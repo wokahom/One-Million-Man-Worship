@@ -1,0 +1,198 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url("../assets/images/bg1.jpeg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Main container */
+.container {
+    width: 95%;
+    max-width: 450px;
+    margin: 40px auto;
+    padding: 3vw;
+    background: rgba(240, 240, 240, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Canvas wrapper */
+.canvas-wrapper {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+canvas {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Buttons */
+button {
+    margin-top: 15px;
+    padding: 0.8rem 1.2rem;
+    background: #e53935;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background: #c62828;
+    transform: translateY(-2px);
+}
+
+.download-share {
+    background-color: #fff;
+    font-size: 2rem;
+    padding: 10px;
+    margin: 25px;
+    text-align: center;
+    font-weight: 700;
+}
+
+
+.glow-text {
+    padding: 12px 20px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: white;
+    background: black;
+    border-radius: 8px;
+    animation: pulseGlow 2s infinite;
+
+    margin: 3.5vw;
+    text-align: center;
+}
+
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 0px rgba(255, 50, 50, 0.6); }
+    50% { box-shadow: 0 0 20px rgba(255, 50, 50, 1); }
+    100% { box-shadow: 0 0 0px rgba(255, 50, 50, 0.6); }
+}
+
+
+.share-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 20px;
+    background: #e53935;
+    color: #fff;
+    padding: 14px 22px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    z-index: 9999;
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.share-btn:hover {
+    background: #c62828;
+    transform: scale(1.05);
+}
+
+
+
+/* Small phones */
+@media (max-width: 399px) {
+    body {
+        background-attachment: scroll;
+    }
+
+    .container {
+        width: 90%;
+        padding: 1.8vw;
+        margin: 4vw auto;
+    }
+
+    button {
+        font-size: 0.8rem;
+        padding: 0.6rem 1rem;
+    }
+    .share-btn {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+        bottom: 20px;
+        right: 15px;
+    }
+    .glow-text {
+        font-size: 1.1rem;
+    }
+}
+
+
+/* Mobile phones */
+@media (max-width: 480px) {
+    body {
+        background-attachment: scroll !important;
+    }
+    .container {
+        width: 90%;
+        padding: 2vw;
+        margin: 4vw auto;  /* centers horizontally */
+    }
+    button {
+        font-size: 0.9rem;
+        padding: 0.7rem 1rem;
+    }
+    .download-share {
+        font-size: 1rem;
+    }
+    .share-btn {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+        bottom: 20px;
+        right: 15px;
+    }
+    .glow-text {
+        font-size: 1.1rem;
+    }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 3vw;
+         margin: 4vw auto;  /* centers horizontally */
+    }
+    body {
+        background-attachment: scroll !important;
+    }
+    .download-share {
+        font-size: 1.2rem;
+    }
+    button {
+        font-size: 1rem;
+        padding: 0.9rem 1.2rem;
+    }
+    .share-btn {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+        bottom: 20px;
+        right: 15px;
+    }
+    .glow-text {
+        font-size: 1.2rem;
+    }
+}

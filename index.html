@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OneMillionManWorship/2025avatar</title>
+    <link rel="stylesheet" href="styles/avatar3.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" />
+
+    <link rel="icon" type="image/png" href="assets/logo/1mmw_logo1.png">
+
+
+</head>
+<body> 
+<section>
+  <div class="container">
+    <h2>Create Your One Million Man Worship Avatar</h2>
+
+    <div class="canvas-wrapper">
+        <canvas id="avatarCanvas"></canvas>
+    </div>
+
+    <input type="file" id="imageUpload" accept="image/*">
+    <button id="downloadBtn">Download Avatar</button>  
+
+  </div>
+</section>
+
+<section>
+    <div class="glow-text">DOWNLOAD AND SHARE WITH FRIENDS AND LOVED ONES</div>
+
+    <button id="shareBtn" class="share-btn">Share</button>
+
+
+</section>
+
+
+
+<script src="js/1mmw-avatar2-2025.js"></script>
+<script src="js/share-button.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+
+
+
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script>
+  // Replace with your Firebase project config
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  // Initialize stats document if it doesn't exist
+  db.collection("stats").doc("main").get().then(doc => {
+    if (!doc.exists) {
+      db.collection("stats").doc("main").set({
+        siteVisits: 0,
+        avatarCreations: 0
+      });
+    }
+  });
+</script>
+
+
+</body>
+</html>
