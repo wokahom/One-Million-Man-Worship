@@ -34,25 +34,33 @@
 
         <button id="downloadBtn">Download Avatar</button>
         <script>
-            document.addEventListener("DOMContentLoaded", () => {
+          document.addEventListener("DOMContentLoaded", () => {
             const downloadBtn = document.getElementById('downloadBtn');
-            const avatarImage = document.getElementById('avatarImage');
+            const canvas = document.getElementById('avatarCanvas');
 
             downloadBtn.addEventListener('click', () => {
+              const imageData = canvas.toDataURL("image/png");
+
+              // Track download in analytics
               firebase.analytics().logEvent('avatar_download');
 
+              // Track download in Firestore
               db.collection('downloads').add({
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                avatar: avatarImage.src
-              });
+                avatar: imageData
+              })
+              .then(() => console.log("Download counted!"))
+              .catch((err) => console.error("Firestore error:", err));
 
+              // Actually download the image
               const link = document.createElement('a');
-              link.href = avatarImage.src;
-              link.download = 'my_avatar.png';
+              link.href = imageData;
+              link.download = 'eventavatar.com_1mmw2025.png';
               link.click();
             });
           });
         </script>
+
       </div>   
     </section>
     
