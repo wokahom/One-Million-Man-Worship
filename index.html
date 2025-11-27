@@ -33,6 +33,26 @@
           <input type="file" id="imageUpload" accept="image/*">
 
         <button id="downloadBtn">Download Avatar</button>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+            const downloadBtn = document.getElementById('downloadBtn');
+            const avatarImage = document.getElementById('avatarImage');
+
+            downloadBtn.addEventListener('click', () => {
+              firebase.analytics().logEvent('avatar_download');
+
+              db.collection('downloads').add({
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                avatar: avatarImage.src
+              });
+
+              const link = document.createElement('a');
+              link.href = avatarImage.src;
+              link.download = 'my_avatar.png';
+              link.click();
+            });
+          });
+        </script>
       </div>   
     </section>
     
@@ -61,27 +81,6 @@
   </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
-
-          <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const downloadBtn = document.getElementById('downloadBtn');
-  const avatarImage = document.getElementById('avatarImage');
-
-  downloadBtn.addEventListener('click', () => {
-    firebase.analytics().logEvent('avatar_download');
-
-    db.collection('downloads').add({
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      avatar: avatarImage.src
-    });
-
-    const link = document.createElement('a');
-    link.href = avatarImage.src;
-    link.download = 'my_avatar.png';
-    link.click();
-  });
-});
-</script>
  
 
 <script>
