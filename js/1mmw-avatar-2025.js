@@ -18,9 +18,12 @@ let imgX = circleX;
 let imgY = circleY;
 let scale = 1;
 
-// Dragging control
+// Drag control
 let isDragging = false;
 let startX, startY;
+
+// Pinch-zoom control
+let lastTouchDistance = null;
 
 template.onload = () => {
     canvas.width = template.width;
@@ -64,13 +67,11 @@ upload.addEventListener("change", function () {
     img.src = URL.createObjectURL(file);
 
     img.onload = () => {
-        // Scale image to fit circle
         scale = Math.max(
             (radius * 2) / img.width,
             (radius * 2) / img.height
         );
 
-        // Center it initially
         imgX = circleX;
         imgY = circleY;
 
@@ -78,43 +79,112 @@ upload.addEventListener("change", function () {
     };
 });
 
-// Mouse events
+// Mouse drag events
 canvas.addEventListener("mousedown", (e) => startDrag(e));
 canvas.addEventListener("mousemove", (e) => drag(e));
 canvas.addEventListener("mouseup", () => stopDrag());
 canvas.addEventListener("mouseleave", () => stopDrag());
 
-// Touch events
-canvas.addEventListener("touchstart", (e) => startDrag(e.touches[0]));
-canvas.addEventListener("touchmove", (e) => {
-    drag(e.touches[0]);
-    e.preventDefault();
+// Touch events (drag + pinch)
+canvas.addEventListener("touchstart", (e) => handleTouchStart(e));
+canvas.addEventListener("touchmove", (e) => handleTouchMove(e));
+canvas.addEventListener("touchend", () => {
+    isDragging = false;
+    lastTouchDistance = null;
 });
-canvas.addEventListener("touchend", () => stopDrag());
 
-function startDrag(e) {
+// Zoom with mouse wheel
+canvas.addEventListener("wheel", function (e) {
     if (!img) return;
 
-    const dx = e.offsetX;
-    const dy = e.offsetY;
+    e.preventDefault();
+    const zoomSpeed = 0.1;
 
-    // Allow dragging anywhere inside canvas
+    if (e.deltaY < 0) {
+        scale += zoomSpeed;
+    } else {
+        scale = Math.max(0.2, scale - zoomSpeed);
+    }
+
+    draw();
+});
+
+// ---------------------------
+// DRAG CONTROL
+// ---------------------------
+function startDrag(e) {
+    if (!img) return;
     isDragging = true;
-    startX = dx - imgX;
-    startY = dy - imgY;
+    startX = e.offsetX - imgX;
+    startY = e.offsetY - imgY;
 }
 
 function drag(e) {
     if (!isDragging || !img) return;
-
     imgX = e.offsetX - startX;
     imgY = e.offsetY - startY;
-
     draw();
 }
 
 function stopDrag() {
     isDragging = false;
+}
+
+// ---------------------------
+// TOUCH + PINCH CONTROL
+// ---------------------------
+
+function getDistance(t1, t2) {
+    const dx = t2.clientX - t1.clientX;
+    const dy = t2.clientY - t1.clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+}
+
+function handleTouchStart(e) {
+    if (!img) return;
+
+    if (e.touches.length === 1) {
+        // Single finger → drag
+        const t = e.touches[0];
+        const rect = canvas.getBoundingClientRect();
+        startX = t.clientX - rect.left - imgX;
+        startY = t.clientY - rect.top - imgY;
+        isDragging = true;
+    } else if (e.touches.length === 2) {
+        // Two fingers → pinch
+        lastTouchDistance = getDistance(e.touches[0], e.touches[1]);
+    }
+}
+
+function handleTouchMove(e) {
+    if (!img) return;
+
+    e.preventDefault();
+
+    const rect = canvas.getBoundingClientRect();
+
+    if (e.touches.length === 1 && isDragging) {
+        const t = e.touches[0];
+        imgX = t.clientX - rect.left - startX;
+        imgY = t.clientY - rect.top - startY;
+        draw();
+    }
+
+    if (e.touches.length === 2) {
+        const newDistance = getDistance(e.touches[0], e.touches[1]);
+
+        if (lastTouchDistance) {
+            const zoomFactor = newDistance / lastTouchDistance;
+            scale *= zoomFactor;
+
+            if (scale < 0.2) scale = 0.2;
+            if (scale > 5) scale = 5;
+
+            draw();
+        }
+
+        lastTouchDistance = newDistance;
+    }
 }
 
 // Download
