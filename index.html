@@ -12,10 +12,14 @@
     <!-- Firebase Firestore -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
+    <meta property="og:title" content="Create Your own Avatar" />
+    <meta property="og:description" content="Create and download your One Million Man Worship avatar" />
+    <meta property="og:image" content="https://eventavatar.com/defaultShareImage.png" />
+    <meta property="og:url" content="https://eventavatar.com/one-million-man-worship" />
 
-    <link rel="stylesheet" href="styles/avatar3.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" />
+    <link rel="stylesheet" href="styles/avatar3.css">
 
     <link rel="icon" type="image/png" href="assets/logo/1mmw_logo1.png">
 
@@ -33,58 +37,12 @@
           <input type="file" id="imageUpload" accept="image/*">
 
         <button id="downloadBtn">Download Avatar</button>
-        <script>
-          document.addEventListener("DOMContentLoaded", () => {
-            const downloadBtn = document.getElementById('downloadBtn');
-            const canvas = document.getElementById('avatarCanvas');
-
-            downloadBtn.addEventListener('click', () => {
-              const imageData = canvas.toDataURL("image/png");
-
-              // Track download in analytics
-              firebase.analytics().logEvent('avatar_download');
-
-              // Track download in Firestore
-              db.collection('downloads').add({
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                avatar: imageData
-              })
-              .then(() => console.log("Download counted!"))
-              .catch((err) => console.error("Firestore error:", err));
-
-              // Actually download the image
-              const link = document.createElement('a');
-              link.href = imageData;
-              link.download = 'eventavatar.com_1mmw2025.png';
-              link.click();
-            });
-          });
-        </script>
-
       </div>   
     </section>
     
     <section>
       <div class="glow-text">DOWNLOAD AND SHARE WITH FRIENDS AND LOVED ONES</div>
       <button id="shareBtn" class="share-btn">Share</button>
-          <script>
-            const shareBtn = document.getElementById('shareBtn');
-            shareBtn.addEventListener('click', () => {
-              // Analytics
-              firebase.analytics().logEvent('avatar_share');
-
-              // Firestore
-              db.collection('shares').add({
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                avatar: 'avatar1' // dynamic if needed
-              });
-
-              // Example share link (WhatsApp)
-              const avatarUrl = 'path_to_avatar_image.png';
-              const shareText = encodeURIComponent('Check out my avatar!');
-              window.open(`https://wa.me/?text=${shareText}%20${avatarUrl}`, '_blank');
-            });
-          </script>
     </section>
   </main>
 
@@ -115,11 +73,64 @@
   });
 </script>
 
+<!-- javascript download tracking code here--> 
+        <script>
+          document.addEventListener("DOMContentLoaded", () => {
+            const downloadBtn = document.getElementById('downloadBtn');
+            const canvas = document.getElementById('avatarCanvas');
+
+            downloadBtn.addEventListener('click', () => {
+              const imageData = canvas.toDataURL("image/png");
+
+              // Track download in analytics
+              firebase.analytics().logEvent('avatar_download');
+
+              // Track download in Firestore
+              db.collection('downloads').add({
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                avatar: imageData
+              })
+              .then(() => console.log("Download counted!"))
+              .catch((err) => console.error("Firestore error:", err));
+
+              // Actually download the image
+              const link = document.createElement('a');
+              link.href = imageData;
+              link.download = 'eventavatar.com_1mmw2025.png';
+              link.click();
+            });
+          });
+        </script> 
+
+<!-- javascript share tracking code here-->
+          <script>
+            const shareBtn = document.getElementById('shareBtn');
+
+            shareBtn.addEventListener('click', () => {
+
+              // 1. Firestore tracking
+              db.collection('shares').add({
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                avatar: avatarImage.src  // if your avatar image element exists
+              });
+
+              // 2. Create share message
+              const siteUrl = "https://yourwebsite.com";  
+              const shareText = encodeURIComponent("Check out my One Million Man Worship avatar!");
+
+              // 3. WhatsApp share link
+              const whatsappUrl = `https://wa.me/?text=${shareText}%20${siteUrl}`;
+
+              // 4. Open WhatsApp
+              window.open(whatsappUrl, '_blank');
+            });
+          </script>
+
+
 
 <!-- Your Main JS Script (AFTER Firebase is initialized) -->
 <script src="js/1mmw-avatar-2025.js"></script>
 <script src="js/share-button.js"></script>
-
 
 
 </body>
