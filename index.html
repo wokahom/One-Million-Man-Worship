@@ -63,24 +63,26 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 
           <script>
-            const downloadBtn = document.getElementById('downloadBtn');
-            downloadBtn.addEventListener('click', () => {
-              // Analytics
-              firebase.analytics().logEvent('avatar_download');
+document.addEventListener("DOMContentLoaded", () => {
+  const downloadBtn = document.getElementById('downloadBtn');
+  const avatarImage = document.getElementById('avatarImage');
 
-              // Firestore
-              db.collection('downloads').add({
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                avatar: 'avatar1' // replace with dynamic avatar name if needed
-              });
+  downloadBtn.addEventListener('click', () => {
+    firebase.analytics().logEvent('avatar_download');
 
-              // Trigger download
-              const link = document.createElement('a');
-              link.href = 'path_to_avatar_image.png'; // Replace with actual image path
-              link.download = 'my_avatar.png';
-              link.click();
-            });
-          </script>  
+    db.collection('downloads').add({
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      avatar: avatarImage.src
+    });
+
+    const link = document.createElement('a');
+    link.href = avatarImage.src;
+    link.download = 'my_avatar.png';
+    link.click();
+  });
+});
+</script>
+ 
 
 <script>
   const firebaseConfig = {
