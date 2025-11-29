@@ -1,0 +1,43 @@
+
+footer {
+  background-color: #000000;
+  color: #fff;
+  padding: 40px 0;
+  text-align: center;
+}
+.footer-section h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+        /* Style for the icons */
+        .material-icons {
+          font-size: 36px;
+          color: #de6f01;
+          margin-right: 10px;
+      }
+        /* Font Awesome icon */
+        .font-awesome-social-icons {
+          display: flex;
+          justify-content: center; /* Center the icons */
+          align-items: center;   
+          margin-bottom: 25px; 
+      }
+      .font-awesome-social-icons a {
+          text-decoration: none; /* Remove underline */
+          margin: 0 15px; /* Add space between icons */
+          color: #ffffff; /* Default color for icons */
+          font-size: 1.2em; /* Size of the icons */
+          transition: color 0.3s; /* Smooth transition for color change */
+      }
+
+      /* Hover effect for social media icons */
+      .font-awesome-social-icons a:hover {
+          color: #8f6152; /* Change color on hover */
+      }
+      .pricelessmusicng {
+        color: #8f6152; 
+      }
+      .pricelessmusicng :hover {
+        transition: color 0.4s;
+        color: white;
+      }

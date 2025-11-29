@@ -1,0 +1,117 @@
+/* HEADER CSS STARTS HERE */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffffff;
+  color: black;
+  height: 100px;
+}
+.logo {
+  height: 75px;
+  margin-left: 45px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  margin-right: 40px;
+  z-index: 1000;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  margin-right: 40px;
+}
+
+.nav-links li {
+  margin: 0 15px;
+  position: relative; /* Allows dropdowns to be positioned relative to their parent */
+}
+
+.nav-links a {
+  color: black;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  border: 2px solid transparent;
+  transition: all 0.4s ease;
+}
+.nav-links a:hover {
+  border: 2px solid #8f6152;
+  padding: 10px 30px;
+}
+
+/* Dropdown styles */
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  min-width: 150px;
+  list-style: none;
+  padding: 10px 0;
+}
+
+.dropdown li {
+  margin: 0;
+  text-align: left;
+}
+
+.dropdown a {
+  padding: 10px 20px;
+  display: block;
+  color: black;
+  font-weight: bold;
+}
+
+.dropdown a:hover {
+  color: #8f6152;
+}
+
+/* Show the dropdown on hover */
+.nav-links li:hover .dropdown {
+  display: block;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  width: 40px;
+}
+.hamburger :hover {
+  background-color: #8f6152;
+}
+        /* Font Awesome icon */
+      .header-font-awesome-social-icons {
+          display: flex;
+          justify-content: center; /* Center the icons */
+          align-items: center;    
+      }
+      .header-position-social-icons {
+        margin-right: 0;
+      }
+      .header-font-awesome-social-icons a {
+          text-decoration: none; /* Remove underline */
+          margin: 0 15px; /* Add space between icons */
+          color: #000000; /* Default color for icons */
+          font-size: 1.2em; /* Size of the icons */
+          transition: color 0.3s; /* Smooth transition for color change */
+      }
+
+      /* Hover effect for social media icons */
+      .header-font-awesome-social-icons a:hover {
+          color: #8f6152; /* Change color on hover */
+      }
+
+/* HEADER CSS STOPS HERE */
+
+
+
+
+
+

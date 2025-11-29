@@ -60,16 +60,6 @@ button:hover {
     transform: translateY(-2px);
 }
 
-.download-share {
-    background-color: #fff;
-    font-size: 2rem;
-    padding: 10px;
-    margin: 25px;
-    text-align: center;
-    font-weight: 700;
-}
-
-
 .glow-text {
     padding: 12px 20px;
     font-size: 1.3rem;
