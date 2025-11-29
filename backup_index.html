@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>Event Avatar</title>
+
+        <!-- Firebase App -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <!-- Firebase Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
+    <!-- Firebase Firestore -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <!-- og mainly for whatsapp share -->
+    <meta property="og:title" content="Create Your own Avatar" />
+    <meta property="og:description" content="Create and download your One Million Man Worship avatar 2025" />
+    <meta property="og:image" content="https://onemillionmanworship.com/defaultShareImage.png" />
+    <meta property="og:url" content="https://onemillionmanworship.com/one-million-man-worship" />
+
+    <!-- google materials -->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Calligraffitti&family=Lobster&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+      <!-- javascript code for page inclusions should be here -->
+    
+
+    <!-- stylesheets start here -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" />
+    <link rel="stylesheet" href="styles/1mmw-avatar.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/footer.css">
+
+    <!-- website logo here -->
+    <link rel="icon" type="image/png" href="assets/logo/1mmw_logo1.png">
+
+
+</head>
+<body> 
+    <!-- <div data-include="header.html"></div> should be here -->
+  <main>
+    <section>
+      <div class="container">
+        <h2>Create Your One Million Man Worship Avatar</h2>
+
+        <div 
+          class="canvas-wrapper"><canvas id="avatarCanvas"></canvas>
+        </div>
+          <input type="file" id="imageUpload" accept="image/*">
+
+        <button id="downloadBtn">Download Avatar</button>
+      </div>   
+    </section>
+    
+    <section>
+      <div class="glow-text">DOWNLOAD AND SHARE WITH FRIENDS AND LOVED ONES</div>
+      <button id="shareBtn" class="share-btn">Share</button>
+    </section>
+  </main>
+  <!-- <div data-include="footer.html"></div> should be here -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+ 
+
+<script>
+  const firebaseConfig = {
+  apiKey: "AIzaSyAKgrFYnCPnYUeNuEV1Aj9IgMvVVaMWhzc",
+  authDomain: "one-million-man-worship-avatar.firebaseapp.com",
+  projectId: "one-million-man-worship-avatar",
+  storageBucket: "one-million-man-worship-avatar.firebasestorage.app",
+  messagingSenderId: "860229940198",
+  appId: "1:860229940198:web:a7f628f4475f84e08cdc27"
+};
+
+  // Initialize Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const analytics = firebase.analytics();
+  const db = firebase.firestore();
+
+  // Track each page visit
+  firebase.analytics().logEvent('page_view');
+
+  // Log visit in Firestore
+  db.collection('visits').add({
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+  });
+</script>
+
+<!-- javascript download tracking code here--> 
+        <script>
+          document.addEventListener("DOMContentLoaded", () => {
+            const downloadBtn = document.getElementById('downloadBtn');
+            const canvas = document.getElementById('avatarCanvas');
+
+            downloadBtn.addEventListener('click', () => {
+              const imageData = canvas.toDataURL("image/png");
+
+              // Track download in analytics
+              firebase.analytics().logEvent('avatar_download');
+
+              // Track download in Firestore
+              db.collection('downloads').add({
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                avatar: imageData
+              })
+              .then(() => console.log("Download counted!"))
+              .catch((err) => console.error("Firestore error:", err));
+
+              // Actually download the image
+              const link = document.createElement('a');
+              link.href = imageData;
+              link.download = 'onemillionmanworship_avatar2025.png';
+              link.click();
+            });
+          });
+        </script> 
+
+<!-- javascript share tracking code here-->
+          <script>
+            const shareBtn = document.getElementById('shareBtn');
+
+            shareBtn.addEventListener('click', () => {
+
+              // 1. Firestore tracking
+              db.collection('shares').add({
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                avatar: avatarImage.src  // if your avatar image element exists
+              });
+
+              // 2. Create share message
+              const siteUrl = "https://onemillionmanworship.com/avatar";  
+              const shareText = encodeURIComponent("Check out my One Million Man Worship avatar!");
+
+              // 3. WhatsApp share link
+              const whatsappUrl = `https://wa.me/?text=${shareText}%20${siteUrl}`;
+
+              // 4. Open WhatsApp
+              window.open(whatsappUrl, '_blank');
+            });
+          </script>
+
+
+
+<!-- Your Main JS Script (AFTER Firebase is initialized) -->
+<!-- <script src="js/hamburger.js"></script> should be here -->
+<script src="js/1mmw-avatar-2025.js"></script>
+<script src="js/share-button.js"></script>
+
+
+</body>
+</html>
