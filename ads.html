@@ -31,6 +31,25 @@
       height: 100%;
       object-fit: cover;
     }
+     /* Floating text */
+    .floating-text {
+        position: absolute;
+        top: 10%;
+        width: 100%;
+        text-align: center;
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+        text-shadow: 0px 0px 15px rgba(0,0,0,0.9);
+        animation: fadeInOut 3s infinite;
+    }
+
+    @keyframes fadeInOut {
+        0% { opacity: 0; }
+        30% { opacity: 1; }
+        70% { opacity: 1; }
+        100% { opacity: 0; }
+    }
   </style>
 </head>
 <body>
@@ -58,6 +77,11 @@
     
     Your browser does not support HTML5 video.
   </video>
+
+    <div class="floating-text">
+        COME BACK FOR MORE...
+    </div>
+
 </div>
 
 </body>
