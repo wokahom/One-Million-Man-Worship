@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-    <title>Event Avatar</title>
+    <title>One Million Man Worship</title>
 
         <!-- Firebase App -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -94,32 +94,38 @@
 
 <!-- javascript download tracking code here--> 
         <script>
-          document.addEventListener("DOMContentLoaded", () => {
-            const downloadBtn = document.getElementById('downloadBtn');
-            const canvas = document.getElementById('avatarCanvas');
+document.addEventListener("DOMContentLoaded", () => {
+  const downloadBtn = document.getElementById('downloadBtn');
+  const canvas = document.getElementById('avatarCanvas');
 
-            downloadBtn.addEventListener('click', () => {
-              const imageData = canvas.toDataURL("image/png");
+  downloadBtn.addEventListener('click', () => {
+    const imageData = canvas.toDataURL("image/png");
 
-              // Track download in analytics
-              firebase.analytics().logEvent('avatar_download');
+    // Track download in analytics
+    firebase.analytics().logEvent('avatar_download');
 
-              // Track download in Firestore
-              db.collection('downloads').add({
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                avatar: imageData
-              })
-              .then(() => console.log("Download counted!"))
-              .catch((err) => console.error("Firestore error:", err));
+    // Track download in Firestore
+    db.collection('downloads').add({
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      avatar: imageData
+    })
+    .then(() => console.log("Download counted!"))
+    .catch((err) => console.error("Firestore error:", err));
 
-              // Actually download the image
-              const link = document.createElement('a');
-              link.href = imageData;
-              link.download = 'onemillionmanworship_avatar2025.png';
-              link.click();
-            });
-          });
-        </script> 
+    // Actually download the image
+    const link = document.createElement('a');
+    link.href = imageData;
+    link.download = 'onemillionmanworship_avatar2025.png';
+    link.click();
+
+    // ⭐ REDIRECT AFTER DOWNLOAD
+    setTimeout(() => {
+      window.location.href = "https://onemillionmanworship.com/ads";
+    }, 800); // delay so download isn't stopped
+  });
+});
+</script>
+
 
 <!-- javascript share tracking code here-->
           <script>
