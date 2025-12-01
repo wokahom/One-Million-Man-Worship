@@ -2,16 +2,16 @@
 footer {
   background-color: #000000;
   color: #fff;
-  padding: 40px 0;
+  padding: 20px 0;
   text-align: center;
 }
 .footer-section h3 {
-  font-size: 24px;
+  font-size: 20px;
   margin-bottom: 20px;
 }
         /* Style for the icons */
         .material-icons {
-          font-size: 36px;
+          font-size: 20px;
           color: #de6f01;
           margin-right: 10px;
       }
@@ -32,12 +32,68 @@ footer {
 
       /* Hover effect for social media icons */
       .font-awesome-social-icons a:hover {
-          color: #8f6152; /* Change color on hover */
+          color: #c62828; /* Change color on hover */
       }
-      .pricelessmusicng {
-        color: #8f6152; 
-      }
-      .pricelessmusicng :hover {
-        transition: color 0.4s;
-        color: white;
-      }
+    
+.footer-line {
+  height: 1.5px; 
+  background-color: #c62828;
+  margin: 0 70px;
+}
+.copy-right {
+  font-size: 0.9rem;
+  margin: 1.5vw;
+}
+.email {
+  margin: 20px;
+  font-size: 1rem;
+
+}
+
+
+
+/* Small phones */
+@media (max-width: 399px) {
+   .copy-right {
+    font-size: 0.6rem;
+   }
+   .email {
+    font-size: 0.7rem;
+}
+.footer-line {
+  height: 1px; 
+  margin: 0 25px;
+}
+}
+
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .copy-right {
+    font-size: 0.7rem;
+   }
+   .email {
+    font-size: 0.7rem;
+}     
+.footer-line {
+  height: 1px; 
+  margin: 0 25px;
+} 
+}
+
+
+/* Tablets */
+@media (max-width: 768px) {
+  .copy-right {
+    font-size: 0.7rem;
+   }
+   .email {
+    font-size: 0.7rem;
+}    
+.footer-line {
+  height: 1px; 
+  margin: 0 25px;
+}
+}
+
+

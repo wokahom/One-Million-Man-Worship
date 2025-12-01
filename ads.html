@@ -1,88 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>One Million Man Worship</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>One Million Man Worship</title>
 
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background: black;
-      overflow: hidden;
-    }
+        <!-- Firebase App -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <!-- Firebase Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
+    <!-- Firebase Firestore -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-    .video-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: black;
-    }
+    <!-- og mainly for whatsapp share -->
+    <meta property="og:title" content="Create Your own Avatar" />
+    <meta property="og:description" content="Create and download your One Million Man Worship avatar 2025" />
+    <meta property="og:image" content="https://onemillionmanworship.com/defaultShareImage.png" />
+    <meta property="og:url" content="https://onemillionmanworship.com/one-million-man-worship" />
 
-    .video-container video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-     /* Floating text */
-    .floating-text {
-        position: absolute;
-        top: 10%;
-        width: 100%;
-        text-align: center;
-        color: white;
-        font-size: 2rem;
-        font-weight: bold;
-        text-shadow: 0px 0px 15px rgba(0,0,0,0.9);
-        animation: fadeInOut 3s infinite;
-    }
+    <!-- google materials -->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
 
-    @keyframes fadeInOut {
-        0% { opacity: 0; }
-        30% { opacity: 1; }
-        70% { opacity: 1; }
-        100% { opacity: 0; }
-    }
-  </style>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Calligraffitti&family=Lobster&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+      <!-- javascript code for page inclusions should be here -->
+       <script src="js/includes.js"></script>
+    
+
+    <!-- stylesheets start here -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" />
+    
+    <!--<link rel="stylesheet" href="styles/1mmw-avatar.css">--> 
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="styles/ads.css">
+    <link rel="stylesheet" href="styles/countdown.css">
+
+    <!-- website logo here -->
+    <link rel="icon" type="image/png" href="assets/logo/1mmw_logo1.png">
+
 </head>
 <body>
+  <main>
+    <section>
+        <!--
+          <div class="video-container">
+            <video autoplay loop muted playsinline>
+              <source src="assets/videos/1mmw_2025_ads_video3_1.MP4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          -->
+        <div>
+          <video 
+            id="promoVideo" 
+            autoplay 
+            muted 
+            loop 
+            playsinline 
+            style="width:100%; height:auto; border-radius:10px;">
+            
+            <source src="https://res.cloudinary.com/dtemxjmt6/video/upload/v1764531906/1mmw_2025_ads_video3_1_bual4w.mov" type="video/mp4">
 
-  <!--
-  <div class="video-container">
-    <video autoplay loop muted playsinline>
-      <source src="assets/videos/1mmw_2025_ads_video3_1.MP4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div>
-  -->
-<div>
-  <video 
-    id="promoVideo" 
-    autoplay 
-    muted 
-    loop 
-    playsinline 
-    style="width:100%; height:auto; border-radius:10px;">
-    
-    <source src="https://res.cloudinary.com/dtemxjmt6/video/upload/v1764531906/1mmw_2025_ads_video3_1_bual4w.mov" type="video/mp4">
+            <source src="https://res.cloudinary.com/dtemxjmt6/video/upload/v1764531906/1mmw_2025_ads_video3_1_bual4w.mov" type="video/quicktime">
+            
+            Your browser does not support HTML5 video.
+          </video>
 
-    <source src="https://res.cloudinary.com/dtemxjmt6/video/upload/v1764531906/1mmw_2025_ads_video3_1_bual4w.mov" type="video/quicktime">
-    
-    Your browser does not support HTML5 video.
-  </video>
+            <div class="floating-text">
+                COME BACK HERE FOR MORE...
+            </div>
+        </div>
+    </section>
+    <section>
+      <div>
+        <img class="flyer3_1" src="assets/images/1mmw_flyer3_1.jpg" alt="">
+      </div>
 
-    <div class="floating-text">
-        COME BACK HERE FOR MORE...
+    <div class="countdown-container">
+    <h2>Countdown to One Million Man Worship 2025</h2>
+    <div class="countdown">
+        <div><span id="days">00</span><p>Days</p></div>
+        <div><span id="hours">00</span><p>Hours</p></div>
+        <div><span id="minutes">00</span><p>Minutes</p></div>
+        <div><span id="seconds">00</span><p>Seconds</p></div>
     </div>
-
 </div>
+
+    </section>
+  </main>
+
+<div data-include="footer.html"></div>
+<!-- Your Main JS Script (AFTER Firebase is initialized) -->
+<!-- <script src="js/hamburger.js"></script> should be here -->
+<script src="js/1mmw-avatar-2025.js"></script>
+<script src="js/share-button.js"></script>
+<script src="js/countdown.js"></script>
 
 </body>
 </html>
