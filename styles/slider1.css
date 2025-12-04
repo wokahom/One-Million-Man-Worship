@@ -1,0 +1,30 @@
+.slider-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.slider-track {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slide-img {
+    width: 25%;        /* 4 images per row on desktop */
+    height: auto;
+    object-fit: cover;
+}
+
+/* Mobile view (2 images per row) */
+@media (max-width: 480px) {
+    .slide-img {
+        width: 50%;    /* 2 images per row on mobile */
+    }
+}
+/* Tablet view (2 images per row) */
+@media (max-width: 768px) {
+    .slide-img {
+        width: 50%;    /* 2 images per row on mobile */
+    }
+}
+

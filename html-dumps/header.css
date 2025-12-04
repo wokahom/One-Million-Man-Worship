@@ -1,0 +1,236 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000000;
+  color: #ffffff;
+  height: 100px;
+  width: 100%;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+
+  padding: 20px;
+}
+.logo {
+  height: 50px;
+  margin-left: 20px;
+}
+nav {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  z-index: 1000;
+}
+nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: Montserrat, Arial, Helvetica, sans-serif;
+}
+nav ul {
+  transition: all 0.9s ease-in-out;
+}
+nav ul.active {
+  display: flex;
+  flex-direction: column;
+  background-color: #000000;
+  position: absolute;
+  top: 80px;
+  right: 0;
+  height: 40%; /* Full screen for mobile view */
+  width: 100%; /* Adjust width as needed */
+  z-index: 10;
+  padding: 20px;
+  box-sizing: border-box;
+}
+#menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  z-index: 5;
+}
+nav ul.active ~ #menu-overlay {
+  display: block;
+}
+nav ul li {
+  position: relative;
+}
+nav ul li a {
+  text-decoration: none;
+  color: #ffffff;
+  padding: 10px 15px;
+  display: block;
+}
+nav ul li a:hover {
+  color: #000000;
+  padding: 15px;
+  
+}
+
+/* Dropdown Menu */
+nav ul li .dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #c62828;
+  min-width: 150px;
+  z-index: 10;
+}
+
+nav ul li .dropdown a {
+  padding: 10px 15px;
+  white-space: nowrap;
+}
+
+nav ul li:hover .dropdown {
+  display: block;
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger span {
+  background-color: #ffffff;
+  height: 4px;
+  width: 30px;
+  margin: 3px 0;
+} 
+.hamburger:hover {
+  background-color: #c62828;
+}
+
+
+ /* Font Awesome icon */
+      .header-font-awesome-social-icons {
+          display: flex;
+          justify-content: center; /* Center the icons */
+          align-items: center;    
+      }
+      .header-position-social-icons {
+        margin-right: 0;
+      }
+      .header-font-awesome-social-icons a {
+          text-decoration: none; /* Remove underline */
+          margin: 0 5px; /* Add space between icons */
+          color: #ffffff; /* Default color for icons */
+          font-size: 1.1em; /* Size of the icons */
+          transition: color 0.3s; /* Smooth transition for color change */
+      }
+
+      /* Hover effect for social media icons */
+      .header-font-awesome-social-icons a:hover {
+          color: #c62828; /* Change color on hover */
+      }
+
+
+/* Mobile Phones */
+@media (max-width: 480px) {
+  header {
+    height: 80px;
+  }
+  .logo {
+    height: 40px;
+    margin-left: 5px;
+  }
+  .close-menu {
+    display: block;
+    align-self: flex-end;
+    cursor: pointer;
+    color: white;
+    font-size: 1.5em;
+    margin-bottom: 20px; 
+  }
+  .close-menu {
+    display: none;
+  } 
+  nav ul {
+    display: none;
+    flex-direction: column;
+    background-color: #0c2847;
+    position: absolute;
+    top: 0px;
+    right: 0;
+    height: 50px;
+    width: 10px;
+    z-index: 10;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .hamburger span {
+  background-color: white;
+  height: 1px;
+  width: 25px;
+  margin-right: auto;
+  margin-left: 50px;
+} 
+.header-font-awesome-social-icons a {
+          margin: 0 5px; /* Add space between icons */
+          font-size: 0.7em; /* Size of the icons */
+      }
+}
+
+
+/* Tablets */
+@media (max-width: 768px) {
+  header {
+    height: 80px;
+  }
+  .logo {
+    height: 40px;
+    margin-left: 5px;
+  }
+  .close-menu {
+    display: block;
+    align-self: flex-end;
+    cursor: pointer;
+    color: white;
+    font-size: 1.5em;
+    margin-bottom: 20px; 
+  }
+  .close-menu {
+    display: none;
+  } 
+  nav ul {
+    display: none;
+    flex-direction: column;
+    background-color: #0c2847;
+    position: absolute;
+    top: 0px;
+    right: 0;
+    height: 50px;
+    width: 10px;
+    z-index: 10;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .hamburger span {
+  background-color: white;
+  height: 1px;
+  width: 25px;
+  margin-right: auto;
+  margin-left: 50px;
+} 
+.header-font-awesome-social-icons a {
+          margin: 0 5px; /* Add space between icons */
+          font-size: 1em; /* Size of the icons */
+      }
+}
+

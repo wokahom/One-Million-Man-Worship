@@ -24,9 +24,9 @@ footer {
       }
       .font-awesome-social-icons a {
           text-decoration: none; /* Remove underline */
-          margin: 0 15px; /* Add space between icons */
+          margin: 0 5px; /* Add space between icons */
           color: #ffffff; /* Default color for icons */
-          font-size: 1.2em; /* Size of the icons */
+          font-size: 1.1em; /* Size of the icons */
           transition: color 0.3s; /* Smooth transition for color change */
       }
 
@@ -52,33 +52,22 @@ footer {
 
 
 
-/* Small phones */
-@media (max-width: 399px) {
-   .copy-right {
-    font-size: 0.6rem;
-   }
-   .email {
-    font-size: 0.7rem;
-}
-.footer-line {
-  height: 1px; 
-  margin: 0 25px;
-}
-}
-
-
 /* Mobile phones */
 @media (max-width: 480px) {
-  .copy-right {
-    font-size: 0.7rem;
+   .copy-right {
+    font-size: 0.5rem;
    }
    .email {
     font-size: 0.7rem;
-}     
+}
 .footer-line {
   height: 1px; 
   margin: 0 25px;
-} 
+}
+.footer-section h3 {
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
 }
 
 
@@ -89,11 +78,16 @@ footer {
    }
    .email {
     font-size: 0.7rem;
-}    
+}     
 .footer-line {
   height: 1px; 
   margin: 0 25px;
+} 
+.footer-section h3 {
+  font-size: 1rem;
+  margin-bottom: 20px;
 }
 }
+
 
 

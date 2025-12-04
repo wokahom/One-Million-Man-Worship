@@ -1,117 +1,177 @@
-/* HEADER CSS STARTS HERE */
+/* MAIN HEADER */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #000;
+  color: #fff;
+  height: 80px;
+  width: 100%;
   padding: 20px;
-  background-color: #ffffff;
-  color: black;
-  height: 100px;
-}
-.logo {
-  height: 75px;
-  margin-left: 45px;
-}
-
-nav {
-  display: flex;
-  align-items: center;
-  margin-right: 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
   z-index: 1000;
 }
 
-.nav-links {
-  list-style: none;
+/* LOGO */
+.logo {
+  height: 50px;
+}
+
+/* NAVBAR DESKTOP */
+nav {
   display: flex;
-  margin-right: 40px;
+  align-items: center;
 }
-
-.nav-links li {
-  margin: 0 15px;
-  position: relative; /* Allows dropdowns to be positioned relative to their parent */
+nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  transition: all 0.4s ease-in-out;
 }
-
-.nav-links a {
-  color: black;
+nav ul li a {
   text-decoration: none;
-  font-size: 14px;
-  font-weight: bold;
-  border: 2px solid transparent;
-  transition: all 0.4s ease;
+  color: #fff;
+  padding: 10px 15px;
+  display: block;
+  transition: all 0.25s ease;
 }
-.nav-links a:hover {
-  border: 2px solid #8f6152;
-  padding: 10px 30px;
+nav ul li a:hover {
+  color: #c62828;
+ 
 }
 
-/* Dropdown styles */
-.dropdown {
+/* DROPDOWN */
+nav ul li {
+  position: relative;
+}
+nav ul li .dropdown {
   display: none;
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #ffffff;
+  background: #c62828;
   min-width: 150px;
-  list-style: none;
-  padding: 10px 0;
 }
-
-.dropdown li {
-  margin: 0;
-  text-align: left;
-}
-
-.dropdown a {
-  padding: 10px 20px;
-  display: block;
-  color: black;
-  font-weight: bold;
-}
-
-.dropdown a:hover {
-  color: #8f6152;
-}
-
-/* Show the dropdown on hover */
-.nav-links li:hover .dropdown {
+nav ul li:hover .dropdown {
   display: block;
 }
+nav ul li .dropdown a {
+  transition: all 0.25s ease;
+}
+nav ul li .dropdown a:hover {
+  border: 2px solid #ffffff; /* white border or your preferred color */
+  padding: 8px 13px;         /* adjust so the text doesn’t jump */
+  border-radius: 0;          /* keeps it square */
+  color: #ffffff;            /* optional – keeps text white */
+  background-color: #c62828; /* keep same background or remove if needed */
+}
 
+/* HAMBURGER */
 .hamburger {
   display: none;
   flex-direction: column;
   cursor: pointer;
-  width: 40px;
+  margin-right: 10px;
+  margin-left: 80px;
 }
-.hamburger :hover {
-  background-color: #8f6152;
+.hamburger span {
+  background: #fff;
+  height: 3px;
+  width: 20px;
+  margin: 2px 0;
 }
-        /* Font Awesome icon */
-      .header-font-awesome-social-icons {
-          display: flex;
-          justify-content: center; /* Center the icons */
-          align-items: center;    
-      }
-      .header-position-social-icons {
-        margin-right: 0;
-      }
-      .header-font-awesome-social-icons a {
-          text-decoration: none; /* Remove underline */
-          margin: 0 15px; /* Add space between icons */
-          color: #000000; /* Default color for icons */
-          font-size: 1.2em; /* Size of the icons */
-          transition: color 0.3s; /* Smooth transition for color change */
-      }
 
-      /* Hover effect for social media icons */
-      .header-font-awesome-social-icons a:hover {
-          color: #8f6152; /* Change color on hover */
-      }
+/* FULLSCREEN MOBILE MENU */
+nav ul.active {
+  display: flex;
+  flex-direction: column;
+  background: #000;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 70%;
+  padding: 40px 20px;
+  z-index: 2000;
+}
 
-/* HEADER CSS STOPS HERE */
+/* OVERLAY */
+#menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  z-index: 1500;
+}
+nav ul.active ~ #menu-overlay {
+  display: block;
+}
+
+/* SOCIAL ICONS */
+.header-font-awesome-social-icons {
+  display: flex;
+  align-items: center;
+}
+.header-font-awesome-social-icons a {
+  text-decoration: none;
+  margin: 0 5px;
+  color: #fff;
+  font-size: 1.1em;
+  transition: 0.3s;
+}
+.header-font-awesome-social-icons a:hover {
+  color: #c62828;
+}
 
 
 
+.live-menu {
+  position: relative;
+  padding-right: 0; /* space for the icon */
+}
+.live-menu::after {
+  content: "\f26c";     /* Font Awesome TV icon */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 700;
+  position: absolute;
+  top: -5px;            /* move icon upward */
+  right: 0;             /* place icon at right corner */
+  font-size: 0.7em;     /* adjust icon size */
+  color: #c62828;       /* icon color */
+}
 
 
 
+/* RESPONSIVE (Mobile & Tablets) */
+@media (max-width: 768px) {
+  header {
+    height: 70px;
+  }
+  .logo {
+    height: 40px;
+  }
+  nav ul {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .header-font-awesome-social-icons a {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    height: 35px;
+  }
+  .header-font-awesome-social-icons a {
+    font-size: 0.7em;
+  }
+}

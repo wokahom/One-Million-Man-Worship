@@ -1,40 +1,45 @@
-<header>
-        <div>
-            <img class="logo" src="assets/images/logo11.png" alt="">
-        </div> 
-        <!-- Social Media Icons -->
-        <section class="header-position-social-icons">     
-                <div class="header-font-awesome-social-icons">
-                    <a href="https://x.com/Nellidsongs?t=C9KwIMx5joCK6mwKOdOBTg&s=09" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.instagram.com/nellid__?igsh=MXNiamhzbTIzOXJhdg==" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.facebook.com/OfficialNelliD?mibextid=a5VnDUpeP1iQ3q3p" target="_blank"><i class="fab fa-facebook"></i></a>
-                    <a href="https://open.spotify.com/artist/1GEHO31K2CA1EYdydUfd9w" target="_blank"><i class="fab fa-spotify"></i></a>
-                    <a href="https://youtube.com/@nellyd_?si=GNynzavgX4op2ciJ" target="_blank"><i class="fab fa-youtube"></i></a>
-                    <a href="https://music.apple.com/us/artist/nellid/1570951547" target="_blank"><i class="fab fa-apple"></i></a>
-                  </div>
-        </section>
 
-        <nav>
-            <ul class="nav-links">
-                <li><a href="home.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="songs.html">Songs</a>
-                    <!-- Dropdown Menu -->
-                    <ul class="dropdown">
-                        <li><a href="songs.html">Singles</a></li>
-                        <li><a href="songs.html">EPs</a></li>
-                        <li><a href="you-lead.html">Albums</a></li>
-                        <li><a href="mary-did-you-know.html">Covers</a></li>
-                        <li><a href="index.html">New Release</a></li>
-                    </ul>
-                </li>
-                <li><a href="videos.html">Videos</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="mailto:nellidsongs@gmail.com" 
-                    target="_blank">Booking</a></li>
-            </ul>
-            <div class="hamburger">
-              <img src="assets/icons/hamburger-menu.svg" alt="">
-          </div>
-        </nav>
-    </header>
+<header>
+    <section>
+        <div>
+            <img class="logo" src="assets/logo/1mmw_logo2.png" alt="">
+        </div>
+    </section>
+    <!-- Social Media Icons -->
+    <section class="header-position-social-icons">     
+            <div class="header-font-awesome-social-icons">
+            <!--<a href="https://x.com/1MMWphc" target="_blank"><i class="fab fa-twitter"></i></a>-->
+            <a href="https://www.instagram.com/onemillionmanworship_ph?igsh=MTRxNWZhNDdkdnB3cA%3D%3D&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
+            <!--<a href="https://web.facebook.com/onemillionmanworshipph" target="_blank"><i class="fab fa-facebook"></i></a>-->
+            <a href="https://www.tiktok.com/@one_million_man_worship?_r=1&_t=ZS-91rEOAu2gDM" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <!--<a href="https://www.youtube.com/@OneMillionManWorship" target="_blank"><i class="fab fa-youtube"></i></a>-->
+        </div>
+    </section>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <nav>
+    <ul id="menu">
+        <li><span class="close-menu" onclick="toggleMenu()">&times;</span></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html">About 1MMW</a></li>
+        <li><a href="index.html">Experience Jesus</a></li>   
+      <li>
+            <a href="index.html">Activities</a>
+        <div class="dropdown">
+            <a href="index.html">Featured Ministers</a>
+            <a href="index.html">Previous Editions</a>
+            <a href="index.html">Testimonies</a>
+            <a href="index.html">Gallery</a>
+            <a href="index.html">Videos</a>
+        </div>
+      </li>
+        <li><a href="ads.html" class="live-menu">LIVE</a></li>
+        <li><a href="mailto:info@onemillionmanworship.com" target="_blank">Contact us</a></li>       
+    </ul>
+  </nav>
+</header>
+
+<div id="menu-overlay" onclick="toggleMenu()" style="display: none;"></div>
