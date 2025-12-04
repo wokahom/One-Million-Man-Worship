@@ -253,7 +253,7 @@
       </script>
       -->
 
-
+<!--
 <script>
   downloadBtn.addEventListener("click", () => {
     canvas.toBlob((blob) => {
@@ -271,6 +271,46 @@
         } else {
             // Mobile: avoid pop-up block → open SAME TAB
             window.location.href = url; 
+        }
+    }, "image/png");
+});
+</script>
+-->
+
+
+<script>
+  // DOWNLOAD AVATAR (MOBILE + DESKTOP SAFE)
+downloadBtn.addEventListener("click", () => {
+
+    // Firebase analytics
+    firebase.analytics().logEvent("avatar_download");
+    db.collection("downloads").add({
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+
+    canvas.toBlob((blob) => {
+        const url = URL.createObjectURL(blob);
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        if (!isMobile) {
+            // 🖥 DESKTOP: Auto download
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "onemillionmanworship_avatar2025.png";
+            a.click();
+            URL.revokeObjectURL(url);
+
+            // Optional redirect for desktop
+            setTimeout(() => {
+                window.location.href = "ads.html"; 
+            }, 800); 
+        } 
+        else {
+            // 📱 MOBILE: Open image in SAME TAB (no popup block)
+            window.location.href = url;
+
+            // ❗ No redirect here — mobile MUST stay on page
+            // If you redirect, the image will FAIL to open.
         }
     }, "image/png");
 });
