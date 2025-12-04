@@ -217,7 +217,7 @@
         </script>
         -->
 
-
+<!-- javascript for DOWNLOAD FUNCTION WHICH WORKS ON MOBILE + DESKTOP
         <script>
           function isMobile() {
             return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -251,6 +251,31 @@
             }
           });
       </script>
+      -->
+
+
+<script>
+  downloadBtn.addEventListener("click", () => {
+    canvas.toBlob((blob) => {
+        const url = URL.createObjectURL(blob);
+
+        // Desktop browser → auto download
+        if (!/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "avatar.png";
+            a.click();
+            URL.revokeObjectURL(url);
+        } 
+        else {
+            // Mobile → open image in new tab
+            window.open(url, "_blank");
+            // User will long-press and save image manually
+        }
+    }, "image/png");
+});
+
+</script>
 
         
 
