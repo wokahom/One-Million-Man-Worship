@@ -81,6 +81,13 @@
         <button id="downloadBtn">Download Avatar</button>
       </div>   
     </section>
+
+        <button id="continueBtn" 
+          style="display:none; margin-top:20px;"
+          onclick="window.location.href='ads.html'">
+          Continue
+        </button>
+
     
     <section>
       <div class="glow-text">DOWNLOAD AND SHARE WITH FRIENDS AND LOVED ONES</div>
@@ -117,7 +124,7 @@
   });
 </script>
 
-<!-- javascript download tracking code here--> 
+<!-- javascript download tracking code here 
         <script>
           document.addEventListener("DOMContentLoaded", () => {
             const downloadBtn = document.getElementById('downloadBtn');
@@ -145,6 +152,7 @@
             });
           });
         </script> 
+        -->
       
         <!-- this is a javascript download tracking code and also redirects visitors to a new page after download  
         <script>
@@ -208,6 +216,42 @@
           });
         </script>
         -->
+
+
+        <script>
+          function isMobile() {
+            return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+          }
+
+          downloadBtn.addEventListener("click", () => {
+            const imageData = canvas.toDataURL("image/png");
+
+            // Log Firebase analytics
+            firebase.analytics().logEvent("avatar_download");
+            db.collection("downloads").add({
+              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            });
+
+            // Trigger download
+            const link = document.createElement("a");
+            link.href = imageData;
+            link.download = "onemillionmanworship_avatar2025.png";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            if (isMobile()) {
+              // 🔥 MOBILE: Do NOT redirect now. Show continue button.
+              document.getElementById("continueBtn").style.display = "block";
+            } else {
+              // 🖥️ DESKTOP: Safe to redirect
+              setTimeout(() => {
+                window.location.href = "ads.html";
+              }, 800);
+            }
+          });
+      </script>
+
         
 
 <!-- javascript share tracking code here
