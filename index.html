@@ -1,6 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+  <!-- This is google original analytics code before i generated a consent mode code and added to it  -->
+      <!-- Google tag (gtag.js) 
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-KGCY1P8LVH"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-KGCY1P8LVH');
+      </script>
+      -->
+  
+<!-- This is google analytics code + consent mode code combined  -->
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-KGCY1P8LVH"></script>
+
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+
+        // ⭐ CONSENT MODE (default: no consent yet)
+        gtag('consent', 'default', {
+          'ad_storage': 'denied',
+          'analytics_storage': 'denied'
+        });
+
+        // Google Analytics initialization
+        gtag('js', new Date());
+        gtag('config', 'G-KGCY1P8LVH');
+      </script>
+      <!-- Google analytics and consent mode ends here-->
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -88,11 +122,33 @@
           Continue
         </button>
 
-    
     <section>
       <div class="glow-text">DOWNLOAD AND SHARE WITH FRIENDS AND LOVED ONES</div>
     <!--<button id="shareBtn" class="share-btn">Share</button>-->
     </section>
+
+      <div id="cookie-banner" style="
+        position: fixed; bottom: 20px; left: 20px; right: 20px;
+        background: #fff; padding: 15px; border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2); z-index: 9999;
+        display: none; max-width: 450px; margin: auto;
+        font-size: 14px;">
+        
+        <p>This website uses cookies for analytics. Do you accept?</p>
+        
+        <button id="accept-cookies" style="
+          background: #4CAF50; color: white; border: none;
+          padding: 8px 14px; cursor: pointer; border-radius: 5px;">
+          Accept
+        </button>
+
+        <button id="decline-cookies" style="
+          background: #ccc; border: none;
+          padding: 8px 14px; cursor: pointer; border-radius: 5px;">
+          Decline
+        </button>
+      </div>
+
   </main>
   <!-- <div data-include="footer.html"></div> should be here -->
    <div data-include="footer.html"></div>
@@ -349,6 +405,7 @@ downloadBtn.addEventListener("click", () => {
 <!-- <script src="js/hamburger.js"></script> should be here -->
 <script src="js/1mmw-avatar3-2025.js"></script>
 <script src="js/share-button.js"></script>
+<script src="js/consent_mode.js"></script>
 
 
 </body>
