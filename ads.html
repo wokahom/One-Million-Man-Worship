@@ -34,7 +34,7 @@
       </script>
       <!-- Google analytics and consent mode ends here-->
 
-      
+
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -204,6 +204,28 @@
         </div>
     </div>
 </section>
+
+<!--This code line for consent mode which is to be pasted in every page-->
+      <div id="cookie-banner" style="
+        position: fixed; bottom: 20px; left: 20px; right: 20px;
+        background: #fff; padding: 15px; border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2); z-index: 9999;
+        display: none; max-width: 450px; margin: auto;
+        font-size: 14px; font-weight: 700;">
+        <p>We use cookies <i class="fas fa-cookie"></i> to make your experience on this website awesome.<br>Do you accept?</p>
+        
+        <button id="accept-cookies" style="
+          background: #4CAF50; color: white; border: none;
+          padding: 8px 14px; cursor: pointer; border-radius: 5px;">
+          Accept
+        </button>
+
+        <button id="decline-cookies" style="
+          background: #ad2c2c; color: white; border: none;
+          padding: 8px 14px; cursor: pointer; border-radius: 5px;">
+          Decline
+        </button>
+      </div>
   </main>
 
 <div data-include="footer.html"></div>
@@ -214,6 +236,7 @@
 <script src="js/countdown.js"></script>
 <script src="js/image-video-autoplay.js"></script>
 <script src="js/slider1.js"></script>
+<script src="js/consent_mode_eu.js"></script>
 
 </body>
 </html>
