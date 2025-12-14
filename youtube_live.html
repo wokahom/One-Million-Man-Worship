@@ -21,29 +21,36 @@
         </div>
     </section>
     -->
+    
 
-
+    <section>
         <div class="live-section">
+        <!-- VIDEO AREA -->
+            <div class="live-wrapper">
+                <span id="liveBadge" class="live-badge">LIVE 🔴</span>
+                <span id="offlineBadge" class="offline-badge">OFFLINE</span>
 
-    <!-- VIDEO AREA -->
-    <div class="live-wrapper">
-        <span id="liveBadge" class="live-badge">LIVE 🔴</span>
-        <span id="offlineBadge" class="offline-badge">OFFLINE</span>
+                <!-- COUNTDOWN -->
+                <div id="countdown" class="countdown"></div>
 
-        <!-- COUNTDOWN -->
-        <div id="countdown" class="countdown"></div>
+                <!-- VIDEO IFRAME -->
+                <iframe
+                    src="https://www.youtube.com/embed/YOUR_LIVE_ID?autoplay=1"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen>
+                </iframe>
+            </div>
 
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/sVkM5DhEMJY?si=KaNx1j-nqv4yXbKT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <!-- LIVE CHAT -->
+            <div class="chat-wrapper">
+                <iframe
+                src="https://www.youtube.com/live_chat?v=MLwu8ojmM90&embed_domain=localhost">
+                </iframe>
+            </div>
     </div>
+    </section>
 
-    <!-- LIVE CHAT -->
-    <div class="chat-wrapper">
-        <iframe
-        src="https://www.youtube.com/live_chat?v=YOUR_LIVE_ID&embed_domain=onemillionmanworship.com">
-        </iframe>
-    </div>
-
-    </div>
+    
         <script src="js/youtube_live.js"></script>
  </body>
  </html>
