@@ -1,0 +1,51 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/youtube_live.css">
+ </head>
+ <body>
+    <!--Thia first youtube stream setup
+    <section>
+        <div class="live-wrapper">
+            <span class="live-badge">LIVE 🔴</span>
+
+            <iframe
+                src="https://www.youtube.com/embed/YOUR_LIVE_ID?autoplay=1"
+                frameborder="0"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </section>
+    -->
+
+
+        <div class="live-section">
+
+    <!-- VIDEO AREA -->
+    <div class="live-wrapper">
+        <span id="liveBadge" class="live-badge">LIVE 🔴</span>
+        <span id="offlineBadge" class="offline-badge">OFFLINE</span>
+
+        <!-- COUNTDOWN -->
+        <div id="countdown" class="countdown"></div>
+
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/8h7WFPhHO4Q?si=N3GFInkVT86p5agJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+
+    <!-- LIVE CHAT -->
+    <div class="chat-wrapper">
+        <iframe
+        src="https://www.youtube.com/live_chat?v=YOUR_LIVE_ID&embed_domain=onemillionmanworship.com">
+        </iframe>
+    </div>
+
+    </div>
+        <script src="js/youtube_live.js"></script>
+ </body>
+ </html>
+ 
+ 
