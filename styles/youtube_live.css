@@ -136,6 +136,7 @@
   50% { opacity: 0; }
 }
 
+/* MOBILE 
 @media (max-width: 480px) {
   .live-section {
     flex-direction: column;
@@ -146,7 +147,7 @@
   }  
 }
 
-/* MOBILE */
+
 @media (max-width: 768px) {
   .live-section {
     flex-direction: column;
@@ -157,3 +158,4 @@
   }
   
 }
+*/
