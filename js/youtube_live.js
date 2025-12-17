@@ -24,7 +24,7 @@
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    countdownEl.innerHTML = `We will be LIVE in the next  ${hours}h ${minutes}m ${seconds}s`;
+    countdownEl.innerHTML = `We will be LIVE in the next...  ${hours}h ${minutes}m ${seconds}s`;
   }
 
   const timer = setInterval(updateCountdown, 1000);
