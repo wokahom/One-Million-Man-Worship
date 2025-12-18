@@ -1,0 +1,91 @@
+.ticker-wrapper {
+  width: 100%;
+  overflow: hidden;
+  background: #221f1f; /* change if needed */
+  color: #fff;
+  padding: 8px 0;
+  position: relative;
+  z-index: 5;
+}
+
+.ticker {
+  white-space: nowrap;
+  display: inline-block;
+  animation: ticker-scroll 15s linear infinite;
+}
+
+.ticker span {
+  display: inline-block;
+  padding-left: 100%;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ticker-wrapper:hover .ticker {
+  animation-play-state: paused;
+}
+
+/*
+.ticker-wrapper {
+  border-bottom: 1px solid #e53935;
+  border-top: 1px solid #e53935;
+}
+  */
+
+.ticker-link {
+  color: #ff3b3b;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Hover effect */
+.ticker-link:hover {
+  background: #ff3b3b;
+  color: #fff;
+}
+
+
+
+/* Animation */
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+
+
+
+@media (max-width: 399px) {
+  .ticker span {
+    font-size: 10px;
+  }
+   .ticker-link {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ticker span {
+    font-size: 11px;
+  }
+   .ticker-link {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ticker span {
+    font-size: 12px;
+  }
+   .ticker-link {
+    font-size: 12px;
+  }
+}
+
