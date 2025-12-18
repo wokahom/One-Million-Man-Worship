@@ -1,12 +1,15 @@
 .image-banner {
   position: relative;
   width: 100%;
+  max-height: 70vh;
+  overflow: hidden;
 }
 
 .banner-img {
   width: 100%;
   height: auto;
-  display: block;
+  object-fit: cover;
+  object-position: center;
 }
 
 /* Overlay content */
@@ -19,15 +22,14 @@
   justify-content: center;
   text-align: center;
 }
-
-
 .banner-content {
   color: #fff;
   padding: 20px;
   max-width: 900px;
 }
 .banner-content h1 {
-  font-size: 2rem;
+  font-size: 2.5rem;
+  line-height: 0.5;
   margin-bottom: 10px;
 }
 .banner-content p {
@@ -35,12 +37,11 @@
   margin-bottom: 25px;
 }
 
-
-
 .banner-btn {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
   display: inline-block;
   padding: 8px 15px;
+  margin-bottom: 25px;
   background: #c62828;
   color: #fff;
   text-decoration: none;
@@ -48,8 +49,36 @@
   border-radius: 4px;
   transition: background 0.3s ease, transform 0.2s ease;
 }
-
 .banner-btn:hover {
   background: #e53935;
   transform: translateY(-2px);
+}
+
+
+
+@media (max-width: 768px) {
+  .banner-content h1 {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+  margin-top: 60px;
+}
+.banner-content p {
+  font-size: 0.7rem;
+}
+.banner-btn {
+  font-size: 0.8rem;
+}
+.banner-img {
+  height: 35vh;
+}
+ .banner-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(0,0,0,0.7),
+      rgba(0,0,0,0.2)
+    );
+  }
+  .banner-img {
+    content: url("../assets/images/1mmw_flyer3_1.jpg");
+  }
 }
