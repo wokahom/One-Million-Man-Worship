@@ -1,0 +1,13 @@
+.text_banner1 {
+  font-size: 1.5rem;
+  padding: 15px;
+  color: #ffffff;
+  text-align: center;
+  background-color: #ce1717;
+}
+
+@media (max-width: 768px) {
+    .text_banner1 {
+        font-size: 0.8rem;
+    }
+}
