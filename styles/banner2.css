@@ -1,0 +1,18 @@
+.banner2-wrapper {
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.banner2-wrapper img,
+.banner2-wrapper video {
+  width: 100%;
+  height: auto;
+  display: none;
+  object-fit: cover; /* makes it scalable & responsive */
+}
+
+#intro-image {
+  display: block; /* show image first */
+}
