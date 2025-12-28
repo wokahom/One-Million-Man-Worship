@@ -34,6 +34,7 @@ nav ul {
 nav ul li a {
   text-decoration: none;
   color: #fff;
+  font-size: 1rem;
   padding: 10px 15px;
   display: block;
   transition: all 0.25s ease;
@@ -128,8 +129,6 @@ nav ul.active ~ #menu-overlay {
 .header-font-awesome-social-icons a:hover {
   color: #c62828;
 }
-
-
 
 .live-menu {
   position: relative;

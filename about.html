@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 
-  <!-- This is google original analytics code before i generated a consent mode code and added to it  -->
+  <!-- 
+    This is google original analytics code before i generated a consent mode code and added to it  -->
       <!-- Google tag (gtag.js) 
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-KGCY1P8LVH"></script>
       <script>
@@ -12,7 +13,7 @@
 
         gtag('config', 'G-KGCY1P8LVH');
       </script>
-      -->
+  -->
   
 <!-- This is google analytics code + consent mode code combined  -->
       <!-- Google tag (gtag.js) -->
@@ -93,14 +94,17 @@
     <link rel="stylesheet" href="styles/1mmw-avatar.css">
     <link rel="stylesheet" href="styles/header.css">
     <link rel="stylesheet" href="styles/footer.css">
+
     <link rel="stylesheet" href="styles/ads.css">
+    <link rel="stylesheet" href="styles/image-video-autoplay.css">
     <link rel="stylesheet" href="styles/countdown.css">
     <link rel="stylesheet" href="styles/slider1.css">
     <link rel="stylesheet" href="styles/facebook_live.css">
     <link rel="stylesheet" href="styles/youtube_live.css">
     <link rel="stylesheet" href="styles/marquee.css">
     <link rel="stylesheet" href="styles/banner1.css">
-
+    <link rel="stylesheet" href="styles/banner2.css">
+    
     <link rel="stylesheet" href="styles/sections/about_banner1.css">
     <link rel="stylesheet" href="styles/sections/text_banner1.css">
 
@@ -112,29 +116,22 @@
 <body> 
     <!-- <div data-include="header.html"></div> should be here -->
      <div data-include="header.html"></div>
-     
   <main>
-    <section>
-        <div class="media-wrapper">
-          <img id="intro-image" src="assets/images/1mmw_flyer3_1.jpg" alt="Intro Image">
-          <video id="main-video" src="https://res.cloudinary.com/dtemxjmt6/video/upload/v1764531906/1mmw_2025_ads_video3_1_bual4w.mov" playsinline muted></video>
-        </div>
-    </section>
+        <div data-include="marquee.html"></div>
+        <div data-include="banner1.html"></div>
+        
+        <div data-include="../sections/about_banner1.html"></div>
+        <div data-include="banner2.html"></div>
 
-    <div data-include="../sections/about_banner1.html"></div>
-    
-    
-
-    
-
-    <!--This code line for consent mode which is to be pasted in every page-->
+        <!--This code line for consent mode which is to be pasted in every page-->
       <div id="cookie-banner" style="
         position: fixed; bottom: 20px; left: 20px; right: 20px;
         background: #fff; padding: 15px; border-radius: 10px;
         box-shadow: 0 0 10px rgba(0,0,0,0.2); z-index: 9999;
         display: none; max-width: 450px; margin: auto;
         font-size: 14px; font-weight: 700;">
-        <p>We use cookies <i class="fas fa-cookie"></i> to make your experience on this website awesome.<br>Do you accept?</p>
+        <p>We use cookies <i class="fas fa-cookie"></i> 
+          to make your experience on this website awesome.<br>Do you accept?</p>
         
         <button id="accept-cookies" style="
           background: #4CAF50; color: white; border: none;
@@ -179,201 +176,6 @@
   });
 </script>
 
-<!-- javascript download tracking code here 
-        <script>
-          document.addEventListener("DOMContentLoaded", () => {
-            const downloadBtn = document.getElementById('downloadBtn');
-            const canvas = document.getElementById('avatarCanvas');
-
-            downloadBtn.addEventListener('click', () => {
-              const imageData = canvas.toDataURL("image/png");
-
-              // Track download in analytics
-              firebase.analytics().logEvent('avatar_download');
-
-              // Track download in Firestore
-              db.collection('downloads').add({
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                avatar: imageData
-              })
-              .then(() => console.log("Download counted!"))
-              .catch((err) => console.error("Firestore error:", err));
-
-              // Actually download the image
-              const link = document.createElement('a');
-              link.href = imageData;
-              link.download = 'onemillionmanworship_avatar2025.png';
-              link.click();
-            });
-          });
-        </script> 
-        -->
-      
-        <!-- this is a javascript download tracking code and also redirects visitors to a new page after download  
-        <script>
-          document.addEventListener("DOMContentLoaded", () => {
-            const downloadBtn = document.getElementById('downloadBtn');
-            const canvas = document.getElementById('avatarCanvas');
-
-            downloadBtn.addEventListener('click', () => {
-              const imageData = canvas.toDataURL("image/png");
-
-              // Track download in analytics
-              firebase.analytics().logEvent('avatar_download');
-
-              // Track download in Firestore
-              db.collection('downloads').add({
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                avatar: imageData
-              })
-              .then(() => console.log("Download counted!"))
-              .catch((err) => console.error("Firestore error:", err));
-
-              // Actually download the image
-              const link = document.createElement('a');
-              link.href = imageData;
-              link.download = 'onemillionmanworship_avatar2025.png';
-              link.click();
-
-              // ⭐ REDIRECT AFTER DOWNLOAD
-              setTimeout(() => {
-                window.location.href = "ads.html";
-              }, 800); // delay so download isn't stopped
-            });
-          });
-        </script>
-        -->
-
-
-<!-- javascript download tracking code, redirects to another page and delays redirect till after download is succcessful 
-        <script>
-            downloadBtn.addEventListener("click", () => {
-            const imageData = canvas.toDataURL("image/png");
-
-            // Firebase analytics + Firestore
-            firebase.analytics().logEvent("avatar_download");
-            db.collection("downloads").add({
-              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            });
-
-            // Trigger download
-            const link = document.createElement("a");
-            link.href = imageData;
-            link.download = "onemillionmanworship_avatar2025.png";
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-
-            // Delay redirect to allow download to start (very important on mobile)
-            setTimeout(() => {
-              window.location.href = "ads.html"; // change to your page
-            }, 2000); // 2 seconds delay
-          });
-        </script>
-        -->
-
-<!-- javascript for DOWNLOAD FUNCTION WHICH WORKS ON MOBILE + DESKTOP
-        <script>
-          function isMobile() {
-            return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-          }
-
-          downloadBtn.addEventListener("click", () => {
-            const imageData = canvas.toDataURL("image/png");
-
-            // Log Firebase analytics
-            firebase.analytics().logEvent("avatar_download");
-            db.collection("downloads").add({
-              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            });
-
-            // Trigger download
-            const link = document.createElement("a");
-            link.href = imageData;
-            link.download = "onemillionmanworship_avatar2025.png";
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-
-            if (isMobile()) {
-              // 🔥 MOBILE: Do NOT redirect now. Show continue button.
-              document.getElementById("continueBtn").style.display = "block";
-            } else {
-              // 🖥️ DESKTOP: Safe to redirect
-              setTimeout(() => {
-                window.location.href = "ads.html";
-              }, 800);
-            }
-          });
-      </script>
-      -->
-
-<!--
-<script>
-  downloadBtn.addEventListener("click", () => {
-    canvas.toBlob((blob) => {
-        const url = URL.createObjectURL(blob);
-
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-        if (!isMobile) {
-            // Desktop auto-download
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = "1mmw_avatar.png";
-            a.click();
-            URL.revokeObjectURL(url);
-        } else {
-            // Mobile: avoid pop-up block → open SAME TAB
-            window.location.href = url; 
-        }
-    }, "image/png");
-});
-</script>
--->
-
-
-<script>
-  // DOWNLOAD AVATAR (MOBILE + DESKTOP SAFE)
-downloadBtn.addEventListener("click", () => {
-
-    // Firebase analytics
-    firebase.analytics().logEvent("avatar_download");
-    db.collection("downloads").add({
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    });
-
-    canvas.toBlob((blob) => {
-        const url = URL.createObjectURL(blob);
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-        if (!isMobile) {
-            // 🖥 DESKTOP: Auto download
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = "onemillionmanworship_avatar2025.png";
-            a.click();
-            URL.revokeObjectURL(url);
-
-            // Optional redirect for desktop
-            setTimeout(() => {
-                window.location.href = "ads.html"; 
-            }, 800); 
-        } 
-        else {
-            // 📱 MOBILE: Open image in SAME TAB (no popup block)
-            window.location.href = url;
-
-            // ❗ No redirect here — mobile MUST stay on page
-            // If you redirect, the image will FAIL to open.
-        }
-    }, "image/png");
-});
-</script>
-
-        
-
-<!-- javascript share tracking code here
           <script>
             const shareBtn = document.getElementById('shareBtn');
 
@@ -396,7 +198,6 @@ downloadBtn.addEventListener("click", () => {
               window.open(whatsappUrl, '_blank');
             });
           </script>
-          -->
 
 
 

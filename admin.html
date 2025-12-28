@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section>
+  <h2>Pending Testimonies</h2>
+  <div id="pendingList"></div>
+</section>
+
+<script type="module">
+    import { collection, query, where, getDocs, updateDoc, doc }
+    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    async function loadPending() {
+    const q = query(collection(db, "testimonies"), where("approved", "==", false));
+    const results = await getDocs(q);
+
+    const container = document.getElementById("pendingList");
+    container.innerHTML = "";
+
+    results.forEach((t) => {
+        const data = t.data();
+        container.innerHTML += `
+        <div class="card">
+            <h3>${data.name}</h3>
+            <p>${data.location}</p>
+            <p>${data.testimony}</p>
+            ${data.imageURL ? `<img src="${data.imageURL}" width="120">` : ""}
+            ${data.videoURL ? `<video width="200" controls src="${data.videoURL}"></video>` : ""}
+            <button onclick="approveTestimony('${t.id}')">Approve</button>
+        </div>
+        `;
+    });
+    }
+
+    window.approveTestimony = async (id) => {
+    await updateDoc(doc(db, "testimonies", id), {
+        approved: true
+    });
+    loadPending();
+    };
+
+    loadPending();
+</script>
+
+</body>
+</html>

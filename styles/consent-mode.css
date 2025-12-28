@@ -1,0 +1,38 @@
+/* Cookie Banner Container */
+#cookie-banner {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  z-index: 9999;
+  display: none;
+  max-width: 450px;
+  margin: auto;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* Accept Button */
+#accept-cookies {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+/* Decline Button */
+#decline-cookies {
+  background: #ad2c2c;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  cursor: pointer;
+  border-radius: 5px;
+}

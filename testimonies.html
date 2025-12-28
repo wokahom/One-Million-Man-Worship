@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="approvedTestimonies" class="testimony-grid"></div>
+
+
+<script type="module">
+    import { collection, query, where, onSnapshot }
+    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const container = document.getElementById("approvedTestimonies");
+
+    const q = query(collection(db, "testimonies"), where("approved", "==", true));
+
+    onSnapshot(q, (snapshot) => {
+    container.innerHTML = "";
+
+    snapshot.forEach((doc) => {
+        const t = doc.data();
+        container.innerHTML += `
+        <div class="testimony-card">
+            ${t.imageURL ? `<img src="${t.imageURL}" class="avatar">` : ""}
+            <h3>${t.name}</h3>
+            <p class="loc">${t.location}</p>
+            <p class="text">${t.testimony}</p>
+            ${t.videoURL ? `<video controls src="${t.videoURL}" width="250"></video>` : ""}
+        </div>
+        `;
+    });
+    });
+</script>
+
+
+    <h2 class="counter">0</h2>
+    <p>Total Testimonies</p>
+
+<script type="module">
+    import { collection, onSnapshot } 
+    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const counter = document.querySelector(".counter");
+
+    onSnapshot(collection(db, "testimonies"), (snapshot) => {
+    let target = snapshot.size;
+    let current = 0;
+
+    let interval = setInterval(() => {
+        if (current < target) {
+        current++;
+        counter.textContent = current;
+        } else {
+        clearInterval(interval);
+        }
+    }, 30);
+    });
+</script>
+
+
+
+    
+</body>
+</html>
