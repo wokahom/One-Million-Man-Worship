@@ -123,25 +123,201 @@
   <main>
     <!-- The marquee codes should be here -->
         <div data-include="marquee.html"></div>
+        <div data-include="../sections/jesus_banner.html"></div>
 
-        <!-- This code line is for image and video -->
-      <section>
-        <div class="media-wrapper">
-        <img id="intro-image" src="assets/images/1mmw_flyer3_1.jpg" alt="Intro Image">
-        <video id="main-video" src="https://res.cloudinary.com/dtemxjmt6/video/upload/v1764531906/1mmw_2025_ads_video3_1_bual4w.mov" playsinline muted></video>
+    <!-- The codes for this page start here -->
+     <section class="youtube-embedded">
+         <h1>INSPIRING MOMENTS AT 1MMW 2025</h1>
+
+        <div class="video-section">
+
+        <!-- Main Video Display -->
+        <div class="video-main">
+            <iframe id="main-video" width="560" height="315" 
+            src="https://www.youtube.com/embed/vLguT07FH8M?si=51O46t9dv49l4uNM"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+            </iframe>
         </div>
-      </section>
+
+        <!-- Thumbnail List -->
+        <div class="video-list">
+
+            <div class="video-item" data-video="vLguT07FH8M">
+            <img src="https://img.youtube.com/vi/vLguT07FH8M/hqdefault.jpg">
+            <p>Video 1</p>
+            </div>
+
+            <div class="video-item" data-video="76SDYB5mZ24">
+            <img src="https://img.youtube.com/vi/76SDYB5mZ24/hqdefault.jpg">
+            <p>Video 2</p>
+            </div>
+
+            <div class="video-item" data-video="OwknAfw_kCE">
+            <img src="https://img.youtube.com/vi/OwknAfw_kCE/hqdefault.jpg">
+            <p>Video 3</p>
+            </div>
+
+            <div class="video-item" data-video="0mxeeKXWFpA">
+            <img src="https://img.youtube.com/vi/0mxeeKXWFpA/hqdefault.jpg">
+            <p>Video 4</p>
+            </div>
+
+            <div class="video-item" data-video="mNKFExzXma8">
+            <img src="https://img.youtube.com/vi/mNKFExzXma8/hqdefault.jpg">
+            <p>Video 5</p>
+            </div>
+
+            <div class="video-item" data-video="CiOakZASGQE">
+            <img src="https://img.youtube.com/vi/CiOakZASGQE/hqdefault.jpg">
+            <p>Video 6</p>
+            </div>
+
+        </div>
+        </div>
+
+
+        <!--
+        <script>
+        const mainVideo = document.getElementById("main-video");
+        const items = document.querySelectorAll(".video-item");
+
+        items.forEach(item => {
+            item.addEventListener("click", () => {
+            const id = item.getAttribute("data-video");
+            mainVideo.src = `https://www.youtube.com/embed/${id}`;
+            });
+        });
+        </script>
+        -->
+
+        <!--
+        <script>
+        const mainVideo = document.getElementById("main-video");
+        const items = document.querySelectorAll(".video-item");
+
+        // Load titles
+        items.forEach(item => {
+            const id = item.getAttribute("data-video");
+            const titleElement = item.querySelector("p");
+
+            fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${id}&format=json`)
+            .then(res => res.json())
+            .then(data => {
+                titleElement.textContent = data.title;
+            })
+            .catch(() => {
+                titleElement.textContent = "Video";
+            });
+        });
+
+        // Change main video on click
+        items.forEach(item => {
+            item.addEventListener("click", () => {
+            const id = item.getAttribute("data-video");
+            mainVideo.src = `https://www.youtube.com/embed/${id}`;
+            });
+        });
+        </script>
+        -->
+
+        <!--
+        <script>
+        const mainVideo = document.getElementById("main-video");
+        const items = document.querySelectorAll(".video-item");
+
+        // Load titles automatically
+        items.forEach(item => {
+            const id = item.getAttribute("data-video");
+            const titleEl = item.querySelector("p");
+
+            fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${id}&format=json`)
+            .then(res => res.json())
+            .then(data => {
+                titleEl.textContent = data.title;
+            });
+        });
+
+        // Change main video + add active highlight
+        items.forEach(item => {
+            item.addEventListener("click", () => {
+            const id = item.getAttribute("data-video");
+
+            // Change main video
+            mainVideo.src = `https://www.youtube.com/embed/${id}`;
+
+            // Remove active class from all items
+            items.forEach(i => i.classList.remove("active"));
+
+            // Add active class to clicked item
+            item.classList.add("active");
+            });
+        });
+
+        // Mark the first one as active by default
+        items[0].classList.add("active");
+        </script>
+        -->
+
+        <script>
+        const mainVideo = document.getElementById("main-video");
+        const items = document.querySelectorAll(".video-item");
+        const videoMainContainer = document.querySelector(".video-main");
+
+        // Load YouTube titles
+        items.forEach(item => {
+            const id = item.getAttribute("data-video");
+            const titleEl = item.querySelector("p");
+
+            fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${id}&format=json`)
+            .then(res => res.json())
+            .then(data => {
+                titleEl.textContent = data.title;
+            });
+        });
+
+        // Change video + fade animation + highlight
+        items.forEach(item => {
+            item.addEventListener("click", () => {
+            const id = item.getAttribute("data-video");
+
+            // Fade out
+            videoMainContainer.classList.remove("fade-in");
+            videoMainContainer.classList.add("fade-out");
+
+            setTimeout(() => {
+                // Change video
+                mainVideo.src = `https://www.youtube.com/embed/${id}`;
+
+                // Fade in
+                videoMainContainer.classList.remove("fade-out");
+                videoMainContainer.classList.add("fade-in");
+            }, 300);
+
+            // Active highlight
+            items.forEach(i => i.classList.remove("active"));
+            item.classList.add("active");
+            });
+        });
+
+        // First video selected by default
+        items[0].classList.add("active");
+        </script>
+    </section>
+
+   
+      
         
-      <!-- The about section codes should be here -->
-        <div data-include="../sections/about_banner1.html"></div>
+      
+
+
 
 
 
         
 
-        
-
-        <!--This code line for consent mode which is to be pasted in every page-->
+    <!--This code line for consent mode which is to be pasted in every page-->
       <div id="cookie-banner" style="
         position: fixed; bottom: 20px; left: 20px; right: 20px;
         background: #fff; padding: 15px; border-radius: 10px;
@@ -237,3 +413,42 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+
+

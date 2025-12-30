@@ -109,6 +109,7 @@
     
     <link rel="stylesheet" href="styles/sections/about_banner1.css">
     <link rel="stylesheet" href="styles/sections/text_banner1.css">
+    <link rel="stylesheet" href="styles/sections/jesus_banner.css">
 
 
     <!-- website logo here -->
@@ -119,7 +120,7 @@
     <!-- <div data-include="header.html"></div> should be here -->
      <div data-include="header.html"></div>
   <main>
-        <!--<div data-include="marquee.html"></div>-->
+        <div data-include="../sections/jesus_banner.html"></div>
 
     <section class="testimony-form-section">
       <h2 class="form-title">Share Your Testimony</h2>
@@ -154,6 +155,10 @@
 
     <p id="formMessage" class="form-message"></p>
   </form>
+
+    <div class="view-testimonies">
+        See other Testimonies and be inspired <a href="testimonies.html"> Click here</a> 
+    </div>
 </section>
 
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
@@ -179,6 +184,8 @@
           });
       });
   </script>      
+
+
 
   </main>
   <!-- <div data-include="footer.html"></div> should be here -->
@@ -232,7 +239,6 @@
               window.open(whatsappUrl, '_blank');
             });
           </script>
-
 
 
 <!-- Your Main JS Script (AFTER Firebase is initialized) -->

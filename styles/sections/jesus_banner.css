@@ -1,0 +1,9 @@
+.jesus_banner {
+  position: relative;
+}
+
+.jesus_banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+}

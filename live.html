@@ -96,8 +96,6 @@
     <link rel="stylesheet" href="styles/footer.css">
 
     <link rel="stylesheet" href="styles/ads.css">
-    <link rel="stylesheet" href="styles/videos.css">
-    <link rel="stylesheet" href="styles/gallery.css">
 
     <link rel="stylesheet" href="styles/image-video-autoplay.css">
     <link rel="stylesheet" href="styles/countdown.css">
@@ -107,6 +105,7 @@
     <link rel="stylesheet" href="styles/marquee.css">
     <link rel="stylesheet" href="styles/banner1.css">
     <link rel="stylesheet" href="styles/banner2.css">
+    <link rel="stylesheet" href="styles/youtube-embedded-videos.css">
     
     <link rel="stylesheet" href="styles/sections/about_banner1.css">
     <link rel="stylesheet" href="styles/sections/text_banner1.css">
@@ -121,23 +120,93 @@
     <!-- The header codes should be here -->
      <div data-include="header.html"></div>
   <main>
-    <!-- The marquee codes should be here -->
-        <div data-include="marquee.html"></div>
+     
 
-        <!-- This code line is for image and video -->
-      <section>
-        <div class="media-wrapper">
-        <img id="intro-image" src="assets/images/1mmw_flyer3_1.jpg" alt="Intro Image">
-        <video id="main-video" src="https://res.cloudinary.com/dtemxjmt6/video/upload/v1764531906/1mmw_2025_ads_video3_1_bual4w.mov" playsinline muted></video>
+
+    <section class="youtube-embedded">
+         <h1>FULL LIVE RECORD OF 1MMW 2024</h1>
+
+        <div class="video-section">
+
+        <!-- Main Video Display -->
+        <div class="video-main">
+            <iframe id="main-video" width="560" height="315" 
+            src="https://www.youtube.com/embed/TVxOqNhZbUA?si=f8rfhH0HbpLf0D5J" 
+            title="YouTube video player" frameborder="0" allow="accelerometer; 
+            autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; 
+            web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
-      </section>
+
+        <!-- Thumbnail List -->
+        <div class="video-list">
+
+            <div class="video-item" data-video="TVxOqNhZbUA">
+            <img src="https://img.youtube.com/vi/TVxOqNhZbUA/hqdefault.jpg">
+            <p>Video 1</p>
+            </div>
+
+            <div class="video-item" data-video="iSAgS4oRAHQ">
+            <img src="https://img.youtube.com/vi/iSAgS4oRAHQ/hqdefault.jpg">
+            <p>Video 2</p>
+            </div>
+
+            <div class="video-item" data-video="kAV4E-ayrXo">
+            <img src="https://img.youtube.com/vi/kAV4E-ayrXo/hqdefault.jpg">
+            <p>Video 3</p>
+            </div>
+
+        </div>
+        </div>
+
+    <script>
+        const mainVideo = document.getElementById("main-video");
+        const items = document.querySelectorAll(".video-item");
+        const videoMainContainer = document.querySelector(".video-main");
+
+        // Load YouTube titles
+        items.forEach(item => {
+            const id = item.getAttribute("data-video");
+            const titleEl = item.querySelector("p");
+
+            fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${id}&format=json`)
+            .then(res => res.json())
+            .then(data => {
+                titleEl.textContent = data.title;
+            });
+        });
+
+        // Change video + fade animation + highlight
+        items.forEach(item => {
+            item.addEventListener("click", () => {
+            const id = item.getAttribute("data-video");
+
+            // Fade out
+            videoMainContainer.classList.remove("fade-in");
+            videoMainContainer.classList.add("fade-out");
+
+            setTimeout(() => {
+                // Change video
+                mainVideo.src = `https://www.youtube.com/embed/${id}`;
+
+                // Fade in
+                videoMainContainer.classList.remove("fade-out");
+                videoMainContainer.classList.add("fade-in");
+            }, 300);
+
+            // Active highlight
+            items.forEach(i => i.classList.remove("active"));
+            item.classList.add("active");
+            });
+        });
+
+        // First video selected by default
+        items[0].classList.add("active");
+    </script>
+    </section>
         
-      <!-- The about section codes should be here -->
-        <div data-include="../sections/about_banner1.html"></div>
 
-
-
-        
+               
+                
 
         
 
@@ -222,7 +291,7 @@
 
 
 <!-- Your Main JS Script (AFTER Firebase is initialized) -->
-<!-- <script src="js/hamburger.js"></script> Was here but later move to the top -->
+<!-- <script src="js/hamburger.js"></script> should be here -->
 <script src="js/1mmw-avatar3-2025.js"></script>
 <script src="js/share-button.js"></script>
 <script src="js/consent_mode_eu.js"></script>
@@ -230,7 +299,6 @@
 <script src="js/image-video-autoplay.js"></script>
 <script src="js/slider1.js"></script>
 <script src="js/youtube_live.js"></script>
-<script src="js/gallery.js"></script>
 
 
 

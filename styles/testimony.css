@@ -77,6 +77,25 @@ textarea:focus {
   color: green;
   font-weight: 600;
 }
+
+.view-testimonies {
+  color: #ffffff;
+  padding: 25px;
+  text-align: center;
+} 
+.view-testimonies a {
+  color: #000000;
+  transition: 0.3s ease;
+}
+.view-testimonies a:hover {
+  color: #ffffff;
+}
+
+
+
+
+
+
 @media (max-width: 399px) { 
   .form-btn {
   font-size: 0.7rem; 
