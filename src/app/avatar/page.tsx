@@ -367,15 +367,15 @@ export default function AvatarPage() {
         {/* Canvas Studio Preview */}
         <div
           style={{
-            background: "rgba(18, 18, 24, 0.9)",
-            border: "1px solid rgba(255, 255, 255, 0.12)",
+            background: "var(--bg-card)",
+            border: "1px solid var(--border-glass)",
             borderRadius: 24,
             padding: 24,
-            boxShadow:
-              "0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(229, 57, 53, 0.15)",
+            boxShadow: "var(--card-shadow)",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            transition: "background-color 0.3s ease",
           }}
         >
           <div
@@ -386,7 +386,7 @@ export default function AvatarPage() {
               aspectRatio: "1 / 1",
               borderRadius: 16,
               overflow: "hidden",
-              border: "1px solid rgba(255, 255, 255, 0.15)",
+              border: "1px solid var(--border-glass)",
               background: "#0d0d12",
               cursor: hasImage ? "grab" : "default",
               touchAction: "none",
@@ -452,7 +452,7 @@ export default function AvatarPage() {
                 </p>
                 <span
                   style={{
-                    color: "#94a3b8",
+                    color: "rgba(255, 255, 255, 0.8)",
                     fontSize: "0.85rem",
                   }}
                 >
@@ -465,7 +465,7 @@ export default function AvatarPage() {
           <p
             style={{
               fontSize: "0.85rem",
-              color: "#94a3b8",
+              color: "var(--text-secondary)",
               marginTop: 14,
               textAlign: "center",
             }}
@@ -477,11 +477,12 @@ export default function AvatarPage() {
         {/* Studio Controls */}
         <div
           style={{
-            background: "rgba(18, 18, 24, 0.8)",
-            border: "1px solid rgba(255, 255, 255, 0.1)",
+            background: "var(--bg-card)",
+            border: "1px solid var(--border-glass)",
             borderRadius: 24,
             padding: 32,
-            boxShadow: "0 15px 40px rgba(0, 0, 0, 0.4)",
+            boxShadow: "var(--card-shadow)",
+            transition: "background-color 0.3s ease",
           }}
         >
           <h3
@@ -489,7 +490,7 @@ export default function AvatarPage() {
               fontFamily: "var(--font-heading)",
               fontSize: "1.35rem",
               fontWeight: 800,
-              color: "#ffffff",
+              color: "var(--text-primary)",
               marginBottom: 20,
             }}
           >
@@ -527,8 +528,8 @@ export default function AvatarPage() {
           {hasImage && (
             <div
               style={{
-                background: "rgba(255, 255, 255, 0.04)",
-                border: "1px solid rgba(255, 255, 255, 0.08)",
+                background: "var(--bg-card-secondary)",
+                border: "1px solid var(--border-glass)",
                 borderRadius: 14,
                 padding: 18,
                 marginBottom: 24,
@@ -546,7 +547,7 @@ export default function AvatarPage() {
                   style={{
                     fontSize: "0.88rem",
                     fontWeight: 600,
-                    color: "#cbd5e1",
+                    color: "var(--text-primary)",
                   }}
                 >
                   Adjust Size & Zoom
@@ -557,7 +558,7 @@ export default function AvatarPage() {
                   style={{
                     background: "none",
                     border: "none",
-                    color: "#f87171",
+                    color: "var(--primary-red)",
                     fontSize: "0.82rem",
                     fontWeight: 600,
                     cursor: "pointer",
@@ -575,11 +576,12 @@ export default function AvatarPage() {
                   type="button"
                   onClick={() => adjustScale(scale - 0.1)}
                   style={{
-                    background: "rgba(255, 255, 255, 0.1)",
-                    border: "none",
+                    background: "var(--bg-card)",
+                    border: "1px solid var(--border-glass)",
                     borderRadius: 8,
-                    color: "#ffffff",
+                    color: "var(--text-primary)",
                     padding: 8,
+                    cursor: "pointer",
                   }}
                 >
                   <ZoomOut size={16} />
@@ -599,11 +601,12 @@ export default function AvatarPage() {
                   type="button"
                   onClick={() => adjustScale(scale + 0.1)}
                   style={{
-                    background: "rgba(255, 255, 255, 0.1)",
-                    border: "none",
+                    background: "var(--bg-card)",
+                    border: "1px solid var(--border-glass)",
                     borderRadius: 8,
-                    color: "#ffffff",
+                    color: "var(--text-primary)",
                     padding: 8,
+                    cursor: "pointer",
                   }}
                 >
                   <ZoomIn size={16} />

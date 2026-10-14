@@ -128,11 +128,13 @@ export default function AboutPage() {
       <div className="container" style={{ paddingTop: 60, paddingBottom: 60 }}>
         <section
           style={{
-            background: "rgba(18, 18, 24, 0.8)",
-            border: "1px solid rgba(255, 255, 255, 0.1)",
+            background: "var(--bg-card)",
+            border: "1px solid var(--border-glass)",
             borderRadius: 24,
             padding: "48px 36px",
             marginBottom: 60,
+            boxShadow: "var(--section-card-shadow)",
+            transition: "background-color 0.3s ease",
           }}
         >
           <div
@@ -149,7 +151,7 @@ export default function AboutPage() {
                 aspectRatio: "16 / 11",
                 borderRadius: 18,
                 overflow: "hidden",
-                border: "1px solid rgba(255, 255, 255, 0.12)",
+                border: "1px solid var(--border-glass)",
               }}
             >
               <Image
@@ -167,7 +169,7 @@ export default function AboutPage() {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 6,
-                  color: "#f87171",
+                  color: "var(--primary-red)",
                   fontSize: "0.85rem",
                   fontWeight: 700,
                   textTransform: "uppercase",
@@ -182,7 +184,7 @@ export default function AboutPage() {
                   fontFamily: "var(--font-heading)",
                   fontSize: "clamp(1.8rem, 3.5vw, 2.4rem)",
                   fontWeight: 900,
-                  color: "#ffffff",
+                  color: "var(--text-primary)",
                   marginBottom: 18,
                   lineHeight: 1.2,
                 }}
@@ -191,7 +193,7 @@ export default function AboutPage() {
               </h2>
               <p
                 style={{
-                  color: "#cbd5e1",
+                  color: "var(--text-primary)",
                   fontSize: "1.05rem",
                   lineHeight: 1.7,
                   marginBottom: 16,
@@ -203,7 +205,7 @@ export default function AboutPage() {
               </p>
               <p
                 style={{
-                  color: "#94a3b8",
+                  color: "var(--text-secondary)",
                   fontSize: "0.95rem",
                   lineHeight: 1.7,
                   marginBottom: 20,
@@ -242,10 +244,11 @@ export default function AboutPage() {
               <div
                 key={idx}
                 style={{
-                  background: "rgba(18, 18, 24, 0.7)",
-                  border: "1px solid rgba(255, 255, 255, 0.08)",
+                  background: "var(--bg-card)",
+                  border: "1px solid var(--border-glass)",
                   borderRadius: 18,
                   padding: "28px 24px",
+                  boxShadow: "var(--card-shadow)",
                   transition: "transform 0.3s ease, border-color 0.3s ease",
                 }}
               >
@@ -254,8 +257,8 @@ export default function AboutPage() {
                     width: 50,
                     height: 50,
                     borderRadius: 12,
-                    background: "rgba(255, 255, 255, 0.05)",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    background: "var(--bg-card-secondary)",
+                    border: "1px solid var(--border-glass)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -268,7 +271,7 @@ export default function AboutPage() {
                   style={{
                     fontSize: "1.2rem",
                     fontWeight: 800,
-                    color: "#ffffff",
+                    color: "var(--text-primary)",
                     marginBottom: 10,
                   }}
                 >
@@ -277,7 +280,7 @@ export default function AboutPage() {
                 <p
                   style={{
                     fontSize: "0.9rem",
-                    color: "#94a3b8",
+                    color: "var(--text-secondary)",
                     lineHeight: 1.6,
                   }}
                 >
@@ -295,7 +298,7 @@ export default function AboutPage() {
               fontFamily: "var(--font-heading)",
               fontSize: "1.8rem",
               fontWeight: 800,
-              color: "#ffffff",
+              color: "var(--text-primary)",
               marginBottom: 16,
             }}
           >
@@ -303,7 +306,7 @@ export default function AboutPage() {
           </h2>
           <p
             style={{
-              color: "#94a3b8",
+              color: "var(--text-secondary)",
               fontSize: "0.95rem",
               marginBottom: 24,
             }}
@@ -314,10 +317,10 @@ export default function AboutPage() {
             style={{
               borderRadius: 20,
               overflow: "hidden",
-              border: "1px solid rgba(255, 255, 255, 0.12)",
+              border: "1px solid var(--border-glass)",
               maxWidth: 960,
               margin: "0 auto",
-              boxShadow: "0 15px 40px rgba(0, 0, 0, 0.6)",
+              boxShadow: "var(--card-shadow)",
             }}
           >
             <Image

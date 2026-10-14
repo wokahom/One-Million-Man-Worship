@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Marquee from "@/components/Marquee";
-import { Play, Video as VideoIcon, Sparkles } from "lucide-react";
+import { Play, Video as VideoIcon } from "lucide-react";
 import { YoutubeIcon } from "@/components/Icons";
 
 interface VideoMoment {
@@ -123,12 +123,11 @@ export default function VideosPage() {
           {/* Main Video Screen */}
           <div
             style={{
-              background: "rgba(18, 18, 24, 0.9)",
-              border: "1px solid rgba(255, 255, 255, 0.12)",
+              background: "var(--bg-card)",
+              border: "1px solid var(--border-glass)",
               borderRadius: 22,
               padding: 16,
-              boxShadow:
-                "0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(229, 57, 53, 0.15)",
+              boxShadow: "var(--section-card-shadow)",
             }}
           >
             <div
@@ -161,7 +160,7 @@ export default function VideosPage() {
                 style={{
                   fontSize: "1.25rem",
                   fontWeight: 800,
-                  color: "#ffffff",
+                  color: "var(--text-primary)",
                   lineHeight: 1.4,
                 }}
               >
@@ -173,7 +172,7 @@ export default function VideosPage() {
                   alignItems: "center",
                   gap: 12,
                   marginTop: 10,
-                  color: "#94a3b8",
+                  color: "var(--text-secondary)",
                   fontSize: "0.85rem",
                 }}
               >
@@ -182,7 +181,7 @@ export default function VideosPage() {
                     display: "inline-flex",
                     alignItems: "center",
                     gap: 5,
-                    color: "#ef4444",
+                    color: "var(--primary-red)",
                   }}
                 >
                   <YoutubeIcon size={16} /> Featured Ministration
@@ -194,11 +193,11 @@ export default function VideosPage() {
           {/* Video List */}
           <div
             style={{
-              background: "rgba(18, 18, 24, 0.8)",
-              border: "1px solid rgba(255, 255, 255, 0.1)",
+              background: "var(--bg-card)",
+              border: "1px solid var(--border-glass)",
               borderRadius: 22,
               padding: 20,
-              boxShadow: "0 15px 40px rgba(0, 0, 0, 0.4)",
+              boxShadow: "var(--card-shadow)",
             }}
           >
             <div
@@ -208,15 +207,15 @@ export default function VideosPage() {
                 gap: 8,
                 marginBottom: 18,
                 paddingBottom: 12,
-                borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+                borderBottom: "1px solid var(--border-glass)",
               }}
             >
-              <VideoIcon size={18} color="#ef4444" />
+              <VideoIcon size={18} color="var(--primary-red)" />
               <h3
                 style={{
                   fontSize: "1.05rem",
                   fontWeight: 700,
-                  color: "#ffffff",
+                  color: "var(--text-primary)",
                 }}
               >
                 Inspiring Videos ({videoList.length})
@@ -245,11 +244,11 @@ export default function VideosPage() {
                       padding: 10,
                       borderRadius: 14,
                       background: isActive
-                        ? "rgba(229, 57, 53, 0.18)"
-                        : "rgba(255, 255, 255, 0.03)",
+                        ? "rgba(229, 57, 53, 0.15)"
+                        : "var(--bg-card-secondary)",
                       border: isActive
-                        ? "1px solid rgba(229, 57, 53, 0.5)"
-                        : "1px solid rgba(255, 255, 255, 0.06)",
+                        ? "1px solid var(--primary-red)"
+                        : "1px solid var(--border-subtle)",
                       cursor: "pointer",
                       transition: "all 0.25s ease",
                     }}
@@ -286,7 +285,7 @@ export default function VideosPage() {
                             width: 24,
                             height: 24,
                             borderRadius: "50%",
-                            background: isActive ? "#ef4444" : "rgba(0,0,0,0.7)",
+                            background: isActive ? "var(--primary-red)" : "rgba(0,0,0,0.7)",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
@@ -303,7 +302,7 @@ export default function VideosPage() {
                         style={{
                           fontSize: "0.72rem",
                           fontWeight: 700,
-                          color: isActive ? "#f87171" : "#94a3b8",
+                          color: isActive ? "var(--primary-red)" : "var(--text-muted)",
                           textTransform: "uppercase",
                         }}
                       >
@@ -313,7 +312,7 @@ export default function VideosPage() {
                         style={{
                           fontSize: "0.82rem",
                           fontWeight: 600,
-                          color: isActive ? "#ffffff" : "#cbd5e1",
+                          color: isActive ? "var(--text-primary)" : "var(--text-secondary)",
                           marginTop: 2,
                           lineHeight: 1.3,
                           display: "-webkit-box",

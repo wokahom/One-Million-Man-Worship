@@ -17,6 +17,7 @@ import {
   Video,
 } from "lucide-react";
 import { BsInstagram } from "react-icons/bs";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -195,6 +196,9 @@ export default function Header() {
               </a>
             </div>
 
+            {/* Theme Toggle */}
+            <ThemeToggle />
+
             {/* Mobile Hamburger Button */}
             <button
               type="button"
@@ -302,7 +306,8 @@ export default function Header() {
           </li>
         </ul>
 
-        <div style={{ marginTop: "auto", paddingTop: 20 }}>
+        <div style={{ marginTop: "auto", paddingTop: 20, display: "flex", flexDirection: "column", gap: 12 }}>
+          <ThemeToggle showLabel />
           <Link
             href="/avatar"
             className="btn-primary"

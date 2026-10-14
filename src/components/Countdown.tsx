@@ -77,14 +77,14 @@ export default function Countdown({
   return (
     <div
       style={{
-        background: "radial-gradient(ellipse at center, rgba(229, 57, 53, 0.15) 0%, rgba(10, 10, 14, 0.95) 70%)",
-        border: "1px solid rgba(229, 57, 53, 0.25)",
+        background: "var(--countdown-bg)",
+        border: "1px solid var(--border-glow)",
         borderRadius: 20,
         padding: "36px 24px",
         margin: "30px auto",
         maxWidth: 720,
         textAlign: "center",
-        boxShadow: "0 15px 35px rgba(0, 0, 0, 0.5), 0 0 30px rgba(229, 57, 53, 0.15)",
+        boxShadow: "var(--card-shadow)",
       }}
     >
       <div
@@ -92,7 +92,7 @@ export default function Countdown({
           display: "inline-flex",
           alignItems: "center",
           gap: 8,
-          color: "#f87171",
+          color: "var(--primary-red)",
           fontSize: "0.9rem",
           fontWeight: 700,
           textTransform: "uppercase",
@@ -108,7 +108,7 @@ export default function Countdown({
           fontFamily: "var(--font-heading)",
           fontSize: "clamp(1.4rem, 3vw, 2rem)",
           fontWeight: 800,
-          color: "#ffffff",
+          color: "var(--text-primary)",
           marginBottom: 28,
         }}
       >
@@ -129,8 +129,8 @@ export default function Countdown({
             <div
               key={idx}
               style={{
-                background: "rgba(255, 255, 255, 0.05)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
+                background: "var(--bg-card-secondary)",
+                border: "1px solid var(--border-glass)",
                 borderRadius: 14,
                 padding: "18px 10px",
                 display: "flex",
@@ -145,9 +145,9 @@ export default function Countdown({
                   fontFamily: "var(--font-heading)",
                   fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
                   fontWeight: 900,
-                  color: "#ffffff",
+                  color: "var(--text-primary)",
                   lineHeight: 1,
-                  background: "linear-gradient(180deg, #ffffff 40%, #fca5a5 100%)",
+                  background: "var(--countdown-digit-gradient)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                 }}
@@ -159,7 +159,7 @@ export default function Countdown({
                   fontSize: "0.78rem",
                   textTransform: "uppercase",
                   letterSpacing: "0.08em",
-                  color: "#94a3b8",
+                  color: "var(--text-secondary)",
                   marginTop: 6,
                   fontWeight: 600,
                 }}

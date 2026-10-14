@@ -8,7 +8,6 @@ import {
   X,
   ChevronLeft,
   ChevronRight,
-  Maximize2,
   Sparkles,
 } from "lucide-react";
 
@@ -130,10 +129,10 @@ export default function GalleryPage() {
                 borderRadius: 16,
                 overflow: "hidden",
                 cursor: "pointer",
-                background: "rgba(255, 255, 255, 0.04)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
+                background: "var(--bg-card)",
+                border: "1px solid var(--border-glass)",
                 aspectRatio: "4 / 3",
-                boxShadow: "0 10px 25px rgba(0, 0, 0, 0.4)",
+                boxShadow: "var(--card-shadow)",
                 transition: "transform 0.3s ease, border-color 0.3s ease",
               }}
             >

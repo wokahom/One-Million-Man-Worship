@@ -5,13 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import Marquee from "@/components/Marquee";
 import {
-  Heart,
   Send,
   Upload,
   CheckCircle2,
   Sparkles,
   ArrowRight,
-  MessageSquareHeart,
   AlertCircle,
 } from "lucide-react";
 import { db, storage } from "@/lib/firebase";
@@ -171,12 +169,12 @@ export default function TestimonyPage() {
           style={{
             maxWidth: 680,
             margin: "0 auto",
-            background: "rgba(18, 18, 24, 0.85)",
-            border: "1px solid rgba(255, 255, 255, 0.12)",
+            background: "var(--bg-card)",
+            border: "1px solid var(--border-glass)",
             borderRadius: 24,
             padding: "40px 32px",
-            boxShadow:
-              "0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(229, 57, 53, 0.12)",
+            boxShadow: "var(--card-shadow)",
+            transition: "background-color 0.3s ease",
           }}
         >
           <div style={{ textAlign: "center", marginBottom: 30 }}>
@@ -185,13 +183,13 @@ export default function TestimonyPage() {
                 fontFamily: "var(--font-heading)",
                 fontSize: "1.8rem",
                 fontWeight: 800,
-                color: "#ffffff",
+                color: "var(--text-primary)",
                 marginBottom: 8,
               }}
             >
               Share Your Testimony
             </h2>
-            <p style={{ color: "#94a3b8", fontSize: "0.95rem" }}>
+            <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}>
               We would love to celebrate what the Lord has done in your health,
               family, career, or spiritual walk.
             </p>
@@ -217,7 +215,7 @@ export default function TestimonyPage() {
                 <strong style={{ fontSize: "0.95rem", display: "block" }}>
                   Testimony Submitted Successfully!
                 </strong>
-                <span style={{ fontSize: "0.85rem", color: "#d1fae5" }}>
+                <span style={{ fontSize: "0.85rem", color: "var(--text-secondary)" }}>
                   Thank you for testifying of God&apos;s goodness. Your testimony
                   will be published to inspire millions.
                 </span>
@@ -255,7 +253,7 @@ export default function TestimonyPage() {
                   display: "block",
                   fontSize: "0.88rem",
                   fontWeight: 600,
-                  color: "#cbd5e1",
+                  color: "var(--text-primary)",
                   marginBottom: 8,
                 }}
               >
@@ -271,9 +269,9 @@ export default function TestimonyPage() {
                   width: "100%",
                   padding: "13px 16px",
                   borderRadius: 10,
-                  background: "rgba(255, 255, 255, 0.05)",
-                  border: "1px solid rgba(255, 255, 255, 0.12)",
-                  color: "#ffffff",
+                  background: "var(--input-bg)",
+                  border: "1px solid var(--input-border)",
+                  color: "var(--text-primary)",
                   fontSize: "0.95rem",
                   outline: "none",
                 }}
@@ -287,7 +285,7 @@ export default function TestimonyPage() {
                   display: "block",
                   fontSize: "0.88rem",
                   fontWeight: 600,
-                  color: "#cbd5e1",
+                  color: "var(--text-primary)",
                   marginBottom: 8,
                 }}
               >
@@ -302,9 +300,9 @@ export default function TestimonyPage() {
                   width: "100%",
                   padding: "13px 16px",
                   borderRadius: 10,
-                  background: "rgba(255, 255, 255, 0.05)",
-                  border: "1px solid rgba(255, 255, 255, 0.12)",
-                  color: "#ffffff",
+                  background: "var(--input-bg)",
+                  border: "1px solid var(--input-border)",
+                  color: "var(--text-primary)",
                   fontSize: "0.95rem",
                   outline: "none",
                 }}
@@ -318,7 +316,7 @@ export default function TestimonyPage() {
                   display: "block",
                   fontSize: "0.88rem",
                   fontWeight: 600,
-                  color: "#cbd5e1",
+                  color: "var(--text-primary)",
                   marginBottom: 8,
                 }}
               >
@@ -334,9 +332,9 @@ export default function TestimonyPage() {
                   width: "100%",
                   padding: "13px 16px",
                   borderRadius: 10,
-                  background: "rgba(255, 255, 255, 0.05)",
-                  border: "1px solid rgba(255, 255, 255, 0.12)",
-                  color: "#ffffff",
+                  background: "var(--input-bg)",
+                  border: "1px solid var(--input-border)",
+                  color: "var(--text-primary)",
                   fontSize: "0.95rem",
                   outline: "none",
                 }}
@@ -350,7 +348,7 @@ export default function TestimonyPage() {
                   display: "block",
                   fontSize: "0.88rem",
                   fontWeight: 600,
-                  color: "#cbd5e1",
+                  color: "var(--text-primary)",
                   marginBottom: 8,
                 }}
               >
@@ -366,9 +364,9 @@ export default function TestimonyPage() {
                   width: "100%",
                   padding: "13px 16px",
                   borderRadius: 10,
-                  background: "rgba(255, 255, 255, 0.05)",
-                  border: "1px solid rgba(255, 255, 255, 0.12)",
-                  color: "#ffffff",
+                  background: "var(--input-bg)",
+                  border: "1px solid var(--input-border)",
+                  color: "var(--text-primary)",
                   fontSize: "0.95rem",
                   outline: "none",
                   resize: "vertical",

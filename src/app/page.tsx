@@ -13,7 +13,6 @@ import {
   Users,
   Flame,
   Radio,
-  Share2,
 } from "lucide-react";
 import { db } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
@@ -55,15 +54,14 @@ export default function HomePage() {
             {/* Card 1: Avatar Generator */}
             <div
               style={{
-                background:
-                  "linear-gradient(135deg, rgba(229, 57, 53, 0.15) 0%, rgba(20, 20, 26, 0.95) 100%)",
-                border: "1px solid rgba(229, 57, 53, 0.3)",
+                background: "var(--hero-card-1-bg)",
+                border: "1px solid var(--hero-card-1-border)",
                 borderRadius: 18,
                 padding: "28px 24px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                boxShadow: "0 10px 30px rgba(0, 0, 0, 0.4)",
+                boxShadow: "var(--card-shadow)",
                 transition: "transform 0.3s ease, border-color 0.3s ease",
               }}
             >
@@ -74,7 +72,7 @@ export default function HomePage() {
                     alignItems: "center",
                     gap: 6,
                     background: "rgba(229, 57, 53, 0.2)",
-                    color: "#f87171",
+                    color: "var(--primary-red)",
                     padding: "4px 12px",
                     borderRadius: 20,
                     fontSize: "0.8rem",
@@ -89,7 +87,7 @@ export default function HomePage() {
                     fontFamily: "var(--font-heading)",
                     fontSize: "1.45rem",
                     fontWeight: 800,
-                    color: "#ffffff",
+                    color: "var(--text-primary)",
                     marginBottom: 10,
                   }}
                 >
@@ -97,7 +95,7 @@ export default function HomePage() {
                 </h3>
                 <p
                   style={{
-                    color: "#94a3b8",
+                    color: "var(--text-secondary)",
                     fontSize: "0.92rem",
                     lineHeight: 1.6,
                     marginBottom: 20,
@@ -117,15 +115,14 @@ export default function HomePage() {
             {/* Card 2: Live Experience */}
             <div
               style={{
-                background:
-                  "linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(20, 20, 26, 0.95) 100%)",
-                border: "1px solid rgba(59, 130, 246, 0.25)",
+                background: "var(--hero-card-2-bg)",
+                border: "1px solid var(--hero-card-2-border)",
                 borderRadius: 18,
                 padding: "28px 24px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                boxShadow: "0 10px 30px rgba(0, 0, 0, 0.4)",
+                boxShadow: "var(--card-shadow)",
               }}
             >
               <div>
@@ -135,7 +132,7 @@ export default function HomePage() {
                     alignItems: "center",
                     gap: 6,
                     background: "rgba(59, 130, 246, 0.2)",
-                    color: "#60a5fa",
+                    color: "#3b82f6",
                     padding: "4px 12px",
                     borderRadius: 20,
                     fontSize: "0.8rem",
@@ -150,7 +147,7 @@ export default function HomePage() {
                     fontFamily: "var(--font-heading)",
                     fontSize: "1.45rem",
                     fontWeight: 800,
-                    color: "#ffffff",
+                    color: "var(--text-primary)",
                     marginBottom: 10,
                   }}
                 >
@@ -158,7 +155,7 @@ export default function HomePage() {
                 </h3>
                 <p
                   style={{
-                    color: "#94a3b8",
+                    color: "var(--text-secondary)",
                     fontSize: "0.92rem",
                     lineHeight: 1.6,
                     marginBottom: 20,
@@ -177,15 +174,14 @@ export default function HomePage() {
             {/* Card 3: Experience Jesus & Testimonies */}
             <div
               style={{
-                background:
-                  "linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(20, 20, 26, 0.95) 100%)",
-                border: "1px solid rgba(245, 158, 11, 0.25)",
+                background: "var(--hero-card-3-bg)",
+                border: "1px solid var(--hero-card-3-border)",
                 borderRadius: 18,
                 padding: "28px 24px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                boxShadow: "0 10px 30px rgba(0, 0, 0, 0.4)",
+                boxShadow: "var(--card-shadow)",
               }}
             >
               <div>
@@ -195,7 +191,7 @@ export default function HomePage() {
                     alignItems: "center",
                     gap: 6,
                     background: "rgba(245, 158, 11, 0.2)",
-                    color: "#fbbf24",
+                    color: "var(--primary-gold)",
                     padding: "4px 12px",
                     borderRadius: 20,
                     fontSize: "0.8rem",
@@ -210,7 +206,7 @@ export default function HomePage() {
                     fontFamily: "var(--font-heading)",
                     fontSize: "1.45rem",
                     fontWeight: 800,
-                    color: "#ffffff",
+                    color: "var(--text-primary)",
                     marginBottom: 10,
                   }}
                 >
@@ -218,7 +214,7 @@ export default function HomePage() {
                 </h3>
                 <p
                   style={{
-                    color: "#94a3b8",
+                    color: "var(--text-secondary)",
                     fontSize: "0.92rem",
                     lineHeight: 1.6,
                     marginBottom: 20,
@@ -239,12 +235,13 @@ export default function HomePage() {
         {/* About Section */}
         <section
           style={{
-            background: "rgba(18, 18, 24, 0.75)",
-            border: "1px solid rgba(255, 255, 255, 0.1)",
+            background: "var(--bg-card)",
+            border: "1px solid var(--border-glass)",
             borderRadius: 24,
             padding: "48px 36px",
             marginBottom: 70,
-            boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)",
+            boxShadow: "var(--section-card-shadow)",
+            transition: "background-color 0.3s ease",
           }}
         >
           <div
@@ -261,8 +258,8 @@ export default function HomePage() {
                 position: "relative",
                 borderRadius: 18,
                 overflow: "hidden",
-                border: "1px solid rgba(255, 255, 255, 0.15)",
-                boxShadow: "0 15px 35px rgba(0, 0, 0, 0.6)",
+                border: "1px solid var(--border-glass)",
+                boxShadow: "var(--card-shadow)",
                 aspectRatio: "16 / 10",
               }}
             >
@@ -282,7 +279,7 @@ export default function HomePage() {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 8,
-                  color: "#f87171",
+                  color: "var(--primary-red)",
                   fontSize: "0.85rem",
                   fontWeight: 700,
                   letterSpacing: "0.1em",
@@ -297,7 +294,7 @@ export default function HomePage() {
                   fontFamily: "var(--font-heading)",
                   fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)",
                   fontWeight: 900,
-                  color: "#ffffff",
+                  color: "var(--text-primary)",
                   lineHeight: 1.2,
                   marginBottom: 18,
                 }}
@@ -306,7 +303,7 @@ export default function HomePage() {
               </h2>
               <p
                 style={{
-                  color: "#cbd5e1",
+                  color: "var(--text-primary)",
                   fontSize: "1.02rem",
                   lineHeight: 1.7,
                   marginBottom: 24,
@@ -318,7 +315,7 @@ export default function HomePage() {
               </p>
               <p
                 style={{
-                  color: "#94a3b8",
+                  color: "var(--text-secondary)",
                   fontSize: "0.95rem",
                   lineHeight: 1.7,
                   marginBottom: 28,
@@ -353,8 +350,8 @@ export default function HomePage() {
               margin: "0 auto",
               borderRadius: 20,
               overflow: "hidden",
-              border: "1px solid rgba(255, 255, 255, 0.12)",
-              boxShadow: "0 20px 45px rgba(0, 0, 0, 0.6)",
+              border: "1px solid var(--border-glass)",
+              boxShadow: "var(--card-shadow)",
             }}
           >
             <Image

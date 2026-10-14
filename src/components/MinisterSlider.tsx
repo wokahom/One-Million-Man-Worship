@@ -86,7 +86,7 @@ export default function MinisterSlider() {
               fontFamily: "var(--font-heading)",
               fontSize: "1.6rem",
               fontWeight: 800,
-              color: "#ffffff",
+              color: "var(--text-primary)",
             }}
           >
             Anointed Ministers & Artistes
@@ -102,9 +102,9 @@ export default function MinisterSlider() {
               width: 40,
               height: 40,
               borderRadius: "50%",
-              background: "rgba(255, 255, 255, 0.08)",
-              border: "1px solid rgba(255, 255, 255, 0.15)",
-              color: "#ffffff",
+              background: "var(--bg-card-secondary)",
+              border: "1px solid var(--border-glass)",
+              color: "var(--text-primary)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -122,9 +122,9 @@ export default function MinisterSlider() {
               width: 40,
               height: 40,
               borderRadius: "50%",
-              background: "rgba(255, 255, 255, 0.08)",
-              border: "1px solid rgba(255, 255, 255, 0.15)",
-              color: "#ffffff",
+              background: "var(--bg-card-secondary)",
+              border: "1px solid var(--border-glass)",
+              color: "var(--text-primary)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -142,9 +142,10 @@ export default function MinisterSlider() {
         style={{
           overflow: "hidden",
           borderRadius: 16,
-          background: "rgba(18, 18, 24, 0.6)",
+          background: "var(--bg-slider)",
           padding: "16px 0",
-          border: "1px solid rgba(255, 255, 255, 0.08)",
+          border: "1px solid var(--border-glass)",
+          boxShadow: "var(--card-shadow)",
         }}
       >
         <div
@@ -165,9 +166,9 @@ export default function MinisterSlider() {
                 width: 240,
                 borderRadius: 12,
                 overflow: "hidden",
-                background: "rgba(255, 255, 255, 0.04)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                boxShadow: "0 10px 25px rgba(0, 0, 0, 0.4)",
+                background: "var(--bg-card)",
+                border: "1px solid var(--border-glass)",
+                boxShadow: "var(--card-shadow)",
                 transition: "transform 0.3s ease, border-color 0.3s ease",
               }}
             >

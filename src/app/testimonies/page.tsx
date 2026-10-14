@@ -7,9 +7,7 @@ import Marquee from "@/components/Marquee";
 import {
   MessageSquareHeart,
   MapPin,
-  Sparkles,
   ArrowRight,
-  Heart,
   Quote,
 } from "lucide-react";
 import { db } from "@/lib/firebase";
@@ -139,12 +137,13 @@ export default function TestimoniesPage() {
               display: "inline-flex",
               flexDirection: "column",
               alignItems: "center",
-              background: "rgba(18, 18, 24, 0.8)",
-              border: "1px solid rgba(255, 255, 255, 0.1)",
+              background: "var(--bg-card)",
+              border: "1px solid var(--border-glass)",
               borderRadius: 20,
               padding: "20px 48px",
-              boxShadow: "0 10px 30px rgba(0, 0, 0, 0.5)",
+              boxShadow: "var(--card-shadow)",
               margin: "0 auto 30px",
+              transition: "background-color 0.3s ease",
             }}
           >
             <span
@@ -152,7 +151,7 @@ export default function TestimoniesPage() {
                 fontFamily: "var(--font-heading)",
                 fontSize: "3.2rem",
                 fontWeight: 900,
-                background: "linear-gradient(135deg, #ffffff 40%, #fca5a5 100%)",
+                background: "var(--title-gradient)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 lineHeight: 1,
@@ -164,7 +163,7 @@ export default function TestimoniesPage() {
               style={{
                 fontSize: "0.88rem",
                 fontWeight: 700,
-                color: "#f87171",
+                color: "var(--primary-red)",
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
                 marginTop: 6,
@@ -194,15 +193,16 @@ export default function TestimoniesPage() {
             <div
               key={item.id}
               style={{
-                background: "rgba(18, 18, 24, 0.75)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
+                background: "var(--bg-card)",
+                border: "1px solid var(--border-glass)",
                 borderRadius: 20,
                 padding: "28px 24px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                boxShadow: "0 12px 35px rgba(0, 0, 0, 0.4)",
+                boxShadow: "var(--card-shadow)",
                 position: "relative",
+                transition: "background-color 0.3s ease, border-color 0.3s ease",
               }}
             >
               <div>
@@ -260,7 +260,7 @@ export default function TestimoniesPage() {
                       style={{
                         fontSize: "1.05rem",
                         fontWeight: 800,
-                        color: "#ffffff",
+                        color: "var(--text-primary)",
                         marginBottom: 4,
                       }}
                     >
@@ -269,14 +269,14 @@ export default function TestimoniesPage() {
                     <p
                       style={{
                         fontSize: "0.82rem",
-                        color: "#94a3b8",
+                        color: "var(--text-secondary)",
                         display: "flex",
                         alignItems: "center",
                         gap: 4,
                         margin: 0,
                       }}
                     >
-                      <MapPin size={13} color="#f87171" />
+                      <MapPin size={13} color="var(--primary-red)" />
                       {item.location}
                     </p>
                   </div>
@@ -290,7 +290,7 @@ export default function TestimoniesPage() {
                   />
                   <p
                     style={{
-                      color: "#cbd5e1",
+                      color: "var(--text-primary)",
                       fontSize: "0.95rem",
                       lineHeight: 1.7,
                       position: "relative",

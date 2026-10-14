@@ -7,7 +7,6 @@ import {
   ShieldAlert,
   Check,
   RefreshCw,
-  Clock,
   MapPin,
   CheckCircle2,
   Trash2,
@@ -102,7 +101,7 @@ export default function AdminPage() {
           gap: 16,
           marginBottom: 36,
           paddingBottom: 20,
-          borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+          borderBottom: "1px solid var(--border-glass)",
         }}
       >
         <div>
@@ -111,8 +110,8 @@ export default function AdminPage() {
               display: "inline-flex",
               alignItems: "center",
               gap: 6,
-              background: "rgba(229, 57, 53, 0.2)",
-              color: "#f87171",
+              background: "rgba(229, 57, 53, 0.15)",
+              color: "var(--primary-red)",
               padding: "4px 12px",
               borderRadius: 20,
               fontSize: "0.8rem",
@@ -127,7 +126,7 @@ export default function AdminPage() {
               fontFamily: "var(--font-heading)",
               fontSize: "2rem",
               fontWeight: 800,
-              color: "#ffffff",
+              color: "var(--text-primary)",
               margin: 0,
             }}
           >
@@ -166,7 +165,7 @@ export default function AdminPage() {
       )}
 
       {loading ? (
-        <div style={{ textAlign: "center", padding: 60, color: "#94a3b8" }}>
+        <div style={{ textAlign: "center", padding: 60, color: "var(--text-muted)" }}>
           Loading pending submissions from Firestore...
         </div>
       ) : pendingList.length === 0 ? (
@@ -174,9 +173,10 @@ export default function AdminPage() {
           style={{
             textAlign: "center",
             padding: "80px 20px",
-            background: "rgba(18, 18, 24, 0.6)",
-            border: "1px dashed rgba(255, 255, 255, 0.12)",
+            background: "var(--bg-card)",
+            border: "1px dashed var(--border-glass)",
             borderRadius: 20,
+            boxShadow: "var(--card-shadow)",
           }}
         >
           <CheckCircle2 size={48} color="#10b981" style={{ marginBottom: 16 }} />
@@ -184,13 +184,13 @@ export default function AdminPage() {
             style={{
               fontSize: "1.4rem",
               fontWeight: 700,
-              color: "#ffffff",
+              color: "var(--text-primary)",
               marginBottom: 8,
             }}
           >
             No Pending Testimonies
           </h3>
-          <p style={{ color: "#94a3b8", maxWidth: 440, margin: "0 auto 20px" }}>
+          <p style={{ color: "var(--text-secondary)", maxWidth: 440, margin: "0 auto 20px" }}>
             All incoming testimonies have been reviewed and published.
           </p>
           <Link href="/testimonies" className="btn-secondary">
@@ -209,10 +209,11 @@ export default function AdminPage() {
             <div
               key={item.id}
               style={{
-                background: "rgba(18, 18, 24, 0.8)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
+                background: "var(--bg-card)",
+                border: "1px solid var(--border-glass)",
                 borderRadius: 18,
                 padding: 24,
+                boxShadow: "var(--card-shadow)",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
@@ -232,7 +233,7 @@ export default function AdminPage() {
                     style={{
                       fontSize: "1.1rem",
                       fontWeight: 800,
-                      color: "#ffffff",
+                      color: "var(--text-primary)",
                     }}
                   >
                     {item.name}
@@ -254,14 +255,14 @@ export default function AdminPage() {
                 <p
                   style={{
                     fontSize: "0.85rem",
-                    color: "#94a3b8",
+                    color: "var(--text-secondary)",
                     display: "flex",
                     alignItems: "center",
                     gap: 6,
                     marginBottom: 14,
                   }}
                 >
-                  <MapPin size={13} color="#f87171" />
+                  <MapPin size={13} color="var(--primary-red)" />
                   {item.location}
                   {item.email && ` • ${item.email}`}
                 </p>
@@ -269,9 +270,9 @@ export default function AdminPage() {
                 <p
                   style={{
                     fontSize: "0.92rem",
-                    color: "#cbd5e1",
+                    color: "var(--text-primary)",
                     lineHeight: 1.6,
-                    background: "rgba(255, 255, 255, 0.03)",
+                    background: "var(--bg-card-secondary)",
                     padding: 12,
                     borderRadius: 10,
                   }}

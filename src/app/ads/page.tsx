@@ -3,7 +3,7 @@ import MediaAutoplay from "@/components/MediaAutoplay";
 import MinisterSlider from "@/components/MinisterSlider";
 import Countdown from "@/components/Countdown";
 import Link from "next/link";
-import { Sparkles, ArrowRight, Calendar, MapPin } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
 
 export const metadata = {
   title: "Event Lineup & Promo",
@@ -38,16 +38,14 @@ export default function AdsPage() {
         {/* Call To Action Banner */}
         <section
           style={{
-            background:
-              "linear-gradient(135deg, rgba(229, 57, 53, 0.2) 0%, rgba(18, 18, 24, 0.95) 100%)",
-            border: "1px solid rgba(229, 57, 53, 0.35)",
+            background: "var(--hero-card-1-bg)",
+            border: "1px solid var(--hero-card-1-border)",
             borderRadius: 24,
             padding: "40px 30px",
             textAlign: "center",
             maxWidth: 850,
             margin: "0 auto",
-            boxShadow:
-              "0 20px 45px rgba(0, 0, 0, 0.5), 0 0 30px rgba(229, 57, 53, 0.15)",
+            boxShadow: "var(--section-card-shadow)",
           }}
         >
           <span
@@ -55,8 +53,8 @@ export default function AdsPage() {
               display: "inline-flex",
               alignItems: "center",
               gap: 6,
-              background: "rgba(229, 57, 53, 0.25)",
-              color: "#fca5a5",
+              background: "rgba(229, 57, 53, 0.15)",
+              color: "var(--primary-red)",
               padding: "4px 14px",
               borderRadius: 20,
               fontSize: "0.85rem",
@@ -71,7 +69,7 @@ export default function AdsPage() {
               fontFamily: "var(--font-heading)",
               fontSize: "clamp(1.8rem, 3.5vw, 2.4rem)",
               fontWeight: 900,
-              color: "#ffffff",
+              color: "var(--text-primary)",
               marginBottom: 14,
             }}
           >
@@ -79,7 +77,7 @@ export default function AdsPage() {
           </h2>
           <p
             style={{
-              color: "#cbd5e1",
+              color: "var(--text-secondary)",
               fontSize: "1.05rem",
               maxWidth: 600,
               margin: "0 auto 24px",

@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://onemillionmanworship.com"),
@@ -64,8 +65,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Anti-FOUC Theme Initializer */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var saved = localStorage.getItem('1mmw_theme');
+                  var theme = saved || 'dark';
+                  document.documentElement.setAttribute('data-theme', theme);
+                } catch(e) {}
+              })();
+            `,
+          }}
+        />
+
         {/* Google Analytics & Consent Mode */}
         <Script
           strategy="afterInteractive"
@@ -85,10 +101,12 @@ export default function RootLayout({
         </Script>
       </head>
       <body>
-        <Header />
-        <main className="main-content">{children}</main>
-        <Footer />
-        <CookieConsent />
+        <ThemeProvider>
+          <Header />
+          <main className="main-content">{children}</main>
+          <Footer />
+          <CookieConsent />
+        </ThemeProvider>
       </body>
     </html>
   );
