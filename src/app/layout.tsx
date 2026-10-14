@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://onemillionmanworship.com"),
@@ -106,6 +107,7 @@ export default function RootLayout({
           <main className="main-content">{children}</main>
           <Footer />
           <CookieConsent />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

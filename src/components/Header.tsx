@@ -154,14 +154,12 @@ export default function Header() {
                 </Link>
               </li>
               <li>
-                <a
-                  href="mailto:info@onemillionmanworship.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="nav-link"
+                <Link
+                  href="/contact"
+                  className={`nav-link ${isActive("/contact") ? "active" : ""}`}
                 >
-                  Contact
-                </a>
+                  Contact Us
+                </Link>
               </li>
             </ul>
           </nav>
@@ -309,13 +307,13 @@ export default function Header() {
                   </Link>
                 </li>
                 <li>
-                  <a
-                    href="mailto:info@onemillionmanworship.com"
-                    className="mobile-nav-link"
+                  <Link
+                    href="/contact"
+                    className={`mobile-nav-link ${isActive("/contact") ? "active" : ""}`}
                     onClick={closeMobile}
                   >
                     Contact Us
-                  </a>
+                  </Link>
                 </li>
               </ul>
 

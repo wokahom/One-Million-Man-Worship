@@ -67,6 +67,27 @@ export default function TestimoniesPage() {
   const [count, setCount] = useState(defaultTestimonies.length + 128);
 
   useEffect(() => {
+    // 1. Fetch approved testimonies from MongoDB API
+    fetch("/api/testimonies?approved=true")
+      .then((res) => res.json())
+      .then((resData) => {
+        if (resData.success && Array.isArray(resData.data) && resData.data.length > 0) {
+          const apiList: TestimonyItem[] = resData.data.map((d: Record<string, unknown>) => ({
+            id: (d._id as string) || (d.id as string),
+            name: d.name as string,
+            location: d.location as string,
+            testimony: d.testimony as string,
+            imageURL: d.imageURL as string | undefined,
+            videoURL: d.videoURL as string | undefined,
+            createdAt: d.createdAt ? new Date(d.createdAt as string).getTime() : undefined,
+          }));
+          setTestimonies(apiList);
+          setCount(apiList.length + 128);
+        }
+      })
+      .catch(() => {});
+
+    // 2. Also subscribe to Firestore if initialized
     if (!db) return;
 
     try {
@@ -84,20 +105,18 @@ export default function TestimoniesPage() {
               const data = doc.data() as Omit<TestimonyItem, "id">;
               list.push({ id: doc.id, ...data });
             });
-            // Prepend new verified testimonies to default seeds
-            setTestimonies([...list, ...defaultTestimonies]);
-            setCount(list.length + defaultTestimonies.length + 128);
+            setTestimonies((prev) => {
+              const ids = new Set(prev.map((p) => p.id));
+              const newItems = list.filter((item) => !ids.has(item.id));
+              return [...newItems, ...prev];
+            });
           }
         },
-        () => {
-          // Keep default testimonies if permission denied
-        }
+        () => {}
       );
 
       return () => unsubscribe();
-    } catch {
-      // Fallback
-    }
+    } catch {}
   }, []);
 
   return (

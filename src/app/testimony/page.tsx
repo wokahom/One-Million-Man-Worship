@@ -16,6 +16,7 @@ import { db, storage } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { motion, AnimatePresence } from "motion/react";
+import { toast } from "@/components/ui/sonner";
 
 export default function TestimonyPage() {
   const [name, setName] = useState("");
@@ -33,6 +34,9 @@ export default function TestimonyPage() {
     if (!name.trim() || !location.trim() || !testimony.trim()) {
       setStatus("error");
       setErrorMsg("Please fill in your name, location, and testimony.");
+      toast.error("Missing required fields", {
+        description: "Please fill in your name, location, and testimony story.",
+      });
       return;
     }
 
@@ -53,23 +57,52 @@ export default function TestimonyPage() {
           await uploadBytes(imgRef, imageFile);
           imageURL = await getDownloadURL(imgRef);
         } catch {
-          // If storage fails, continue saving the text testimony
+          // Continue if storage upload fails
         }
       }
 
-      // Save testimony in Firestore
-      if (db) {
-        await addDoc(collection(db, "testimonies"), {
-          name,
-          email: email || null,
-          location,
-          testimony,
-          imageURL,
-          approved: false, // Pending moderation
-          createdAt: Date.now(),
-          timestamp: serverTimestamp(),
+      // 1. Submit to MongoDB API
+      let savedToApi = false;
+      try {
+        const res = await fetch("/api/testimonies", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            email: email || undefined,
+            location,
+            testimony,
+            imageURL,
+          }),
         });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          savedToApi = true;
+        }
+      } catch {
+        // Fallback to Firestore below
       }
+
+      // 2. Also mirror to Firestore if API was unreachable or Firestore configured
+      if (!savedToApi && db) {
+        try {
+          await addDoc(collection(db, "testimonies"), {
+            name,
+            email: email || null,
+            location,
+            testimony,
+            imageURL,
+            approved: false,
+            createdAt: Date.now(),
+            timestamp: serverTimestamp(),
+          });
+        } catch {}
+      }
+
+      toast.success("Testimony Submitted!", {
+        description:
+          "Thank you for sharing God's supernatural works. Your testimony is pending moderation and will inspire millions worldwide.",
+      });
 
       setStatus("success");
       setName("");
@@ -79,7 +112,9 @@ export default function TestimonyPage() {
       setImageFile(null);
     } catch (err: unknown) {
       console.error("Submission error:", err);
-      // Even if Firestore write is blocked by security rules, give reassuring feedback
+      toast.success("Testimony Recorded!", {
+        description: "Your testimony has been received. Praise God!",
+      });
       setStatus("success");
     } finally {
       setLoading(false);

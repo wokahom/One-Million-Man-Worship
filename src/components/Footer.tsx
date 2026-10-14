@@ -75,6 +75,9 @@ export default function Footer() {
               <li>
                 <Link href="/ads">Ministers & Countdown</Link>
               </li>
+              <li>
+                <Link href="/contact">Contact Us</Link>
+              </li>
               <li style={{ marginTop: 8 }}>
                 <a
                   href="mailto:info@onemillionmanworship.com"
