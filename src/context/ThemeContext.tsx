@@ -13,13 +13,13 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("dark");
+  const [theme, setThemeState] = useState<Theme>("light");
   useEffect(() => {
     // Read theme from localStorage or DOM attribute set by head script
     const currentTheme =
       (document.documentElement.getAttribute("data-theme") as Theme) ||
       (localStorage.getItem("1mmw_theme") as Theme) ||
-      "dark";
+      "light";
 
     setThemeState(currentTheme);
     document.documentElement.setAttribute("data-theme", currentTheme);

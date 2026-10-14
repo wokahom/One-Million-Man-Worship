@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { AuthProvider } from "@/context/AuthContext";
 import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
@@ -103,11 +104,13 @@ export default function RootLayout({
       </head>
       <body>
         <ThemeProvider>
-          <Header />
-          <main className="main-content">{children}</main>
-          <Footer />
-          <CookieConsent />
-          <Toaster />
+          <AuthProvider>
+            <Header />
+            <main className="main-content">{children}</main>
+            <Footer />
+            <CookieConsent />
+            <Toaster />
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>
