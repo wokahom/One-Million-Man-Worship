@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "motion/react";
 import { Clock } from "lucide-react";
 
 interface CountdownProps {
@@ -126,8 +127,10 @@ export default function Countdown({
           }}
         >
           {units.map((unit, idx) => (
-            <div
+            <motion.div
               key={idx}
+              whileHover={{ y: -4, scale: 1.04 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
               style={{
                 background: "var(--bg-card-secondary)",
                 border: "1px solid var(--border-glass)",
@@ -137,7 +140,8 @@ export default function Countdown({
                 flexDirection: "column",
                 alignItems: "center",
                 backdropFilter: "blur(10px)",
-                transition: "transform 0.2s ease",
+                boxShadow: "0 8px 20px rgba(0, 0, 0, 0.15)",
+                cursor: "default",
               }}
             >
               <span
@@ -166,7 +170,7 @@ export default function Countdown({
               >
                 {unit.label}
               </span>
-            </div>
+            </motion.div>
           ))}
         </div>
       )}

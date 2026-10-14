@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "motion/react";
 import {
   Menu,
   X,
@@ -212,112 +213,127 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Mobile Drawer Overlay */}
-      <div
-        className={`drawer-overlay ${mobileOpen ? "open" : ""}`}
-        onClick={closeMobile}
-      />
+      {/* Mobile Drawer with Framer Motion */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="drawer-overlay open"
+              onClick={closeMobile}
+            />
 
-      {/* Mobile Drawer */}
-      <aside className={`mobile-drawer ${mobileOpen ? "open" : ""}`}>
-        <div className="mobile-drawer-header">
-          <Image
-            src="/assets/logo/1mmw_logo2.png"
-            alt="One Million Man Worship"
-            width={140}
-            height={38}
-          />
-          <button
-            type="button"
-            className="close-drawer-btn"
-            onClick={closeMobile}
-            aria-label="Close menu"
-          >
-            <X size={22} />
-          </button>
-        </div>
+            <motion.aside
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 28, stiffness: 260 }}
+              className="mobile-drawer open"
+            >
+              <div className="mobile-drawer-header">
+                <Image
+                  src="/assets/logo/1mmw_logo2.png"
+                  alt="One Million Man Worship"
+                  width={140}
+                  height={38}
+                />
+                <button
+                  type="button"
+                  className="close-drawer-btn"
+                  onClick={closeMobile}
+                  aria-label="Close menu"
+                >
+                  <X size={22} />
+                </button>
+              </div>
 
-        <ul className="mobile-nav-links">
-          <li>
-            <Link href="/" className="mobile-nav-link" onClick={closeMobile}>
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link href="/about" className="mobile-nav-link" onClick={closeMobile}>
-              About 1MMW
-            </Link>
-          </li>
-          <li>
-            <Link href="/avatar" className="mobile-nav-link" onClick={closeMobile}>
-              Create Avatar
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/testimony"
-              className="mobile-nav-link"
-              onClick={closeMobile}
-            >
-              Experience Jesus
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/testimonies"
-              className="mobile-nav-link"
-              onClick={closeMobile}
-            >
-              Testimonies Feed
-            </Link>
-          </li>
-          <li>
-            <Link href="/ads" className="mobile-nav-link" onClick={closeMobile}>
-              Ministers & Countdown
-            </Link>
-          </li>
-          <li>
-            <Link href="/live" className="mobile-nav-link" onClick={closeMobile}>
-              Live Broadcast
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/gallery"
-              className="mobile-nav-link"
-              onClick={closeMobile}
-            >
-              Photo Gallery
-            </Link>
-          </li>
-          <li>
-            <Link href="/videos" className="mobile-nav-link" onClick={closeMobile}>
-              Inspiring Moments
-            </Link>
-          </li>
-          <li>
-            <a
-              href="mailto:info@onemillionmanworship.com"
-              className="mobile-nav-link"
-              onClick={closeMobile}
-            >
-              Contact Us
-            </a>
-          </li>
-        </ul>
+              <ul className="mobile-nav-links">
+                <li>
+                  <Link href="/" className="mobile-nav-link" onClick={closeMobile}>
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/about" className="mobile-nav-link" onClick={closeMobile}>
+                    About 1MMW
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/avatar" className="mobile-nav-link" onClick={closeMobile}>
+                    Create Avatar
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/testimony"
+                    className="mobile-nav-link"
+                    onClick={closeMobile}
+                  >
+                    Experience Jesus
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/testimonies"
+                    className="mobile-nav-link"
+                    onClick={closeMobile}
+                  >
+                    Testimonies Feed
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/ads" className="mobile-nav-link" onClick={closeMobile}>
+                    Ministers & Countdown
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/live" className="mobile-nav-link" onClick={closeMobile}>
+                    Live Broadcast
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/gallery"
+                    className="mobile-nav-link"
+                    onClick={closeMobile}
+                  >
+                    Photo Gallery
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/videos" className="mobile-nav-link" onClick={closeMobile}>
+                    Inspiring Moments
+                  </Link>
+                </li>
+                <li>
+                  <a
+                    href="mailto:info@onemillionmanworship.com"
+                    className="mobile-nav-link"
+                    onClick={closeMobile}
+                  >
+                    Contact Us
+                  </a>
+                </li>
+              </ul>
 
-        <div style={{ marginTop: "auto", paddingTop: 20, display: "flex", flexDirection: "column", gap: 12 }}>
-          <ThemeToggle showLabel />
-          <Link
-            href="/avatar"
-            className="btn-primary"
-            style={{ width: "100%", textAlign: "center" }}
-            onClick={closeMobile}
-          >
-            <Sparkles size={16} /> Get Your Avatar
-          </Link>
-        </div>
-      </aside>
+              <div style={{ marginTop: "auto", paddingTop: 20, display: "flex", flexDirection: "column", gap: 12 }}>
+                <ThemeToggle showLabel />
+                <Link
+                  href="/avatar"
+                  className="btn-primary"
+                  style={{ width: "100%", textAlign: "center", justifyContent: "center" }}
+                  onClick={closeMobile}
+                >
+                  <Sparkles size={16} /> Get Your Avatar
+                </Link>
+              </div>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 }
