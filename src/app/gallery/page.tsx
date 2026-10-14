@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "motion/react";
 import Marquee from "@/components/Marquee";
 import {
   Image as ImageIcon,
@@ -81,19 +82,35 @@ export default function GalleryPage() {
   };
 
   return (
-    <div>
+    <div style={{ position: "relative", overflow: "hidden" }}>
+      {/* Background Ambient Glow */}
+      <div
+        className="glow-orb glow-orb-red"
+        style={{ top: "8%", left: "10%", width: 440, height: 440 }}
+      />
+      <div
+        className="glow-orb glow-orb-gold"
+        style={{ top: "40%", right: "8%", width: 390, height: 390 }}
+      />
+
       <Marquee />
 
-      <div className="container" style={{ paddingTop: 40, paddingBottom: 80 }}>
-        <div style={{ textAlign: "center", marginBottom: 36 }}>
+      <div className="container" style={{ position: "relative", zIndex: 1, paddingTop: 40, paddingBottom: 80 }}>
+        {/* Title */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          style={{ textAlign: "center", marginBottom: 36 }}
+        >
           <span
             style={{
               display: "inline-flex",
               alignItems: "center",
               gap: 6,
               background: "rgba(229, 57, 53, 0.15)",
-              color: "#f87171",
-              border: "1px solid rgba(229, 57, 53, 0.3)",
+              color: "var(--primary-red)",
+              border: "1px solid var(--border-glow)",
               padding: "5px 14px",
               borderRadius: 20,
               fontSize: "0.85rem",
@@ -110,9 +127,9 @@ export default function GalleryPage() {
             Experience the divine beauty and grandeur of the gathering through
             high-resolution photos from past editions.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Responsive Grid */}
+        {/* Responsive Grid with Staggered Motion */}
         <div
           style={{
             display: "grid",
@@ -121,8 +138,12 @@ export default function GalleryPage() {
           }}
         >
           {visiblePhotos.map((photo, idx) => (
-            <div
+            <motion.div
               key={photo.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: (idx % 6) * 0.08 }}
+              whileHover={{ y: -7, scale: 1.02 }}
               onClick={() => setSelectedIndex(idx)}
               style={{
                 position: "relative",
@@ -133,7 +154,6 @@ export default function GalleryPage() {
                 border: "1px solid var(--border-glass)",
                 aspectRatio: "4 / 3",
                 boxShadow: "var(--card-shadow)",
-                transition: "transform 0.3s ease, border-color 0.3s ease",
               }}
             >
               <Image
@@ -169,161 +189,179 @@ export default function GalleryPage() {
                   </h4>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Load More Button */}
         {visibleCount < allPhotos.length && (
           <div style={{ textAlign: "center", marginTop: 40 }}>
-            <button
+            <motion.button
               type="button"
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.96 }}
               onClick={() => setVisibleCount((prev) => prev + 4)}
               className="btn-secondary"
             >
               <span>Load More Photos</span>
               <Sparkles size={16} />
-            </button>
+            </motion.button>
           </div>
         )}
 
-        {/* Lightbox Modal */}
-        {selectedIndex !== null && (
-          <div
-            onClick={() => setSelectedIndex(null)}
-            style={{
-              position: "fixed",
-              inset: 0,
-              background: "rgba(0, 0, 0, 0.92)",
-              backdropFilter: "blur(12px)",
-              zIndex: 3000,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: 24,
-            }}
-          >
-            {/* Close Button */}
-            <button
-              type="button"
+        {/* Lightbox Modal with AnimatePresence */}
+        <AnimatePresence>
+          {selectedIndex !== null && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
               onClick={() => setSelectedIndex(null)}
-              aria-label="Close modal"
               style={{
-                position: "absolute",
-                top: 24,
-                right: 24,
-                background: "rgba(255, 255, 255, 0.1)",
-                border: "none",
-                borderRadius: "50%",
-                width: 44,
-                height: 44,
+                position: "fixed",
+                inset: 0,
+                background: "rgba(0, 0, 0, 0.92)",
+                backdropFilter: "blur(14px)",
+                zIndex: 3000,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "#ffffff",
-                cursor: "pointer",
-                zIndex: 3010,
+                padding: 24,
               }}
             >
-              <X size={24} />
-            </button>
-
-            {/* Prev Button */}
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                handlePrev();
-              }}
-              aria-label="Previous image"
-              style={{
-                position: "absolute",
-                left: 20,
-                background: "rgba(255, 255, 255, 0.1)",
-                border: "none",
-                borderRadius: "50%",
-                width: 48,
-                height: 48,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#ffffff",
-                cursor: "pointer",
-                zIndex: 3010,
-              }}
-            >
-              <ChevronLeft size={28} />
-            </button>
-
-            {/* Next Button */}
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleNext();
-              }}
-              aria-label="Next image"
-              style={{
-                position: "absolute",
-                right: 20,
-                background: "rgba(255, 255, 255, 0.1)",
-                border: "none",
-                borderRadius: "50%",
-                width: 48,
-                height: 48,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#ffffff",
-                cursor: "pointer",
-                zIndex: 3010,
-              }}
-            >
-              <ChevronRight size={28} />
-            </button>
-
-            {/* Active Image container */}
-            <div
-              onClick={(e) => e.stopPropagation()}
-              style={{
-                position: "relative",
-                maxWidth: "90vw",
-                maxHeight: "85vh",
-                width: 900,
-                height: 600,
-                borderRadius: 16,
-                overflow: "hidden",
-                border: "1px solid rgba(255, 255, 255, 0.2)",
-                boxShadow: "0 25px 60px rgba(0,0,0,0.8)",
-              }}
-            >
-              <Image
-                src={allPhotos[selectedIndex].src}
-                alt={allPhotos[selectedIndex].title}
-                fill
-                sizes="90vw"
-                style={{ objectFit: "contain", background: "#000" }}
-              />
-              <div
+              {/* Close Button */}
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setSelectedIndex(null)}
+                aria-label="Close modal"
                 style={{
                   position: "absolute",
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  background:
-                    "linear-gradient(180deg, transparent, rgba(0,0,0,0.9))",
-                  padding: "16px 20px",
+                  top: 24,
+                  right: 24,
+                  background: "rgba(255, 255, 255, 0.12)",
+                  border: "none",
+                  borderRadius: "50%",
+                  width: 44,
+                  height: 44,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                   color: "#ffffff",
-                  fontSize: "1.05rem",
-                  fontWeight: 700,
+                  cursor: "pointer",
+                  zIndex: 3010,
                 }}
               >
-                {allPhotos[selectedIndex].title} ({selectedIndex + 1} of{" "}
-                {allPhotos.length})
-              </div>
-            </div>
-          </div>
-        )}
+                <X size={24} />
+              </motion.button>
+
+              {/* Prev Button */}
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handlePrev();
+                }}
+                aria-label="Previous image"
+                style={{
+                  position: "absolute",
+                  left: 20,
+                  background: "rgba(255, 255, 255, 0.12)",
+                  border: "none",
+                  borderRadius: "50%",
+                  width: 48,
+                  height: 48,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#ffffff",
+                  cursor: "pointer",
+                  zIndex: 3010,
+                }}
+              >
+                <ChevronLeft size={28} />
+              </motion.button>
+
+              {/* Next Button */}
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleNext();
+                }}
+                aria-label="Next image"
+                style={{
+                  position: "absolute",
+                  right: 20,
+                  background: "rgba(255, 255, 255, 0.12)",
+                  border: "none",
+                  borderRadius: "50%",
+                  width: 48,
+                  height: 48,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#ffffff",
+                  cursor: "pointer",
+                  zIndex: 3010,
+                }}
+              >
+                <ChevronRight size={28} />
+              </motion.button>
+
+              {/* Active Image container with Spring Pop */}
+              <motion.div
+                initial={{ scale: 0.88, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.88, opacity: 0 }}
+                transition={{ type: "spring", stiffness: 320, damping: 28 }}
+                onClick={(e) => e.stopPropagation()}
+                style={{
+                  position: "relative",
+                  maxWidth: "90vw",
+                  maxHeight: "85vh",
+                  width: 900,
+                  height: 600,
+                  borderRadius: 18,
+                  overflow: "hidden",
+                  border: "1px solid rgba(255, 255, 255, 0.2)",
+                  boxShadow: "0 25px 60px rgba(0,0,0,0.85)",
+                }}
+              >
+                <Image
+                  src={allPhotos[selectedIndex].src}
+                  alt={allPhotos[selectedIndex].title}
+                  fill
+                  sizes="90vw"
+                  style={{ objectFit: "contain", background: "#000" }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    background:
+                      "linear-gradient(180deg, transparent, rgba(0,0,0,0.92))",
+                    padding: "16px 20px",
+                    color: "#ffffff",
+                    fontSize: "1.05rem",
+                    fontWeight: 700,
+                  }}
+                >
+                  {allPhotos[selectedIndex].title} ({selectedIndex + 1} of{" "}
+                  {allPhotos.length})
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

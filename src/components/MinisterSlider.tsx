@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Mic2 } from "lucide-react";
+import { motion } from "motion/react";
 
 const ministers = [
   { id: "artist1", src: "/assets/slider1/artist1.jpg", title: "Minister / Artiste" },
@@ -94,9 +95,12 @@ export default function MinisterSlider() {
         </div>
 
         <div style={{ display: "flex", gap: 8 }}>
-          <button
+          <motion.button
             type="button"
             onClick={prevSlide}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ type: "spring", damping: 20, stiffness: 350 }}
             aria-label="Previous Minister"
             style={{
               width: 40,
@@ -109,14 +113,16 @@ export default function MinisterSlider() {
               alignItems: "center",
               justifyContent: "center",
               cursor: "pointer",
-              transition: "all 0.2s ease",
             }}
           >
             <ChevronLeft size={20} />
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             type="button"
             onClick={nextSlide}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ type: "spring", damping: 20, stiffness: 350 }}
             aria-label="Next Minister"
             style={{
               width: 40,
@@ -129,11 +135,10 @@ export default function MinisterSlider() {
               alignItems: "center",
               justifyContent: "center",
               cursor: "pointer",
-              transition: "all 0.2s ease",
             }}
           >
             <ChevronRight size={20} />
-          </button>
+          </motion.button>
         </div>
       </div>
 
@@ -159,8 +164,10 @@ export default function MinisterSlider() {
           }}
         >
           {ministers.map((item, idx) => (
-            <div
+            <motion.div
               key={idx}
+              whileHover={{ y: -6, scale: 1.02 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
               style={{
                 flexShrink: 0,
                 width: 240,
@@ -169,7 +176,7 @@ export default function MinisterSlider() {
                 background: "var(--bg-card)",
                 border: "1px solid var(--border-glass)",
                 boxShadow: "var(--card-shadow)",
-                transition: "transform 0.3s ease, border-color 0.3s ease",
+                cursor: "pointer",
               }}
             >
               <div
@@ -215,10 +222,11 @@ export default function MinisterSlider() {
                   {item.title}
                 </span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
     </div>
   );
 }
+

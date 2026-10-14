@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { db } from "@/lib/firebase";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { motion } from "motion/react";
 
 interface TestimonyItem {
   id: string;
@@ -100,12 +101,39 @@ export default function TestimoniesPage() {
   }, []);
 
   return (
-    <div>
+    <div style={{ position: "relative", overflow: "hidden" }}>
+      {/* Ambient background glow orbs */}
+      <div
+        className="glow-orb"
+        style={{
+          width: 500,
+          height: 500,
+          background: "radial-gradient(circle, rgba(229, 57, 53, 0.12) 0%, transparent 70%)",
+          top: -120,
+          left: -120,
+        }}
+      />
+      <div
+        className="glow-orb"
+        style={{
+          width: 440,
+          height: 440,
+          background: "radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, transparent 70%)",
+          bottom: 120,
+          right: -100,
+        }}
+      />
+
       <Marquee />
 
-      <div className="container" style={{ paddingTop: 40, paddingBottom: 80 }}>
+      <div className="container" style={{ paddingTop: 40, paddingBottom: 80, position: "relative", zIndex: 1 }}>
         {/* Header & Live Counter */}
-        <div style={{ textAlign: "center", marginBottom: 40 }}>
+        <motion.div
+          initial={{ opacity: 0, y: 22 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          style={{ textAlign: "center", marginBottom: 40 }}
+        >
           <span
             style={{
               display: "inline-flex",
@@ -132,7 +160,11 @@ export default function TestimoniesPage() {
           </p>
 
           {/* Testimonies Counter Card */}
-          <div
+          <motion.div
+            initial={{ opacity: 0, scale: 0.94 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.15, type: "spring", damping: 20, stiffness: 240 }}
+            whileHover={{ scale: 1.03 }}
             style={{
               display: "inline-flex",
               flexDirection: "column",
@@ -143,7 +175,7 @@ export default function TestimoniesPage() {
               padding: "20px 48px",
               boxShadow: "var(--card-shadow)",
               margin: "0 auto 30px",
-              transition: "background-color 0.3s ease",
+              transition: "background-color 0.3s ease, border-color 0.3s ease",
             }}
           >
             <span
@@ -171,7 +203,7 @@ export default function TestimoniesPage() {
             >
               Documented Testimonies & Miracles
             </span>
-          </div>
+          </motion.div>
 
           <div style={{ marginTop: 10 }}>
             <Link href="/testimony" className="btn-primary">
@@ -179,7 +211,7 @@ export default function TestimoniesPage() {
               <ArrowRight size={16} />
             </Link>
           </div>
-        </div>
+        </motion.div>
 
         {/* Testimonies Grid */}
         <div
@@ -189,9 +221,17 @@ export default function TestimoniesPage() {
             gap: 24,
           }}
         >
-          {testimonies.map((item) => (
-            <div
+          {testimonies.map((item, idx) => (
+            <motion.div
               key={item.id}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.5,
+                delay: Math.min(idx * 0.08, 0.4),
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              whileHover={{ y: -6, scale: 1.015 }}
               style={{
                 background: "var(--bg-card)",
                 border: "1px solid var(--border-glass)",
@@ -318,7 +358,7 @@ export default function TestimoniesPage() {
                   />
                 </div>
               )}
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

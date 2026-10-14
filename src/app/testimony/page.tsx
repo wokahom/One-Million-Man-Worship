@@ -15,6 +15,7 @@ import {
 import { db, storage } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { motion, AnimatePresence } from "motion/react";
 
 export default function TestimonyPage() {
   const [name, setName] = useState("");
@@ -86,7 +87,29 @@ export default function TestimonyPage() {
   };
 
   return (
-    <div>
+    <div style={{ position: "relative", overflow: "hidden" }}>
+      {/* Ambient background glow orbs */}
+      <div
+        className="glow-orb"
+        style={{
+          width: 500,
+          height: 500,
+          background: "radial-gradient(circle, rgba(229, 57, 53, 0.12) 0%, transparent 70%)",
+          top: 150,
+          left: -150,
+        }}
+      />
+      <div
+        className="glow-orb"
+        style={{
+          width: 420,
+          height: 420,
+          background: "radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, transparent 70%)",
+          bottom: 100,
+          right: -120,
+        }}
+      />
+
       <Marquee />
 
       {/* Jesus Banner Header */}
@@ -99,7 +122,7 @@ export default function TestimonyPage() {
           alignItems: "center",
           justifyContent: "center",
           overflow: "hidden",
-          borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+          borderBottom: "1px solid var(--border-glass)",
         }}
       >
         <Image
@@ -110,7 +133,10 @@ export default function TestimonyPage() {
           sizes="100vw"
           style={{ objectFit: "cover", filter: "brightness(0.35)" }}
         />
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="container"
           style={{
             position: "relative",
@@ -160,12 +186,15 @@ export default function TestimonyPage() {
             God has done great things! Share your miraculous story and be a
             beacon of encouragement to someone today.
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* Form Container */}
-      <div className="container" style={{ paddingTop: 50, paddingBottom: 80 }}>
-        <div
+      <div className="container" style={{ paddingTop: 50, paddingBottom: 80, position: "relative", zIndex: 1 }}>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, delay: 0.1, type: "spring", damping: 25, stiffness: 220 }}
           style={{
             maxWidth: 680,
             margin: "0 auto",
@@ -195,52 +224,64 @@ export default function TestimonyPage() {
             </p>
           </div>
 
-          {/* Success Feedback Popup */}
-          {status === "success" && (
-            <div
-              style={{
-                marginBottom: 24,
-                padding: 18,
-                borderRadius: 14,
-                background: "rgba(16, 185, 129, 0.15)",
-                border: "1px solid rgba(16, 185, 129, 0.3)",
-                color: "#10b981",
-                display: "flex",
-                alignItems: "center",
-                gap: 12,
-              }}
-            >
-              <CheckCircle2 size={24} style={{ flexShrink: 0 }} />
-              <div>
-                <strong style={{ fontSize: "0.95rem", display: "block" }}>
-                  Testimony Submitted Successfully!
-                </strong>
-                <span style={{ fontSize: "0.85rem", color: "var(--text-secondary)" }}>
-                  Thank you for testifying of God&apos;s goodness. Your testimony
-                  will be published to inspire millions.
-                </span>
-              </div>
-            </div>
-          )}
+          {/* Success / Error Feedback Popups with AnimatePresence */}
+          <AnimatePresence mode="wait">
+            {status === "success" && (
+              <motion.div
+                key="success-box"
+                initial={{ opacity: 0, y: -10, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -10, scale: 0.98 }}
+                transition={{ duration: 0.3 }}
+                style={{
+                  marginBottom: 24,
+                  padding: 18,
+                  borderRadius: 14,
+                  background: "rgba(16, 185, 129, 0.15)",
+                  border: "1px solid rgba(16, 185, 129, 0.3)",
+                  color: "#10b981",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 12,
+                }}
+              >
+                <CheckCircle2 size={24} style={{ flexShrink: 0 }} />
+                <div>
+                  <strong style={{ fontSize: "0.95rem", display: "block" }}>
+                    Testimony Submitted Successfully!
+                  </strong>
+                  <span style={{ fontSize: "0.85rem", color: "var(--text-secondary)" }}>
+                    Thank you for testifying of God&apos;s goodness. Your testimony
+                    will be published to inspire millions.
+                  </span>
+                </div>
+              </motion.div>
+            )}
 
-          {status === "error" && (
-            <div
-              style={{
-                marginBottom: 24,
-                padding: 16,
-                borderRadius: 14,
-                background: "rgba(239, 68, 68, 0.15)",
-                border: "1px solid rgba(239, 68, 68, 0.3)",
-                color: "#ef4444",
-                display: "flex",
-                alignItems: "center",
-                gap: 10,
-              }}
-            >
-              <AlertCircle size={20} />
-              <span>{errorMsg}</span>
-            </div>
-          )}
+            {status === "error" && (
+              <motion.div
+                key="error-box"
+                initial={{ opacity: 0, y: -10, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -10, scale: 0.98 }}
+                transition={{ duration: 0.3 }}
+                style={{
+                  marginBottom: 24,
+                  padding: 16,
+                  borderRadius: 14,
+                  background: "rgba(239, 68, 68, 0.15)",
+                  border: "1px solid rgba(239, 68, 68, 0.3)",
+                  color: "#ef4444",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                }}
+              >
+                <AlertCircle size={20} />
+                <span>{errorMsg}</span>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <form
             onSubmit={handleSubmit}
@@ -382,7 +423,7 @@ export default function TestimonyPage() {
                   display: "block",
                   fontSize: "0.88rem",
                   fontWeight: 600,
-                  color: "#cbd5e1",
+                  color: "var(--text-secondary)",
                   marginBottom: 8,
                 }}
               >
@@ -395,17 +436,17 @@ export default function TestimonyPage() {
                   gap: 12,
                   padding: "12px 16px",
                   borderRadius: 10,
-                  background: "rgba(255, 255, 255, 0.03)",
-                  border: "1px dashed rgba(255, 255, 255, 0.2)",
+                  background: "var(--bg-card-secondary)",
+                  border: "1px dashed var(--border-glass)",
                 }}
               >
-                <Upload size={18} color="#94a3b8" />
+                <Upload size={18} color="var(--primary-red)" />
                 <input
                   type="file"
                   accept="image/*"
                   onChange={(e) => setImageFile(e.target.files?.[0] || null)}
                   style={{
-                    color: "#94a3b8",
+                    color: "var(--text-secondary)",
                     fontSize: "0.85rem",
                     cursor: "pointer",
                   }}
@@ -414,20 +455,24 @@ export default function TestimonyPage() {
             </div>
 
             {/* Submit Button */}
-            <button
+            <motion.button
               type="submit"
               disabled={loading}
+              whileHover={{ scale: 1.015 }}
+              whileTap={{ scale: 0.985 }}
+              transition={{ type: "spring", damping: 20, stiffness: 400 }}
               className="btn-primary"
               style={{
                 width: "100%",
                 padding: "15px",
                 fontSize: "1.05rem",
                 marginTop: 10,
+                cursor: loading ? "not-allowed" : "pointer",
               }}
             >
               <Send size={18} />
               <span>{loading ? "Submitting..." : "Submit Testimony"}</span>
-            </button>
+            </motion.button>
           </form>
 
           {/* Link to view other testimonies */}
@@ -436,15 +481,15 @@ export default function TestimonyPage() {
               textAlign: "center",
               marginTop: 30,
               paddingTop: 20,
-              borderTop: "1px solid rgba(255, 255, 255, 0.08)",
+              borderTop: "1px solid var(--border-glass)",
             }}
           >
-            <p style={{ color: "#94a3b8", fontSize: "0.92rem", margin: 0 }}>
+            <p style={{ color: "var(--text-secondary)", fontSize: "0.92rem", margin: 0 }}>
               Want to see what God is doing?{" "}
               <Link
                 href="/testimonies"
                 style={{
-                  color: "#f87171",
+                  color: "var(--primary-red)",
                   fontWeight: 700,
                   display: "inline-flex",
                   alignItems: "center",
@@ -456,7 +501,7 @@ export default function TestimonyPage() {
               </Link>
             </p>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

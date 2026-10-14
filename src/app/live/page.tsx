@@ -5,6 +5,7 @@ import Image from "next/image";
 import Marquee from "@/components/Marquee";
 import { Tv, Play, Radio } from "lucide-react";
 import { YoutubeIcon } from "@/components/Icons";
+import { motion } from "motion/react";
 
 interface VideoItem {
   id: string;
@@ -69,12 +70,39 @@ export default function LivePage() {
   const activeVideo = videoList.find((v) => v.id === activeVideoId);
 
   return (
-    <div>
+    <div style={{ position: "relative", overflow: "hidden" }}>
+      {/* Ambient background glow orbs */}
+      <div
+        className="glow-orb"
+        style={{
+          width: 480,
+          height: 480,
+          background: "radial-gradient(circle, rgba(229, 57, 53, 0.12) 0%, transparent 70%)",
+          top: -120,
+          left: -120,
+        }}
+      />
+      <div
+        className="glow-orb"
+        style={{
+          width: 440,
+          height: 440,
+          background: "radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, transparent 70%)",
+          bottom: 40,
+          right: -100,
+        }}
+      />
+
       <Marquee />
 
-      <div className="container" style={{ paddingTop: 40, paddingBottom: 80 }}>
+      <div className="container" style={{ paddingTop: 40, paddingBottom: 80, position: "relative", zIndex: 1 }}>
         {/* Title */}
-        <div style={{ textAlign: "center", marginBottom: 36 }}>
+        <motion.div
+          initial={{ opacity: 0, y: 22 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          style={{ textAlign: "center", marginBottom: 36 }}
+        >
           <span
             style={{
               display: "inline-flex",
@@ -99,7 +127,7 @@ export default function LivePage() {
             Relive the glory, intense praise, and supernatural power captured
             live during the global convocation.
           </p>
-        </div>
+        </motion.div>
 
         {/* Video Player Layout */}
         <div
@@ -111,7 +139,10 @@ export default function LivePage() {
           }}
         >
           {/* Main Embedded Player */}
-          <div
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98, y: 15 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             style={{
               background: "var(--bg-card)",
               border: "1px solid var(--border-glass)",
@@ -180,10 +211,13 @@ export default function LivePage() {
                 <span>Port Harcourt, Nigeria</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Playlist Selector Sidebar */}
-          <div
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             style={{
               background: "var(--bg-card)",
               border: "1px solid var(--border-glass)",
@@ -218,9 +252,12 @@ export default function LivePage() {
               {videoList.map((item, idx) => {
                 const isActive = item.id === activeVideoId;
                 return (
-                  <div
+                  <motion.div
                     key={item.id}
                     onClick={() => selectVideo(item.id)}
+                    whileHover={{ x: 6, scale: 1.01 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", damping: 25, stiffness: 350 }}
                     style={{
                       display: "flex",
                       gap: 12,
@@ -233,7 +270,7 @@ export default function LivePage() {
                         ? "1px solid var(--primary-red)"
                         : "1px solid var(--border-subtle)",
                       cursor: "pointer",
-                      transition: "all 0.25s ease",
+                      boxShadow: isActive ? "0 4px 16px rgba(229, 57, 53, 0.15)" : "none",
                     }}
                   >
                     <div
@@ -307,11 +344,11 @@ export default function LivePage() {
                         {item.title}
                       </h4>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "motion/react";
 import {
   Upload,
   Download,
@@ -324,374 +325,420 @@ export default function AvatarPage() {
   };
 
   return (
-    <div className="container" style={{ paddingTop: 40, paddingBottom: 80 }}>
-      {/* Page Header */}
-      <div style={{ textAlign: "center", marginBottom: 36 }}>
-        <span
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 6,
-            background: "rgba(229, 57, 53, 0.15)",
-            color: "#f87171",
-            padding: "5px 14px",
-            borderRadius: 20,
-            fontSize: "0.85rem",
-            fontWeight: 700,
-            textTransform: "uppercase",
-            letterSpacing: "0.08em",
-            marginBottom: 12,
-          }}
-        >
-          <Sparkles size={16} /> Official 2025 Badge Studio
-        </span>
-        <h1 className="section-title">
-          Create Your One Million Man Worship Avatar
-        </h1>
-        <p className="section-subtitle">
-          Upload your photo, adjust positioning and scale, and download your
-          custom high-resolution avatar to share with loved ones.
-        </p>
-      </div>
-
+    <div style={{ position: "relative", overflow: "hidden" }}>
+      {/* Background Ambient Glow */}
       <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-          gap: 40,
-          alignItems: "start",
-          maxWidth: 1050,
-          margin: "0 auto",
-        }}
-      >
-        {/* Canvas Studio Preview */}
-        <div
-          style={{
-            background: "var(--bg-card)",
-            border: "1px solid var(--border-glass)",
-            borderRadius: 24,
-            padding: 24,
-            boxShadow: "var(--card-shadow)",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            transition: "background-color 0.3s ease",
-          }}
+        className="glow-orb glow-orb-red"
+        style={{ top: "5%", left: "10%", width: 450, height: 450 }}
+      />
+      <div
+        className="glow-orb glow-orb-gold"
+        style={{ top: "35%", right: "8%", width: 380, height: 380 }}
+      />
+
+      <div className="container" style={{ position: "relative", zIndex: 1, paddingTop: 40, paddingBottom: 80 }}>
+        {/* Page Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          style={{ textAlign: "center", marginBottom: 36 }}
         >
-          <div
+          <span
             style={{
-              position: "relative",
-              width: "100%",
-              maxWidth: 440,
-              aspectRatio: "1 / 1",
-              borderRadius: 16,
-              overflow: "hidden",
-              border: "1px solid var(--border-glass)",
-              background: "#0d0d12",
-              cursor: hasImage ? "grab" : "default",
-              touchAction: "none",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+              background: "rgba(229, 57, 53, 0.15)",
+              color: "var(--primary-red)",
+              padding: "5px 14px",
+              borderRadius: 20,
+              fontSize: "0.85rem",
+              fontWeight: 700,
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
+              marginBottom: 12,
             }}
           >
-            <canvas
-              ref={canvasRef}
-              onMouseDown={handleMouseDown}
-              onMouseMove={handleMouseMove}
-              onMouseUp={handleMouseUp}
-              onMouseLeave={handleMouseUp}
-              onWheel={handleWheel}
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
+            <Sparkles size={16} /> Official 2025 Badge Studio
+          </span>
+          <h1 className="section-title">
+            Create Your One Million Man Worship Avatar
+          </h1>
+          <p className="section-subtitle">
+            Upload your photo, adjust positioning and scale, and download your
+            custom high-resolution avatar to share with loved ones.
+          </p>
+        </motion.div>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gap: 40,
+            alignItems: "start",
+            maxWidth: 1050,
+            margin: "0 auto",
+          }}
+        >
+          {/* Canvas Studio Preview */}
+          <motion.div
+            initial={{ opacity: 0, x: -24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            style={{
+              background: "var(--bg-card)",
+              border: "1px solid var(--border-glass)",
+              borderRadius: 24,
+              padding: 24,
+              boxShadow: "var(--card-shadow)",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              transition: "background-color 0.3s ease",
+            }}
+          >
+            <div
               style={{
+                position: "relative",
                 width: "100%",
-                height: "100%",
-                display: "block",
+                maxWidth: 440,
+                aspectRatio: "1 / 1",
+                borderRadius: 16,
+                overflow: "hidden",
+                border: "1px solid var(--border-glass)",
+                background: "#0d0d12",
+                cursor: hasImage ? "grab" : "default",
+                touchAction: "none",
               }}
+            >
+              <canvas
+                ref={canvasRef}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
+                onWheel={handleWheel}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  display: "block",
+                }}
+              />
+
+              {!hasImage && templateLoaded && (
+                <div
+                  onClick={() => fileInputRef.current?.click()}
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    background: "rgba(0, 0, 0, 0.4)",
+                    cursor: "pointer",
+                    gap: 12,
+                    padding: 20,
+                    textAlign: "center",
+                  }}
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    style={{
+                      width: 64,
+                      height: 64,
+                      borderRadius: "50%",
+                      background: "rgba(229, 57, 53, 0.9)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#ffffff",
+                      boxShadow: "0 0 24px rgba(229, 57, 53, 0.8)",
+                    }}
+                  >
+                    <Upload size={28} />
+                  </motion.div>
+                  <p
+                    style={{
+                      color: "#ffffff",
+                      fontWeight: 700,
+                      fontSize: "1.05rem",
+                    }}
+                  >
+                    Click Here To Upload Your Photo
+                  </p>
+                  <span
+                    style={{
+                      color: "rgba(255, 255, 255, 0.8)",
+                      fontSize: "0.85rem",
+                    }}
+                  >
+                    Supports JPG, PNG, WEBP (Square or Portrait)
+                  </span>
+                </div>
+              )}
+            </div>
+
+            <p
+              style={{
+                fontSize: "0.85rem",
+                color: "var(--text-secondary)",
+                marginTop: 14,
+                textAlign: "center",
+              }}
+            >
+              💡 <em>Tip: Click and drag to move • Scroll or pinch to zoom photo</em>
+            </p>
+          </motion.div>
+
+          {/* Studio Controls */}
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+            style={{
+              background: "var(--bg-card)",
+              border: "1px solid var(--border-glass)",
+              borderRadius: 24,
+              padding: 32,
+              boxShadow: "var(--card-shadow)",
+              transition: "background-color 0.3s ease",
+            }}
+          >
+            <h3
+              style={{
+                fontFamily: "var(--font-heading)",
+                fontSize: "1.35rem",
+                fontWeight: 800,
+                color: "var(--text-primary)",
+                marginBottom: 20,
+              }}
+            >
+              Customization Studio
+            </h3>
+
+            {/* Hidden File Input */}
+            <input
+              type="file"
+              ref={fileInputRef}
+              accept="image/*"
+              onChange={handleInputChange}
+              style={{ display: "none" }}
             />
 
-            {!hasImage && templateLoaded && (
-              <div
+            {/* Step 1: Upload Button */}
+            <div style={{ marginBottom: 24 }}>
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => fileInputRef.current?.click()}
+                className="btn-secondary"
                 style={{
-                  position: "absolute",
-                  inset: 0,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
+                  width: "100%",
                   justifyContent: "center",
-                  background: "rgba(0, 0, 0, 0.4)",
-                  cursor: "pointer",
-                  gap: 12,
-                  padding: 20,
-                  textAlign: "center",
+                  padding: "14px",
+                  fontSize: "1rem",
+                }}
+              >
+                <ImageIcon size={18} />
+                <span>{hasImage ? "Change Uploaded Photo" : "Upload Your Photo"}</span>
+              </motion.button>
+            </div>
+
+            {/* Step 2: Zoom and Adjust Controls */}
+            {hasImage && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                transition={{ duration: 0.3 }}
+                style={{
+                  background: "var(--bg-card-secondary)",
+                  border: "1px solid var(--border-glass)",
+                  borderRadius: 14,
+                  padding: 18,
+                  marginBottom: 24,
                 }}
               >
                 <div
                   style={{
-                    width: 64,
-                    height: 64,
-                    borderRadius: "50%",
-                    background: "rgba(229, 57, 53, 0.9)",
                     display: "flex",
+                    justifyContent: "space-between",
                     alignItems: "center",
-                    justifyContent: "center",
-                    color: "#ffffff",
-                    boxShadow: "0 0 24px rgba(229, 57, 53, 0.8)",
+                    marginBottom: 10,
                   }}
                 >
-                  <Upload size={28} />
+                  <span
+                    style={{
+                      fontSize: "0.88rem",
+                      fontWeight: 600,
+                      color: "var(--text-primary)",
+                    }}
+                  >
+                    Adjust Size & Zoom
+                  </span>
+                  <motion.button
+                    type="button"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={resetPosition}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      color: "var(--primary-red)",
+                      fontSize: "0.82rem",
+                      fontWeight: 600,
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 4,
+                    }}
+                  >
+                    <RotateCcw size={13} /> Reset
+                  </motion.button>
                 </div>
-                <p
-                  style={{
-                    color: "#ffffff",
-                    fontWeight: 700,
-                    fontSize: "1.05rem",
-                  }}
-                >
-                  Click Here To Upload Your Photo
-                </p>
-                <span
-                  style={{
-                    color: "rgba(255, 255, 255, 0.8)",
-                    fontSize: "0.85rem",
-                  }}
-                >
-                  Supports JPG, PNG, WEBP (Square or Portrait)
-                </span>
-              </div>
+
+                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                  <motion.button
+                    type="button"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => adjustScale(scale - 0.1)}
+                    style={{
+                      background: "var(--bg-card)",
+                      border: "1px solid var(--border-glass)",
+                      borderRadius: 8,
+                      color: "var(--text-primary)",
+                      padding: 8,
+                      cursor: "pointer",
+                    }}
+                  >
+                    <ZoomOut size={16} />
+                  </motion.button>
+
+                  <input
+                    type="range"
+                    min="0.2"
+                    max="3"
+                    step="0.05"
+                    value={scale}
+                    onChange={(e) => adjustScale(parseFloat(e.target.value))}
+                    style={{ flex: 1, accentColor: "#e53935", cursor: "pointer" }}
+                  />
+
+                  <motion.button
+                    type="button"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => adjustScale(scale + 0.1)}
+                    style={{
+                      background: "var(--bg-card)",
+                      border: "1px solid var(--border-glass)",
+                      borderRadius: 8,
+                      color: "var(--text-primary)",
+                      padding: 8,
+                      cursor: "pointer",
+                    }}
+                  >
+                    <ZoomIn size={16} />
+                  </motion.button>
+                </div>
+              </motion.div>
             )}
-          </div>
 
-          <p
-            style={{
-              fontSize: "0.85rem",
-              color: "var(--text-secondary)",
-              marginTop: 14,
-              textAlign: "center",
-            }}
-          >
-            💡 <em>Tip: Click and drag to move • Scroll or pinch to zoom photo</em>
-          </p>
-        </div>
-
-        {/* Studio Controls */}
-        <div
-          style={{
-            background: "var(--bg-card)",
-            border: "1px solid var(--border-glass)",
-            borderRadius: 24,
-            padding: 32,
-            boxShadow: "var(--card-shadow)",
-            transition: "background-color 0.3s ease",
-          }}
-        >
-          <h3
-            style={{
-              fontFamily: "var(--font-heading)",
-              fontSize: "1.35rem",
-              fontWeight: 800,
-              color: "var(--text-primary)",
-              marginBottom: 20,
-            }}
-          >
-            Customization Studio
-          </h3>
-
-          {/* Hidden File Input */}
-          <input
-            type="file"
-            ref={fileInputRef}
-            accept="image/*"
-            onChange={handleInputChange}
-            style={{ display: "none" }}
-          />
-
-          {/* Step 1: Upload Button */}
-          <div style={{ marginBottom: 24 }}>
-            <button
-              type="button"
-              onClick={() => fileInputRef.current?.click()}
-              className="btn-secondary"
-              style={{
-                width: "100%",
-                justifyContent: "center",
-                padding: "14px",
-                fontSize: "1rem",
-              }}
-            >
-              <ImageIcon size={18} />
-              <span>{hasImage ? "Change Uploaded Photo" : "Upload Your Photo"}</span>
-            </button>
-          </div>
-
-          {/* Step 2: Zoom and Adjust Controls */}
-          {hasImage && (
-            <div
-              style={{
-                background: "var(--bg-card-secondary)",
-                border: "1px solid var(--border-glass)",
-                borderRadius: 14,
-                padding: 18,
-                marginBottom: 24,
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  marginBottom: 10,
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: "0.88rem",
-                    fontWeight: 600,
-                    color: "var(--text-primary)",
-                  }}
-                >
-                  Adjust Size & Zoom
-                </span>
-                <button
-                  type="button"
-                  onClick={resetPosition}
-                  style={{
-                    background: "none",
-                    border: "none",
-                    color: "var(--primary-red)",
-                    fontSize: "0.82rem",
-                    fontWeight: 600,
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 4,
-                  }}
-                >
-                  <RotateCcw size={13} /> Reset
-                </button>
-              </div>
-
-              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                <button
-                  type="button"
-                  onClick={() => adjustScale(scale - 0.1)}
-                  style={{
-                    background: "var(--bg-card)",
-                    border: "1px solid var(--border-glass)",
-                    borderRadius: 8,
-                    color: "var(--text-primary)",
-                    padding: 8,
-                    cursor: "pointer",
-                  }}
-                >
-                  <ZoomOut size={16} />
-                </button>
-
-                <input
-                  type="range"
-                  min="0.2"
-                  max="3"
-                  step="0.05"
-                  value={scale}
-                  onChange={(e) => adjustScale(parseFloat(e.target.value))}
-                  style={{ flex: 1, accentColor: "#e53935", cursor: "pointer" }}
-                />
-
-                <button
-                  type="button"
-                  onClick={() => adjustScale(scale + 0.1)}
-                  style={{
-                    background: "var(--bg-card)",
-                    border: "1px solid var(--border-glass)",
-                    borderRadius: 8,
-                    color: "var(--text-primary)",
-                    padding: 8,
-                    cursor: "pointer",
-                  }}
-                >
-                  <ZoomIn size={16} />
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* Step 3: Download Button */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-            <button
-              type="button"
-              onClick={handleDownload}
-              disabled={!hasImage}
-              className="btn-primary"
-              style={{
-                width: "100%",
-                padding: "15px",
-                fontSize: "1.05rem",
-                opacity: hasImage ? 1 : 0.5,
-                cursor: hasImage ? "pointer" : "not-allowed",
-              }}
-            >
-              <Download size={20} />
-              <span>Download Official Avatar</span>
-            </button>
-
-            {/* Step 4: Share WhatsApp Button */}
-            <button
-              type="button"
-              onClick={handleShareWhatsApp}
-              className="btn-secondary"
-              style={{
-                width: "100%",
-                padding: "14px",
-                fontSize: "0.95rem",
-                color: "#22c55e",
-                borderColor: "rgba(34, 197, 94, 0.3)",
-              }}
-            >
-              <Share2 size={18} />
-              <span>Share Link On WhatsApp</span>
-            </button>
-          </div>
-
-          {/* Feedback & Continue */}
-          {downloadSuccess && (
-            <div
-              style={{
-                marginTop: 24,
-                padding: 16,
-                borderRadius: 14,
-                background: "rgba(16, 185, 129, 0.15)",
-                border: "1px solid rgba(16, 185, 129, 0.3)",
-                color: "#10b981",
-                display: "flex",
-                flexDirection: "column",
-                gap: 10,
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <CheckCircle2 size={18} />
-                <strong style={{ fontSize: "0.95rem" }}>
-                  Avatar Downloaded Successfully!
-                </strong>
-              </div>
-              <p style={{ fontSize: "0.85rem", color: "#d1fae5", margin: 0 }}>
-                Set it as your display picture on WhatsApp, Instagram, and
-                Facebook.
-              </p>
-              <Link
-                href="/ads"
+            {/* Step 3: Download Button */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              <motion.button
+                type="button"
+                whileHover={{ scale: hasImage ? 1.02 : 1 }}
+                whileTap={{ scale: hasImage ? 0.98 : 1 }}
+                onClick={handleDownload}
+                disabled={!hasImage}
                 className="btn-primary"
                 style={{
-                  alignSelf: "flex-start",
-                  marginTop: 6,
-                  padding: "8px 18px",
-                  fontSize: "0.88rem",
+                  width: "100%",
+                  padding: "15px",
+                  fontSize: "1.05rem",
+                  opacity: hasImage ? 1 : 0.5,
+                  cursor: hasImage ? "pointer" : "not-allowed",
                 }}
               >
-                <span>Continue to Ministers & Promo</span>
-                <ArrowRight size={15} />
-              </Link>
+                <Download size={20} />
+                <span>Download Official Avatar</span>
+              </motion.button>
+
+              {/* Step 4: Share WhatsApp Button */}
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={handleShareWhatsApp}
+                className="btn-secondary"
+                style={{
+                  width: "100%",
+                  padding: "14px",
+                  fontSize: "0.95rem",
+                  color: "#22c55e",
+                  borderColor: "rgba(34, 197, 94, 0.3)",
+                }}
+              >
+                <Share2 size={18} />
+                <span>Share Link On WhatsApp</span>
+              </motion.button>
             </div>
-          )}
+
+            {/* Feedback & Continue */}
+            <AnimatePresence>
+              {downloadSuccess && (
+                <motion.div
+                  initial={{ opacity: 0, y: 15, scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                  style={{
+                    marginTop: 24,
+                    padding: 16,
+                    borderRadius: 14,
+                    background: "rgba(16, 185, 129, 0.15)",
+                    border: "1px solid rgba(16, 185, 129, 0.3)",
+                    color: "#10b981",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 10,
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <CheckCircle2 size={18} />
+                    <strong style={{ fontSize: "0.95rem" }}>
+                      Avatar Downloaded Successfully!
+                    </strong>
+                  </div>
+                  <p style={{ fontSize: "0.85rem", color: "#d1fae5", margin: 0 }}>
+                    Set it as your display picture on WhatsApp, Instagram, and
+                    Facebook.
+                  </p>
+                  <Link
+                    href="/ads"
+                    className="btn-primary"
+                    style={{
+                      alignSelf: "flex-start",
+                      marginTop: 6,
+                      padding: "8px 18px",
+                      fontSize: "0.88rem",
+                    }}
+                  >
+                    <span>Continue to Ministers & Promo</span>
+                    <ArrowRight size={15} />
+                  </Link>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
         </div>
       </div>
     </div>
