@@ -4,19 +4,34 @@ import { Sparkles } from "lucide-react";
 export default function Marquee() {
   const items = [
     {
-      text: "SHARE YOUR TESTIMONY AT ONE MILLION MAN WORSHIP",
-      cta: "Click here",
-      href: "/testimony",
+      text: "ONE MILLION MAN WORSHIP 2026 • 4TH EDITION • 3 DAYS, ONE GOD, ONE SOUND, ONE STAGE",
+      cta: "Explore 2026",
+      href: "/about",
     },
     {
-      text: "CREATE YOUR OFFICIAL 1MMW 2025 AVATAR TODAY",
+      text: "CREATE YOUR OFFICIAL 1MMW 2026 'I'LL BE ATTENDING' AVATAR",
       cta: "Create Avatar",
       href: "/avatar",
     },
     {
-      text: "EXPERIENCE THE POWER & PRESENCE OF GOD IN WORSHIP",
+      text: "DECEMBER 18 – 20, 2026 • YAKUBU GOWON STADIUM, PORT HARCOURT • ACCESS FREE",
+      cta: "Event Info",
+      href: "/ads",
+    },
+    {
+      text: "JOIN THE 2026 VOLUNTEER WORKFORCE",
+      cta: "Register Now",
+      href: "/volunteer",
+    },
+    {
+      text: "STREAM LIVE BROADCASTS & WATCH HISTORIC MOMENTS",
       cta: "Watch Live",
       href: "/live",
+    },
+    {
+      text: "SUBMIT YOUR TESTIMONY OR PRAYER REQUEST",
+      cta: "Share Story",
+      href: "/testimony",
     },
   ];
 

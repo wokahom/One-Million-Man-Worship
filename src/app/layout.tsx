@@ -11,42 +11,46 @@ import { Toaster } from "@/components/ui/sonner";
 export const metadata: Metadata = {
   metadataBase: new URL("https://onemillionmanworship.com"),
   title: {
-    default: "One Million Man Worship | Official Website",
-    template: "%s | One Million Man Worship",
+    default: "One Million Man Worship 2026 | 4th Edition - Port Harcourt",
+    template: "%s | One Million Man Worship 2026",
   },
   description:
-    "Official One Million Man Worship movement. Create your official 2025 avatar, watch live recordings, submit testimonies, and experience the presence of God.",
+    "Official One Million Man Worship 2026 (4th Edition). 3 Days • One God • One Sound • One Stage. December 18-20, 2026 at Yakubu Gowon Stadium, Elekahia, Port Harcourt. Create your 2026 avatar, watch live broadcasts, and submit testimonies.",
   keywords: [
-    "One Million Man Worship",
-    "1MMW",
-    "Avatar Generator 2025",
-    "Gospel Worship",
-    "Worship Movement",
-    "Port Harcourt Worship",
-    "Praise and Worship",
+    "One Million Man Worship 2026",
+    "1MMW 2026",
+    "Avatar Generator 2026",
+    "Gospel Worship Port Harcourt",
+    "Yakubu Gowon Stadium Worship",
+    "Port Harcourt Worship Movement",
+    "Praise and Worship Nigeria",
+    "Dr Paul Enenche",
+    "Dunsin Oyekan",
+    "Tye Tribbett",
+    "Min GUC",
   ],
   authors: [{ name: "One Million Man Worship" }],
   openGraph: {
     type: "website",
     url: "https://onemillionmanworship.com",
-    title: "One Million Man Worship",
+    title: "One Million Man Worship 2026 | 4th Edition",
     description:
-      "Create your official One Million Man Worship avatar instantly and join believers worldwide in worship.",
+      "Join over 1,000,000 believers on December 18-20, 2026 at Yakubu Gowon Stadium, Port Harcourt. Create your official 2026 avatar now!",
     images: [
       {
-        url: "/assets/images/share-preview.jpg",
-        width: 1200,
-        height: 630,
-        alt: "One Million Man Worship",
+        url: "/assets/2026/1MMW 2026 MAIN TV.png",
+        width: 1280,
+        height: 720,
+        alt: "One Million Man Worship 2026",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "One Million Man Worship",
+    title: "One Million Man Worship 2026 | 4th Edition",
     description:
-      "Create your official One Million Man Worship avatar instantly and join believers worldwide in worship.",
-    images: ["/assets/images/share-preview.jpg"],
+      "3 Days • One God • One Sound • One Stage. December 18-20, 2026 at Yakubu Gowon Stadium, Elekahia, Port Harcourt. Free Access.",
+    images: ["/assets/2026/1MMW 2026 MAIN TV.png"],
   },
   icons: {
     icon: "/favicon.png",
@@ -76,7 +80,7 @@ export default function RootLayout({
               (function() {
                 try {
                   var saved = localStorage.getItem('1mmw_theme');
-                  var theme = saved || 'dark';
+                  var theme = saved || 'light';
                   document.documentElement.setAttribute('data-theme', theme);
                 } catch(e) {}
               })();

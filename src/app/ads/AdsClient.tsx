@@ -36,7 +36,7 @@ export default function AdsClient() {
       <Marquee />
 
       <div className="container" style={{ paddingTop: 30, paddingBottom: 60, position: "relative", zIndex: 1 }}>
-        {/* Intro Video & Flyer Autoplay */}
+        {/* Intro Video & 2026 Flyer Autoplay */}
         <motion.section
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
@@ -44,12 +44,12 @@ export default function AdsClient() {
           style={{ marginBottom: 40 }}
         >
           <MediaAutoplay
-            imageSrc="/assets/images/1mmw_flyer3_1.jpg"
+            imageSrc="/assets/2026/1MMW 2026 MAIN TV.png"
             videoSrc="https://res.cloudinary.com/dtemxjmt6/video/upload/v1764531906/1mmw_2025_ads_video3_1_bual4w.mov"
           />
         </motion.section>
 
-        {/* Live Countdown to Event */}
+        {/* Live Countdown to 2026 Event */}
         <motion.section
           initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -57,7 +57,10 @@ export default function AdsClient() {
           transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           style={{ marginBottom: 40 }}
         >
-          <Countdown targetDate="December 19, 2025 16:00:00" />
+          <Countdown
+            targetDate="December 18, 2026 16:00:00"
+            title="Countdown to One Million Man Worship 2026"
+          />
         </motion.section>
 
         {/* Ministers and Artistes Slider */}
@@ -137,8 +140,13 @@ export default function AdsClient() {
           >
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
               <Link href="/avatar" className="btn-primary">
-                <span>Create Your 2025 Avatar</span>
+                <span>Create Your 2026 Avatar</span>
                 <ArrowRight size={17} />
+              </Link>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+              <Link href="/volunteer" className="btn-secondary">
+                <span>Volunteer For 2026</span>
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>

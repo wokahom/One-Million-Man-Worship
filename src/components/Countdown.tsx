@@ -10,8 +10,8 @@ interface CountdownProps {
 }
 
 export default function Countdown({
-  targetDate = "December 19, 2025 16:00:00",
-  title = "Countdown to One Million Man Worship 2025",
+  targetDate = "December 18, 2026 16:00:00",
+  title = "Countdown to One Million Man Worship 2026",
 }: CountdownProps) {
   const [timeLeft, setTimeLeft] = useState<{
     days: number;

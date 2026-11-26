@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Mail, Heart } from "lucide-react";
-import { InstagramIcon, TikTokIcon } from "./Icons";
+import { Mail, Heart, MapPin } from "lucide-react";
+import { InstagramIcon, TikTokIcon, YoutubeIcon, FacebookIcon, XTwitterIcon } from "./Icons";
 
 export default function Footer() {
   return (
@@ -10,29 +10,69 @@ export default function Footer() {
           {/* Brand Col */}
           <div className="footer-brand">
             <h3>ONE MILLION MAN WORSHIP</h3>
+            <span
+              style={{
+                display: "inline-block",
+                fontSize: "0.8rem",
+                color: "var(--primary-gold)",
+                fontWeight: 700,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                marginBottom: 8,
+              }}
+            >
+              4th Edition • 3 Days, One God, One Sound, One Stage
+            </span>
             <p>
-              A global worship movement gathering believers across cities and
+              A global worship convocation gathering believers across cities and
               nations to lift up the highest praise to King Jesus with one heart
-              and one voice.
+              and one voice. December 18 – 20, 2026 at Yakubu Gowon Stadium, Elekahia, Port Harcourt.
             </p>
-            <div style={{ marginTop: 18, display: "flex", gap: 10 }}>
+            <div style={{ marginTop: 18, display: "flex", gap: 10, flexWrap: "wrap" }}>
               <a
                 href="https://www.instagram.com/onemillionmanworship_ph"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-icon"
-                title="Instagram"
+                title="Instagram (@onemillionmanworship_ph)"
               >
                 <InstagramIcon size={17} />
               </a>
               <a
-                href="https://www.tiktok.com/@one_million_man_worship"
+                href="https://facebook.com/onemillionmanworship"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-icon"
-                title="TikTok"
+                title="Facebook (@onemillionmanworship)"
+              >
+                <FacebookIcon size={17} />
+              </a>
+              <a
+                href="https://youtube.com/@onemillionmanworship"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-icon"
+                title="YouTube (@onemillionmanworship)"
+              >
+                <YoutubeIcon size={17} />
+              </a>
+              <a
+                href="https://www.tiktok.com/@onemillionmanworship"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-icon"
+                title="TikTok (@onemillionmanworship)"
               >
                 <TikTokIcon size={15} />
+              </a>
+              <a
+                href="https://x.com/onemillionmanworship_ph"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-icon"
+                title="X / Twitter (@onemillionmanworship_ph)"
+              >
+                <XTwitterIcon size={15} />
               </a>
             </div>
           </div>
@@ -48,7 +88,13 @@ export default function Footer() {
                 <Link href="/about">About Movement</Link>
               </li>
               <li>
-                <Link href="/avatar">Create 2025 Avatar</Link>
+                <Link href="/avatar">Create 2026 Avatar</Link>
+              </li>
+              <li>
+                <Link href="/volunteer">Volunteer for 2026</Link>
+              </li>
+              <li>
+                <Link href="/prayer">Prayer Requests</Link>
               </li>
               <li>
                 <Link href="/testimony">Share Testimony</Link>
@@ -59,32 +105,51 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Features & Connect */}
+          {/* Features & Official Contact */}
           <div className="footer-col">
-            <h4>Explore & Contact</h4>
+            <h4>Explore & Official Contact</h4>
             <ul className="footer-links">
               <li>
-                <Link href="/live">Live Broadcast</Link>
+                <Link href="/live">2026 Live Broadcast</Link>
               </li>
               <li>
-                <Link href="/gallery">Photo Gallery</Link>
+                <Link href="/gallery">Photo Gallery (2026 & Past)</Link>
+              </li>
+              <li>
+                <Link href="/ads">Ministers Lineup & Countdown</Link>
               </li>
               <li>
                 <Link href="/videos">Inspiring Moments</Link>
               </li>
               <li>
-                <Link href="/ads">Ministers & Countdown</Link>
+                <Link href="/contact">Contact & Transportation</Link>
               </li>
-              <li>
-                <Link href="/contact">Contact Us</Link>
-              </li>
-              <li style={{ marginTop: 8 }}>
+              <li style={{ marginTop: 12, borderTop: "1px solid var(--border-glass)", paddingTop: 10 }}>
                 <a
                   href="mailto:info@onemillionmanworship.com"
-                  style={{ display: "flex", alignItems: "center", gap: 6 }}
+                  style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.85rem" }}
                 >
-                  <Mail size={14} /> info@onemillionmanworship.com
+                  <Mail size={13} color="var(--primary-red)" /> info@onemillionmanworship.com
                 </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:team@onemillionmanworship.com"
+                  style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.85rem" }}
+                >
+                  <Mail size={13} color="var(--primary-gold)" /> team@onemillionmanworship.com
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:admin@onemillionmanworship.com"
+                  style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.85rem" }}
+                >
+                  <Mail size={13} color="#3b82f6" /> admin@onemillionmanworship.com
+                </a>
+              </li>
+              <li style={{ marginTop: 6, display: "flex", alignItems: "center", gap: 6, fontSize: "0.82rem", color: "var(--text-secondary)" }}>
+                <MapPin size={13} color="#ef4444" /> Yakubu Gowon Stadium, Elekahia, Port Harcourt
               </li>
             </ul>
           </div>
@@ -93,7 +158,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="footer-bottom">
           <p>
-            &copy; {new Date().getFullYear()} One Million Man Worship. All
+            &copy; 2026 One Million Man Worship. All
             rights reserved.
           </p>
           <p style={{ display: "flex", alignItems: "center", gap: 6 }}>

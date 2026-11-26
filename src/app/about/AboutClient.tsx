@@ -79,12 +79,12 @@ export default function AboutClient() {
         }}
       >
         <Image
-          src="/assets/images/1mmw_banner1.jpeg"
-          alt="Create Your Own Avatar Banner"
+          src="/assets/2026/1MMW 2026 MAIN TV.png"
+          alt="Create Your Own 2026 Avatar Banner"
           fill
           priority
           sizes="100vw"
-          style={{ objectFit: "cover", filter: "brightness(0.35)" }}
+          style={{ objectFit: "cover", filter: "brightness(0.32)" }}
         />
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -114,7 +114,7 @@ export default function AboutClient() {
               marginBottom: 16,
             }}
           >
-            <Sparkles size={16} /> Official Badge & Identity
+            <Sparkles size={16} /> 2026 Official Badge Studio • 4th Edition
           </span>
           <h1
             style={{
@@ -125,19 +125,19 @@ export default function AboutClient() {
               marginBottom: 14,
             }}
           >
-            Create Your Own Avatar
+            Create Your 2026 Official Avatar
           </h1>
           <p
             style={{
               color: "#cbd5e1",
               fontSize: "1.1rem",
-              maxWidth: 620,
+              maxWidth: 640,
               margin: "0 auto 24px",
               lineHeight: 1.6,
             }}
           >
-            Download and share with friends, family, and loved ones as we
-            prepare our hearts for an historic encounter.
+            Join over one million believers worldwide. Download and share your
+            &quot;I&apos;ll Be Attending&quot; badge as we prepare for 3 Days of Glory, December 18 – 20, 2026.
           </p>
           <motion.div
             whileHover={{ scale: 1.03 }}
@@ -145,7 +145,7 @@ export default function AboutClient() {
             style={{ display: "inline-block" }}
           >
             <Link href="/avatar" className="btn-primary">
-              <span>Click Here to Generate Avatar</span>
+              <span>Click Here to Generate 2026 Avatar</span>
               <ArrowRight size={17} />
             </Link>
           </motion.div>
@@ -190,8 +190,8 @@ export default function AboutClient() {
               }}
             >
               <Image
-                src="/assets/images/1mmw_banner2.jpg"
-                alt="About One Million Man Worship"
+                src="/assets/2026/1MMW 2026 MAIN SQ.png"
+                alt="About One Million Man Worship 2026"
                 fill
                 sizes="(max-width: 768px) 100vw, 550px"
                 style={{ objectFit: "cover" }}
@@ -345,54 +345,63 @@ export default function AboutClient() {
           </div>
         </section>
 
-        {/* Bus Routes Banner */}
+        {/* Transportation & Transit Section */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          style={{ textAlign: "center" }}
+          style={{ textAlign: "center", marginTop: 40 }}
         >
+          <span
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+              background: "rgba(16, 185, 129, 0.15)",
+              color: "#10b981",
+              padding: "4px 14px",
+              borderRadius: 20,
+              fontSize: "0.82rem",
+              fontWeight: 700,
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
+              marginBottom: 8,
+            }}
+          >
+            Logistics & Access
+          </span>
           <h2
             style={{
               fontFamily: "var(--font-heading)",
               fontSize: "1.8rem",
               fontWeight: 800,
               color: "var(--text-primary)",
-              marginBottom: 16,
+              marginBottom: 12,
             }}
           >
-            Transportation & Bus Routes
+            2026 Transportation & Stadium Access
           </h2>
           <p
             style={{
               color: "var(--text-secondary)",
               fontSize: "0.95rem",
-              marginBottom: 24,
+              maxWidth: 700,
+              margin: "0 auto 24px",
+              lineHeight: 1.6,
             }}
           >
-            Free transit locations and pickup centers across key junctions.
+            Free transit shuttles operate across 6 Port Harcourt zones: Port Harcourt City / Town, Obio/Akpor / Rumuokoro, Eleme / Oyigbo, Ikwerre / Airport, Diobu / UST, and Trans-Amadi / Peter Odili. Shuttles run daily starting at 1:00 PM on December 18 – 20, 2026.
           </p>
-          <motion.div
-            whileHover={{ scale: 1.01 }}
-            transition={{ type: "spring", damping: 25, stiffness: 280 }}
-            style={{
-              borderRadius: 20,
-              overflow: "hidden",
-              border: "1px solid var(--border-glass)",
-              maxWidth: 960,
-              margin: "0 auto",
-              boxShadow: "var(--card-shadow)",
-            }}
-          >
-            <Image
-              src="/assets/images/1mmw_2025bus_route.jpg"
-              alt="1MMW Bus Route Map"
-              width={1200}
-              height={700}
-              style={{ width: "100%", height: "auto" }}
-            />
-          </motion.div>
+          <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+            <Link href="/contact" className="btn-primary">
+              <span>View Full Transit Details & Contacts</span>
+              <ArrowRight size={16} />
+            </Link>
+            <Link href="/avatar" className="btn-secondary">
+              <span>Create 2026 Avatar</span>
+            </Link>
+          </div>
         </motion.section>
       </div>
     </div>

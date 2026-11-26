@@ -147,7 +147,7 @@ export default function ContactClient() {
             transition={{ duration: 0.65, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             style={{ display: "flex", flexDirection: "column", gap: 20 }}
           >
-            {/* Info Card 1: Official Email */}
+            {/* Info Card 1: Official Emails */}
             <div
               style={{
                 background: "var(--bg-card)",
@@ -177,22 +177,31 @@ export default function ContactClient() {
               </div>
               <div>
                 <h3 style={{ fontSize: "1.05rem", fontWeight: 700, color: "var(--text-primary)", marginBottom: 4 }}>
-                  Official Email
+                  Official Email Addresses
                 </h3>
-                <p style={{ color: "var(--text-secondary)", fontSize: "0.9rem", marginBottom: 8 }}>
-                  For general correspondence, feedback, and minister inquiries.
+                <p style={{ color: "var(--text-secondary)", fontSize: "0.85rem", marginBottom: 8 }}>
+                  Reach our specific administrative desks directly:
                 </p>
-                <a
-                  href="mailto:info@onemillionmanworship.com"
-                  style={{
-                    color: "var(--primary-red)",
-                    fontWeight: 700,
-                    fontSize: "0.95rem",
-                    wordBreak: "break-all",
-                  }}
-                >
-                  info@onemillionmanworship.com
-                </a>
+                <div style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: "0.88rem" }}>
+                  <div>
+                    <span style={{ color: "var(--text-secondary)", fontSize: "0.8rem" }}>General Inquiries: </span>
+                    <a href="mailto:info@onemillionmanworship.com" style={{ color: "var(--primary-red)", fontWeight: 700 }}>
+                      info@onemillionmanworship.com
+                    </a>
+                  </div>
+                  <div>
+                    <span style={{ color: "var(--text-secondary)", fontSize: "0.8rem" }}>Team & Logistics: </span>
+                    <a href="mailto:team@onemillionmanworship.com" style={{ color: "var(--primary-gold)", fontWeight: 700 }}>
+                      team@onemillionmanworship.com
+                    </a>
+                  </div>
+                  <div>
+                    <span style={{ color: "var(--text-secondary)", fontSize: "0.8rem" }}>Administration: </span>
+                    <a href="mailto:admin@onemillionmanworship.com" style={{ color: "#3b82f6", fontWeight: 700 }}>
+                      admin@onemillionmanworship.com
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -226,10 +235,10 @@ export default function ContactClient() {
               </div>
               <div>
                 <h3 style={{ fontSize: "1.05rem", fontWeight: 700, color: "var(--text-primary)", marginBottom: 4 }}>
-                  Convocation Ground
+                  2026 Convocation Ground
                 </h3>
-                <p style={{ color: "var(--text-secondary)", fontSize: "0.9rem", lineHeight: 1.5 }}>
-                  Port Harcourt, Rivers State, Nigeria. Multiple designated free bus stations available across major hubs.
+                <p style={{ color: "var(--text-secondary)", fontSize: "0.9rem", lineHeight: 1.5, margin: 0 }}>
+                  <strong>Yakubu Gowon Stadium</strong>, Elekahia, Port Harcourt, Rivers State, Nigeria. Free shuttle transit operating across 6 major regional corridors.
                 </p>
               </div>
             </div>
@@ -264,10 +273,10 @@ export default function ContactClient() {
               </div>
               <div>
                 <h3 style={{ fontSize: "1.05rem", fontWeight: 700, color: "var(--text-primary)", marginBottom: 4 }}>
-                  Date & Worship Schedule
+                  2026 Date & Schedule (3 Days)
                 </h3>
-                <p style={{ color: "var(--text-secondary)", fontSize: "0.9rem", lineHeight: 1.5 }}>
-                  Friday, December 19, 2025 • Gates open from 4:00 PM (WAT) till dawn.
+                <p style={{ color: "var(--text-secondary)", fontSize: "0.9rem", lineHeight: 1.5, margin: 0 }}>
+                  <strong>Friday, Dec 18 – Sunday, Dec 20, 2026</strong> • Daily from 4:00 PM (GMT+1) till dawn. Gates open at 12:00 PM. Admission is 100% Free.
                 </p>
               </div>
             </div>
@@ -302,19 +311,35 @@ export default function ContactClient() {
               </div>
               <div>
                 <h3 style={{ fontSize: "1.05rem", fontWeight: 700, color: "var(--text-primary)", marginBottom: 4 }}>
-                  Official Instagram
+                  Official Social Handles
                 </h3>
-                <p style={{ color: "var(--text-secondary)", fontSize: "0.9rem", marginBottom: 8 }}>
-                  Follow live updates, ministration previews, and highlights.
+                <p style={{ color: "var(--text-secondary)", fontSize: "0.85rem", marginBottom: 8 }}>
+                  Stay connected for live announcements, ministration previews & highlights:
                 </p>
-                <a
-                  href="https://www.instagram.com/onemillionmanworship_ph"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: "#ec4899", fontWeight: 700, fontSize: "0.95rem" }}
-                >
-                  @onemillionmanworship_ph
-                </a>
+                <div style={{ display: "flex", flexDirection: "column", gap: 3, fontSize: "0.88rem" }}>
+                  <div>
+                    <span style={{ color: "var(--text-secondary)", fontSize: "0.8rem" }}>Instagram & X: </span>
+                    <a
+                      href="https://www.instagram.com/onemillionmanworship_ph"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: "#ec4899", fontWeight: 700 }}
+                    >
+                      @onemillionmanworship_ph
+                    </a>
+                  </div>
+                  <div>
+                    <span style={{ color: "var(--text-secondary)", fontSize: "0.8rem" }}>Facebook & YouTube: </span>
+                    <a
+                      href="https://youtube.com/@onemillionmanworship"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: "var(--primary-red)", fontWeight: 700 }}
+                    >
+                      @onemillionmanworship
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>

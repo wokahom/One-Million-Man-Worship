@@ -2,14 +2,16 @@ import { initializeApp, getApps, getApp, FirebaseApp } from "firebase/app";
 import { getFirestore, Firestore } from "firebase/firestore";
 import { getAnalytics, Analytics, isSupported } from "firebase/analytics";
 import { getStorage, FirebaseStorage } from "firebase/storage";
+import { firebaseConfig as config } from "@/configs/app.configs";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAKgrFYnCPnYUeNuEV1Aj9IgMvVVaMWhzc",
-  authDomain: "one-million-man-worship-avatar.firebaseapp.com",
-  projectId: "one-million-man-worship-avatar",
-  storageBucket: "one-million-man-worship-avatar.firebasestorage.app",
-  messagingSenderId: "860229940198",
-  appId: "1:860229940198:web:a7f628f4475f84e08cdc27"
+  apiKey: config.apiKey,
+  authDomain: config.authDomain,
+  projectId: config.projectId,
+  storageBucket: config.storageBucket,
+  messagingSenderId: config.messagingSenderId,
+  appId: config.appId,
+  measurementId: config.measurementId,
 };
 
 let app: FirebaseApp;
@@ -21,7 +23,7 @@ if (typeof window !== "undefined") {
   app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
   db = getFirestore(app);
   storage = getStorage(app);
-  
+
   isSupported().then((supported) => {
     if (supported) {
       analytics = getAnalytics(app);

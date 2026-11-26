@@ -133,10 +133,10 @@ export default function VideosPage() {
           >
             <VideoIcon size={16} /> Highlights & Ministrations
           </span>
-          <h1 className="section-title">INSPIRING MOMENTS AT 1MMW 2025</h1>
+          <h1 className="section-title">INSPIRING MOMENTS OF WORSHIP</h1>
           <p className="section-subtitle">
             Relive profound worship clips, prophetic decrees, and praise
-            highlights that marked our sacred gathering.
+            highlights from previous editions as we build anticipation for 1MMW 2026.
           </p>
         </motion.div>
 

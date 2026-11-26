@@ -16,8 +16,10 @@ import {
   MessageSquareHeart,
   Users,
   Video,
+  HeartHandshake,
 } from "lucide-react";
 import { BsInstagram } from "react-icons/bs";
+import { YoutubeIcon, TikTokIcon, FacebookIcon } from "./Icons";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
@@ -72,8 +74,18 @@ export default function Header() {
                 <Link
                   href="/avatar"
                   className={`nav-link ${isActive("/avatar") ? "active" : ""}`}
+                  style={{ display: "flex", alignItems: "center", gap: 5 }}
                 >
-                  Avatar Creator
+                  <Sparkles size={14} color="var(--primary-gold)" />
+                  <span>Avatar 2026</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/volunteer"
+                  className={`nav-link ${isActive("/volunteer") ? "active" : ""}`}
+                >
+                  Volunteer
                 </Link>
               </li>
               <li>
@@ -81,7 +93,7 @@ export default function Header() {
                   href="/testimony"
                   className={`nav-link ${isActive("/testimony") ? "active" : ""}`}
                 >
-                  Experience Jesus
+                  Testimonies
                 </Link>
               </li>
 
@@ -106,7 +118,7 @@ export default function Header() {
                     onClick={() => setDropdownOpen(false)}
                   >
                     <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                      <Users size={15} /> Ministers & Artists
+                      <Users size={15} /> 2026 Ministers Lineup
                     </span>
                   </Link>
                   <Link
@@ -115,7 +127,16 @@ export default function Header() {
                     onClick={() => setDropdownOpen(false)}
                   >
                     <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                      <Tv size={15} /> Previous Editions
+                      <Tv size={15} /> 2026 Live Broadcast
+                    </span>
+                  </Link>
+                  <Link
+                    href="/prayer"
+                    className="dropdown-item"
+                    onClick={() => setDropdownOpen(false)}
+                  >
+                    <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                      <HeartHandshake size={15} /> Prayer Requests
                     </span>
                   </Link>
                   <Link
@@ -124,7 +145,7 @@ export default function Header() {
                     onClick={() => setDropdownOpen(false)}
                   >
                     <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                      <MessageSquareHeart size={15} /> Testimonies
+                      <MessageSquareHeart size={15} /> Testimonies Archive
                     </span>
                   </Link>
                   <Link
@@ -150,7 +171,7 @@ export default function Header() {
 
               <li>
                 <Link href="/live" className="nav-link live-badge">
-                  <Radio size={14} /> LIVE
+                  <Radio size={14} /> LIVE 2026
                 </Link>
               </li>
               <li>
@@ -158,7 +179,7 @@ export default function Header() {
                   href="/contact"
                   className={`nav-link ${isActive("/contact") ? "active" : ""}`}
                 >
-                  Contact Us
+                  Contact & Logistics
                 </Link>
               </li>
             </ul>
@@ -172,26 +193,36 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-icon"
-                title="Instagram"
+                title="Instagram (@onemillionmanworship_ph)"
               >
-                <BsInstagram size={17} />
+                <BsInstagram size={16} />
               </a>
               <a
-                href="https://www.tiktok.com/@one_million_man_worship"
+                href="https://facebook.com/onemillionmanworship"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-icon"
-                title="TikTok"
+                title="Facebook (@onemillionmanworship)"
               >
-                {/* TikTok custom SVG */}
-                <svg
-                  width="15"
-                  height="15"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.29 0 .58.04.86.12V9.42a6.34 6.34 0 0 0-.86-.06 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.71a8.18 8.18 0 0 0 4.77 1.52V6.78a4.85 4.85 0 0 1-1-.09z" />
-                </svg>
+                <FacebookIcon size={16} />
+              </a>
+              <a
+                href="https://youtube.com/@onemillionmanworship"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-icon"
+                title="YouTube (@onemillionmanworship)"
+              >
+                <YoutubeIcon size={16} />
+              </a>
+              <a
+                href="https://www.tiktok.com/@onemillionmanworship"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-icon"
+                title="TikTok (@onemillionmanworship)"
+              >
+                <TikTokIcon size={14} />
               </a>
             </div>
 
@@ -251,7 +282,7 @@ export default function Header() {
               <ul className="mobile-nav-links">
                 <li>
                   <Link href="/" className="mobile-nav-link" onClick={closeMobile}>
-                    Home
+                    Home (2026 Edition)
                   </Link>
                 </li>
                 <li>
@@ -261,7 +292,28 @@ export default function Header() {
                 </li>
                 <li>
                   <Link href="/avatar" className="mobile-nav-link" onClick={closeMobile}>
-                    Create Avatar
+                    <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                      <Sparkles size={16} color="var(--primary-gold)" />
+                      Create 2026 Avatar
+                    </span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/volunteer" className="mobile-nav-link" onClick={closeMobile}>
+                    Volunteer Registration
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/live" className="mobile-nav-link" onClick={closeMobile}>
+                    <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                      <Radio size={14} color="#ef4444" />
+                      2026 Live Broadcast
+                    </span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/ads" className="mobile-nav-link" onClick={closeMobile}>
+                    2026 Ministers & Artistes
                   </Link>
                 </li>
                 <li>
@@ -270,7 +322,16 @@ export default function Header() {
                     className="mobile-nav-link"
                     onClick={closeMobile}
                   >
-                    Experience Jesus
+                    Share Testimony
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/prayer"
+                    className="mobile-nav-link"
+                    onClick={closeMobile}
+                  >
+                    Submit Prayer Request
                   </Link>
                 </li>
                 <li>
@@ -283,22 +344,12 @@ export default function Header() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ads" className="mobile-nav-link" onClick={closeMobile}>
-                    Ministers & Countdown
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/live" className="mobile-nav-link" onClick={closeMobile}>
-                    Live Broadcast
-                  </Link>
-                </li>
-                <li>
                   <Link
                     href="/gallery"
                     className="mobile-nav-link"
                     onClick={closeMobile}
                   >
-                    Photo Gallery
+                    Photo Gallery (2026 & Past)
                   </Link>
                 </li>
                 <li>
@@ -312,7 +363,7 @@ export default function Header() {
                     className={`mobile-nav-link ${isActive("/contact") ? "active" : ""}`}
                     onClick={closeMobile}
                   >
-                    Contact Us
+                    Contact & Transit Logistics
                   </Link>
                 </li>
               </ul>

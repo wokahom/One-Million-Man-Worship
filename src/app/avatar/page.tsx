@@ -10,6 +10,7 @@ import {
   ZoomIn,
   ZoomOut,
   RotateCcw,
+  RotateCw,
   Sparkles,
   ArrowRight,
   CheckCircle2,
@@ -27,21 +28,26 @@ export default function AvatarPage() {
   const [templateLoaded, setTemplateLoaded] = useState(false);
   const [hasImage, setHasImage] = useState(false);
   const [scale, setScale] = useState(1);
+  const [rotation, setRotation] = useState(0);
   const [downloadSuccess, setDownloadSuccess] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   // Template & Image references
   const templateRef = useRef<HTMLImageElement | null>(null);
   const userImgRef = useRef<HTMLImageElement | null>(null);
 
-  // Coordinate references
-  const circleX = 640;
-  const circleY = 640;
-  const radius = 350;
+  // Exact 2026 Template Dimensions & Circle Coordinates
+  const templateW = 2100;
+  const templateH = 2100;
+  const circleX = 1036;
+  const circleY = 824;
+  const radius = 392;
 
-  const imgCoords = useRef<{ x: number; y: number; scale: number }>({
-    x: 640,
-    y: 640,
+  const imgCoords = useRef<{ x: number; y: number; scale: number; rotation: number }>({
+    x: circleX,
+    y: circleY,
     scale: 1,
+    rotation: 0,
   });
 
   // Dragging & Gesture interaction refs
@@ -66,12 +72,12 @@ export default function AvatarPage() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // 1. Draw base template background
+    // 1. Draw 2026 base template background
     if (templateRef.current) {
-      ctx.drawImage(templateRef.current, 0, 0);
+      ctx.drawImage(templateRef.current, 0, 0, canvas.width, canvas.height);
     }
 
-    // 2. Draw user image in circle clip if loaded
+    // 2. Draw user image inside the 2026 circular cutout
     const uImg = userImgRef.current;
     if (uImg) {
       ctx.save();
@@ -82,32 +88,40 @@ export default function AvatarPage() {
       const displayW = uImg.width * imgCoords.current.scale;
       const displayH = uImg.height * imgCoords.current.scale;
 
+      ctx.save();
+      ctx.translate(imgCoords.current.x, imgCoords.current.y);
+      ctx.rotate((imgCoords.current.rotation * Math.PI) / 180);
       ctx.drawImage(
         uImg,
-        imgCoords.current.x - displayW / 2,
-        imgCoords.current.y - displayH / 2,
+        -displayW / 2,
+        -displayH / 2,
         displayW,
         displayH
       );
       ctx.restore();
+      ctx.restore();
 
-      // 3. Re-draw template on top for foreground borders and badges
-      if (templateRef.current) {
-        ctx.drawImage(templateRef.current, 0, 0);
-      }
+      // 3. Draw a clean inner ring stroke to blend seamlessly with the template's red border
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(circleX, circleY, radius, 0, Math.PI * 2);
+      ctx.strokeStyle = "rgba(182, 10, 8, 0.4)";
+      ctx.lineWidth = 4;
+      ctx.stroke();
+      ctx.restore();
     }
   }, [circleX, circleY, radius]);
 
-  // Load template on mount
+  // Load 2026 template on mount
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const t = new window.Image();
-    t.src = "/assets/images/1mmw2025_avatar.png";
+    t.src = "/assets/2026/i will be attend.png";
     t.onload = () => {
-      canvas.width = t.width || 1280;
-      canvas.height = t.height || 1280;
+      canvas.width = templateW;
+      canvas.height = templateH;
       templateRef.current = t;
       setTemplateLoaded(true);
       drawCanvas();
@@ -116,11 +130,11 @@ export default function AvatarPage() {
     // Log page view in Firestore
     if (db) {
       addDoc(collection(db, "visits"), {
-        page: "avatar",
+        page: "avatar-2026",
         timestamp: serverTimestamp(),
-      }).catch(() => {});
+      }).catch(() => { });
     }
-  }, [drawCanvas]);
+  }, [drawCanvas, templateW, templateH]);
 
   // Handle image upload
   const handleFileUpload = (file: File) => {
@@ -133,17 +147,20 @@ export default function AvatarPage() {
       u.onload = () => {
         userImgRef.current = u;
 
-        // Calculate initial optimal scale to cover circle
+        // Calculate initial scale to cover the circular frame completely
         const minScale = Math.max(
           (radius * 2) / u.width,
           (radius * 2) / u.height
         );
+        const initialScale = minScale * 1.05;
         imgCoords.current = {
           x: circleX,
           y: circleY,
-          scale: minScale * 1.05,
+          scale: initialScale,
+          rotation: 0,
         };
-        setScale(minScale * 1.05);
+        setScale(initialScale);
+        setRotation(0);
         setHasImage(true);
         drawCanvas();
       };
@@ -158,9 +175,18 @@ export default function AvatarPage() {
 
   // Adjust zoom via slider / buttons
   const adjustScale = (newScale: number) => {
-    const clamped = Math.max(0.2, Math.min(5, newScale));
+    const clamped = Math.max(0.1, Math.min(6, newScale));
     imgCoords.current.scale = clamped;
     setScale(clamped);
+    drawCanvas();
+  };
+
+  // Rotate 90 degrees
+  const rotatePhoto = (direction: "cw" | "ccw") => {
+    const delta = direction === "cw" ? 90 : -90;
+    const newRot = (imgCoords.current.rotation + delta) % 360;
+    imgCoords.current.rotation = newRot;
+    setRotation(newRot);
     drawCanvas();
   };
 
@@ -170,20 +196,23 @@ export default function AvatarPage() {
       (radius * 2) / userImgRef.current.width,
       (radius * 2) / userImgRef.current.height
     );
+    const initialScale = minScale * 1.05;
     imgCoords.current = {
       x: circleX,
       y: circleY,
-      scale: minScale,
+      scale: initialScale,
+      rotation: 0,
     };
-    setScale(minScale);
+    setScale(initialScale);
+    setRotation(0);
     drawCanvas();
   };
 
-  // Mouse drag handlers
+  // Mouse drag handlers with accurate 2100px coordinate projection
   const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
     if (!hasImage) return;
     const rect = e.currentTarget.getBoundingClientRect();
-    const scaleFactor = 1280 / rect.width;
+    const scaleFactor = templateW / rect.width;
     dragRef.current.isDragging = true;
     dragRef.current.startX =
       (e.clientX - rect.left) * scaleFactor - imgCoords.current.x;
@@ -194,7 +223,7 @@ export default function AvatarPage() {
   const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
     if (!dragRef.current.isDragging || !hasImage) return;
     const rect = e.currentTarget.getBoundingClientRect();
-    const scaleFactor = 1280 / rect.width;
+    const scaleFactor = templateW / rect.width;
     imgCoords.current.x =
       (e.clientX - rect.left) * scaleFactor - dragRef.current.startX;
     imgCoords.current.y =
@@ -214,7 +243,7 @@ export default function AvatarPage() {
     adjustScale(imgCoords.current.scale + delta);
   };
 
-  // Touch handlers (drag & pinch zoom)
+  // Touch handlers (drag & pinch zoom on mobile devices)
   const getTouchDist = (t1: React.Touch, t2: React.Touch) => {
     const dx = t2.clientX - t1.clientX;
     const dy = t2.clientY - t1.clientY;
@@ -224,7 +253,7 @@ export default function AvatarPage() {
   const handleTouchStart = (e: React.TouchEvent<HTMLCanvasElement>) => {
     if (!hasImage) return;
     const rect = e.currentTarget.getBoundingClientRect();
-    const scaleFactor = 1280 / rect.width;
+    const scaleFactor = templateW / rect.width;
 
     if (e.touches.length === 1) {
       dragRef.current.isDragging = true;
@@ -244,7 +273,7 @@ export default function AvatarPage() {
   const handleTouchMove = (e: React.TouchEvent<HTMLCanvasElement>) => {
     if (!hasImage) return;
     const rect = e.currentTarget.getBoundingClientRect();
-    const scaleFactor = 1280 / rect.width;
+    const scaleFactor = templateW / rect.width;
 
     if (e.touches.length === 1 && dragRef.current.isDragging) {
       const t = e.touches[0];
@@ -268,16 +297,18 @@ export default function AvatarPage() {
     dragRef.current.lastTouchDist = null;
   };
 
-  // Download Avatar
+  // Download Avatar (High Res 2100x2100 PNG)
   const handleDownload = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    setIsProcessing(true);
+
     // Trigger celebration confetti
     try {
       confetti({
-        particleCount: 80,
-        spread: 70,
+        particleCount: 100,
+        spread: 80,
         origin: { y: 0.6 },
         colors: ["#ef4444", "#f59e0b", "#ffffff"],
       });
@@ -288,40 +319,75 @@ export default function AvatarPage() {
     // Log download in Firestore
     if (db) {
       addDoc(collection(db, "downloads"), {
+        edition: "2026",
         timestamp: serverTimestamp(),
-      }).catch(() => {});
+      }).catch(() => { });
     }
 
-    // Canvas to Blob & download
+    // Convert Canvas to Blob & download
     canvas.toBlob((blob) => {
+      setIsProcessing(false);
       if (!blob) return;
       const url = URL.createObjectURL(blob);
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
+      const filename = "1MMW2026_Avatar.png";
+
       if (!isMobile) {
         const a = document.createElement("a");
         a.href = url;
-        a.download = "onemillionmanworship_avatar2025.png";
+        a.download = filename;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
       } else {
-        // Mobile: open image in new window / same tab for long-press saving
-        window.open(url, "_blank");
+        // Mobile fallback: open full-res image for direct long-press save or share
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
       }
 
       setDownloadSuccess(true);
     }, "image/png");
   };
 
-  // Share to WhatsApp
-  const handleShareWhatsApp = () => {
-    const siteUrl = "https://onemillionmanworship.com/avatar";
-    const text = encodeURIComponent(
-      "Check out my official One Million Man Worship 2025 avatar! Create yours here: "
-    );
-    window.open(`https://wa.me/?text=${text}${siteUrl}`, "_blank");
+  // Native Web Share API or WhatsApp Share
+  const handleShare = async () => {
+    const shareText =
+      "I will be attending One Million Man Worship 2026 (4th Edition)! 3 DAYS • ONE GOD • ONE SOUND • ONE STAGE. Dec 18 - 20, 2026 at Yakubu Gowon Stadium, Port Harcourt. Create your official avatar here:";
+    const shareUrl = "https://onemillionmanworship.com/avatar";
+
+    if (canvasRef.current && navigator.share) {
+      try {
+        canvasRef.current.toBlob(async (blob) => {
+          if (blob && navigator.canShare && navigator.canShare({ files: [new File([blob], "1MMW2026_Avatar.png", { type: "image/png" })] })) {
+            const file = new File([blob], "1MMW2026_Avatar.png", { type: "image/png" });
+            await navigator.share({
+              title: "My 1MMW 2026 Avatar",
+              text: `${shareText} #1MMW2026`,
+              files: [file],
+            });
+          } else {
+            await navigator.share({
+              title: "One Million Man Worship 2026 Avatar",
+              text: shareText,
+              url: shareUrl,
+            });
+          }
+        }, "image/png");
+        return;
+      } catch (err) {
+        console.log("Web Share fallback:", err);
+      }
+    }
+
+    // Fallback to WhatsApp
+    const encoded = encodeURIComponent(`${shareText} ${shareUrl} #1MMW2026 #OneMillionManWorship`);
+    window.open(`https://wa.me/?text=${encoded}`, "_blank");
   };
 
   return (
@@ -360,14 +426,14 @@ export default function AvatarPage() {
               marginBottom: 12,
             }}
           >
-            <Sparkles size={16} /> Official 2025 Badge Studio
+            <Sparkles size={16} /> Official 2026 Badge Studio • 4th Edition
           </span>
           <h1 className="section-title">
-            Create Your One Million Man Worship Avatar
+            CREATE YOUR 2026 OFFICIAL AVATAR
           </h1>
           <p className="section-subtitle">
-            Upload your photo, adjust positioning and scale, and download your
-            custom high-resolution avatar to share with loved ones.
+            Upload your photo, adjust zoom and rotation, and download your
+            high-resolution <strong>&quot;I&apos;ll Be Attending&quot;</strong> badge to celebrate the 2026 convocation.
           </p>
         </motion.div>
 
@@ -377,7 +443,7 @@ export default function AvatarPage() {
             gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
             gap: 40,
             alignItems: "start",
-            maxWidth: 1050,
+            maxWidth: 1080,
             margin: "0 auto",
           }}
         >
@@ -402,14 +468,15 @@ export default function AvatarPage() {
               style={{
                 position: "relative",
                 width: "100%",
-                maxWidth: 440,
+                maxWidth: 460,
                 aspectRatio: "1 / 1",
-                borderRadius: 16,
+                borderRadius: 18,
                 overflow: "hidden",
-                border: "1px solid var(--border-glass)",
+                border: "1px solid var(--border-glow)",
                 background: "#0d0d12",
                 cursor: hasImage ? "grab" : "default",
                 touchAction: "none",
+                boxShadow: "0 10px 40px rgba(0,0,0,0.5)",
               }}
             >
               <canvas
@@ -439,10 +506,10 @@ export default function AvatarPage() {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
-                    background: "rgba(0, 0, 0, 0.4)",
+                    background: "rgba(0, 0, 0, 0.45)",
                     cursor: "pointer",
                     gap: 12,
-                    padding: 20,
+                    padding: 24,
                     textAlign: "center",
                   }}
                 >
@@ -450,35 +517,36 @@ export default function AvatarPage() {
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                     style={{
-                      width: 64,
-                      height: 64,
+                      width: 68,
+                      height: 68,
                       borderRadius: "50%",
-                      background: "rgba(229, 57, 53, 0.9)",
+                      background: "var(--primary-red)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       color: "#ffffff",
-                      boxShadow: "0 0 24px rgba(229, 57, 53, 0.8)",
+                      boxShadow: "0 0 28px rgba(229, 57, 53, 0.8)",
                     }}
                   >
-                    <Upload size={28} />
+                    <Upload size={30} />
                   </motion.div>
                   <p
                     style={{
                       color: "#ffffff",
-                      fontWeight: 700,
-                      fontSize: "1.05rem",
+                      fontWeight: 800,
+                      fontSize: "1.1rem",
+                      margin: 0,
                     }}
                   >
-                    Click Here To Upload Your Photo
+                    Tap Here To Upload Your Photo
                   </p>
                   <span
                     style={{
-                      color: "rgba(255, 255, 255, 0.8)",
+                      color: "rgba(255, 255, 255, 0.85)",
                       fontSize: "0.85rem",
                     }}
                   >
-                    Supports JPG, PNG, WEBP (Square or Portrait)
+                    Supports JPG, PNG, WEBP • Works on mobile and desktop
                   </span>
                 </div>
               )}
@@ -488,11 +556,11 @@ export default function AvatarPage() {
               style={{
                 fontSize: "0.85rem",
                 color: "var(--text-secondary)",
-                marginTop: 14,
+                marginTop: 16,
                 textAlign: "center",
               }}
             >
-              💡 <em>Tip: Click and drag to move • Scroll or pinch to zoom photo</em>
+              💡 <em>Tip: Drag with finger or mouse to adjust position • Use zoom slider below to fit</em>
             </p>
           </motion.div>
 
@@ -510,17 +578,31 @@ export default function AvatarPage() {
               transition: "background-color 0.3s ease",
             }}
           >
-            <h3
-              style={{
-                fontFamily: "var(--font-heading)",
-                fontSize: "1.35rem",
-                fontWeight: 800,
-                color: "var(--text-primary)",
-                marginBottom: 20,
-              }}
-            >
-              Customization Studio
-            </h3>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+              <h3
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  fontSize: "1.35rem",
+                  fontWeight: 800,
+                  color: "var(--text-primary)",
+                  margin: 0,
+                }}
+              >
+                Badge Studio Controls
+              </h3>
+              <span
+                style={{
+                  fontSize: "0.78rem",
+                  fontWeight: 700,
+                  color: "var(--primary-gold)",
+                  background: "rgba(245, 158, 11, 0.15)",
+                  padding: "3px 10px",
+                  borderRadius: 12,
+                }}
+              >
+                2026 Edition
+              </span>
+            </div>
 
             {/* Hidden File Input */}
             <input
@@ -532,7 +614,7 @@ export default function AvatarPage() {
             />
 
             {/* Step 1: Upload Button */}
-            <div style={{ marginBottom: 24 }}>
+            <div style={{ marginBottom: 20 }}>
               <motion.button
                 type="button"
                 whileHover={{ scale: 1.02 }}
@@ -547,11 +629,11 @@ export default function AvatarPage() {
                 }}
               >
                 <ImageIcon size={18} />
-                <span>{hasImage ? "Change Uploaded Photo" : "Upload Your Photo"}</span>
+                <span>{hasImage ? "Choose Another Photo" : "Upload Your Photo"}</span>
               </motion.button>
             </div>
 
-            {/* Step 2: Zoom and Adjust Controls */}
+            {/* Step 2: Zoom, Rotate & Adjust Controls */}
             {hasImage && (
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
@@ -560,27 +642,28 @@ export default function AvatarPage() {
                 style={{
                   background: "var(--bg-card-secondary)",
                   border: "1px solid var(--border-glass)",
-                  borderRadius: 14,
-                  padding: 18,
+                  borderRadius: 16,
+                  padding: 20,
                   marginBottom: 24,
                 }}
               >
+                {/* Header with reset */}
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    marginBottom: 10,
+                    marginBottom: 12,
                   }}
                 >
                   <span
                     style={{
                       fontSize: "0.88rem",
-                      fontWeight: 600,
+                      fontWeight: 700,
                       color: "var(--text-primary)",
                     }}
                   >
-                    Adjust Size & Zoom
+                    Scale & Zoom ({scale.toFixed(2)}x)
                   </span>
                   <motion.button
                     type="button"
@@ -592,7 +675,7 @@ export default function AvatarPage() {
                       border: "none",
                       color: "var(--primary-red)",
                       fontSize: "0.82rem",
-                      fontWeight: 600,
+                      fontWeight: 700,
                       cursor: "pointer",
                       display: "flex",
                       alignItems: "center",
@@ -603,12 +686,14 @@ export default function AvatarPage() {
                   </motion.button>
                 </div>
 
-                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                {/* Slider */}
+                <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
                   <motion.button
                     type="button"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={() => adjustScale(scale - 0.1)}
+                    aria-label="Zoom Out"
                     style={{
                       background: "var(--bg-card)",
                       border: "1px solid var(--border-glass)",
@@ -616,6 +701,8 @@ export default function AvatarPage() {
                       color: "var(--text-primary)",
                       padding: 8,
                       cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
                     }}
                   >
                     <ZoomOut size={16} />
@@ -624,7 +711,7 @@ export default function AvatarPage() {
                   <input
                     type="range"
                     min="0.2"
-                    max="3"
+                    max="4"
                     step="0.05"
                     value={scale}
                     onChange={(e) => adjustScale(parseFloat(e.target.value))}
@@ -636,6 +723,7 @@ export default function AvatarPage() {
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={() => adjustScale(scale + 0.1)}
+                    aria-label="Zoom In"
                     style={{
                       background: "var(--bg-card)",
                       border: "1px solid var(--border-glass)",
@@ -643,56 +731,104 @@ export default function AvatarPage() {
                       color: "var(--text-primary)",
                       padding: 8,
                       cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
                     }}
                   >
                     <ZoomIn size={16} />
                   </motion.button>
                 </div>
+
+                {/* Rotate Controls */}
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid var(--border-glass)", paddingTop: 12 }}>
+                  <span style={{ fontSize: "0.85rem", color: "var(--text-secondary)", fontWeight: 600 }}>
+                    Orientation ({rotation}°):
+                  </span>
+                  <div style={{ display: "flex", gap: 8 }}>
+                    <button
+                      type="button"
+                      onClick={() => rotatePhoto("ccw")}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 4,
+                        padding: "6px 12px",
+                        background: "var(--bg-card)",
+                        border: "1px solid var(--border-glass)",
+                        borderRadius: 8,
+                        color: "var(--text-primary)",
+                        fontSize: "0.8rem",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <RotateCcw size={13} /> -90°
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => rotatePhoto("cw")}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 4,
+                        padding: "6px 12px",
+                        background: "var(--bg-card)",
+                        border: "1px solid var(--border-glass)",
+                        borderRadius: 8,
+                        color: "var(--text-primary)",
+                        fontSize: "0.8rem",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <RotateCw size={13} /> +90°
+                    </button>
+                  </div>
+                </div>
               </motion.div>
             )}
 
-            {/* Step 3: Download Button */}
+            {/* Step 3: Action Buttons */}
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               <motion.button
                 type="button"
                 whileHover={{ scale: hasImage ? 1.02 : 1 }}
                 whileTap={{ scale: hasImage ? 0.98 : 1 }}
                 onClick={handleDownload}
-                disabled={!hasImage}
+                disabled={!hasImage || isProcessing}
                 className="btn-primary"
                 style={{
                   width: "100%",
-                  padding: "15px",
+                  padding: "16px",
                   fontSize: "1.05rem",
                   opacity: hasImage ? 1 : 0.5,
                   cursor: hasImage ? "pointer" : "not-allowed",
+                  justifyContent: "center",
                 }}
               >
                 <Download size={20} />
-                <span>Download Official Avatar</span>
+                <span>{isProcessing ? "Generating High-Res Badge..." : "Download Official 2026 Avatar"}</span>
               </motion.button>
 
-              {/* Step 4: Share WhatsApp Button */}
               <motion.button
                 type="button"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={handleShareWhatsApp}
+                onClick={handleShare}
                 className="btn-secondary"
                 style={{
                   width: "100%",
                   padding: "14px",
                   fontSize: "0.95rem",
                   color: "#22c55e",
-                  borderColor: "rgba(34, 197, 94, 0.3)",
+                  borderColor: "rgba(34, 197, 94, 0.35)",
+                  justifyContent: "center",
                 }}
               >
                 <Share2 size={18} />
-                <span>Share Link On WhatsApp</span>
+                <span>Share On WhatsApp & Social Media</span>
               </motion.button>
             </div>
 
-            {/* Feedback & Continue */}
+            {/* Success Feedback Banner */}
             <AnimatePresence>
               {downloadSuccess && (
                 <motion.div
@@ -702,8 +838,8 @@ export default function AvatarPage() {
                   transition={{ duration: 0.3 }}
                   style={{
                     marginTop: 24,
-                    padding: 16,
-                    borderRadius: 14,
+                    padding: 18,
+                    borderRadius: 16,
                     background: "rgba(16, 185, 129, 0.15)",
                     border: "1px solid rgba(16, 185, 129, 0.3)",
                     color: "#10b981",
@@ -714,27 +850,36 @@ export default function AvatarPage() {
                 >
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     <CheckCircle2 size={18} />
-                    <strong style={{ fontSize: "0.95rem" }}>
-                      Avatar Downloaded Successfully!
+                    <strong style={{ fontSize: "0.98rem" }}>
+                      2026 Avatar Created Successfully!
                     </strong>
                   </div>
-                  <p style={{ fontSize: "0.85rem", color: "#d1fae5", margin: 0 }}>
-                    Set it as your display picture on WhatsApp, Instagram, and
-                    Facebook.
+                  <p style={{ fontSize: "0.85rem", color: "var(--text-primary)", margin: 0, lineHeight: 1.5 }}>
+                    Your high-resolution PNG is ready. Set it as your WhatsApp DP, Instagram Story, or Facebook profile to invite friends and family to the convocation!
                   </p>
-                  <Link
-                    href="/ads"
-                    className="btn-primary"
-                    style={{
-                      alignSelf: "flex-start",
-                      marginTop: 6,
-                      padding: "8px 18px",
-                      fontSize: "0.88rem",
-                    }}
-                  >
-                    <span>Continue to Ministers & Promo</span>
-                    <ArrowRight size={15} />
-                  </Link>
+                  <div style={{ display: "flex", gap: 10, marginTop: 4, flexWrap: "wrap" }}>
+                    <Link
+                      href="/live"
+                      className="btn-primary"
+                      style={{
+                        padding: "8px 16px",
+                        fontSize: "0.85rem",
+                      }}
+                    >
+                      <span>Explore 2026 Live Broadcast</span>
+                      <ArrowRight size={14} />
+                    </Link>
+                    <Link
+                      href="/volunteer"
+                      className="btn-secondary"
+                      style={{
+                        padding: "8px 16px",
+                        fontSize: "0.85rem",
+                      }}
+                    >
+                      <span>Join 2026 Workforce</span>
+                    </Link>
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
