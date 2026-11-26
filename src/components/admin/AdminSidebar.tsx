@@ -53,7 +53,7 @@ export default function AdminSidebar() {
             variant="ghost"
             size="sm"
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="text-slate-300 p-1.5"
+            className="text-slate-300 p-1.5 hover:bg-slate-800"
           >
             {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </Button>
@@ -66,17 +66,17 @@ export default function AdminSidebar() {
           <Link
             href="/"
             target="_blank"
-            className="text-xs px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white"
+            className="text-xs px-2.5 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white flex items-center gap-1"
           >
-            Site ↗
+            <span>Site</span> <ExternalLink className="w-3 h-3" />
           </Link>
           <Button
-            variant="ghost"
             size="sm"
             onClick={() => logout()}
-            className="text-red-400 p-1.5"
+            className="bg-red-500/15 hover:bg-red-500/25 text-red-400 border border-red-500/30 font-semibold text-xs px-3 py-1.5"
           >
-            <LogOut className="w-4 h-4" />
+            <LogOut className="w-3.5 h-3.5 mr-1" />
+            <span>Logout</span>
           </Button>
         </div>
       </div>
@@ -91,9 +91,8 @@ export default function AdminSidebar() {
 
       {/* Main Persistent Desktop & Mobile Drawer */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-72 bg-slate-900/95 backdrop-blur-xl border-r border-slate-800 p-5 flex flex-col justify-between transition-transform duration-300 md:static md:translate-x-0 ${
-          mobileOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed inset-y-0 left-0 z-50 w-72 bg-slate-900/95 backdrop-blur-xl border-r border-slate-800 p-5 flex flex-col justify-between transition-transform duration-300 md:static md:translate-x-0 ${mobileOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         <div className="space-y-6">
           {/* Logo / Brand Header */}
@@ -117,11 +116,11 @@ export default function AdminSidebar() {
             </button>
           </div>
 
-          {/* User Session Info */}
-          <div className="p-3 rounded-2xl bg-slate-950/60 border border-slate-800/80 flex items-center justify-between">
+          {/* User Session Info Card with Logout */}
+          <div className="p-3.5 rounded-2xl bg-slate-950/70 border border-slate-800 space-y-2.5">
             <div className="flex items-center gap-2.5 overflow-hidden">
-              <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
-                <ShieldCheck className="w-4 h-4" />
+              <div className="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/20">
+                <ShieldCheck className="w-5 h-5" />
               </div>
               <div className="truncate">
                 <span className="text-xs font-bold text-white block truncate">
@@ -132,6 +131,16 @@ export default function AdminSidebar() {
                 </span>
               </div>
             </div>
+
+            {/* <Button
+              onClick={() => logout()}
+              variant="outline"
+              size="sm"
+              className="w-full border-red-500/30 bg-red-950/20 hover:bg-red-900/40 text-red-400 hover:text-red-300 font-semibold text-xs py-1.5 h-8 flex items-center justify-center gap-2"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span>Sign Out / Logout</span>
+            </Button> */}
           </div>
 
           {/* Nav Links */}
@@ -144,11 +153,10 @@ export default function AdminSidebar() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                    active
-                      ? "bg-gradient-to-r from-amber-500/20 to-amber-500/5 text-amber-300 border border-amber-500/30 shadow-sm"
-                      : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/60"
-                  }`}
+                  className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${active
+                    ? "bg-gradient-to-r from-amber-500/20 to-amber-500/5 text-amber-300 border border-amber-500/30 shadow-sm"
+                    : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/60"
+                    }`}
                 >
                   <Icon className={`w-4 h-4 ${active ? "text-amber-400" : "text-slate-400"}`} />
                   <span>{item.label}</span>
@@ -162,25 +170,29 @@ export default function AdminSidebar() {
         <div className="pt-4 border-t border-slate-800/80 space-y-3">
           <div className="flex items-center justify-between text-xs text-slate-400">
             <span>Database: MongoDB</span>
-            <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
+            <span className="flex items-center gap-1.5 text-emerald-400 font-semibold text-[11px]">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse" />
+              Connected
+            </span>
           </div>
+
           <div className="flex gap-2">
             <Link
               href="/"
               target="_blank"
               className="flex-1 text-center text-xs py-2 px-3 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 transition flex items-center justify-center gap-1.5"
             >
-              <span>View Site</span> <ExternalLink className="w-3.5 h-3.5" />
+              <span>View Public Site</span> <ExternalLink className="w-3.5 h-3.5" />
             </Link>
-            <Button
-              onClick={() => logout()}
-              variant="outline"
-              size="sm"
-              className="border-slate-700 bg-slate-800 text-red-400 hover:bg-red-950/30 hover:text-red-300"
-            >
-              <LogOut className="w-4 h-4" />
-            </Button>
           </div>
+
+          <Button
+            onClick={() => logout()}
+            className="w-full bg-red-600/90 hover:bg-red-500 text-white font-bold text-xs py-2 h-9 flex items-center justify-center gap-2 shadow-sm"
+          >
+            <LogOut className="w-4 h-4" />
+            <span>Log Out Session</span>
+          </Button>
         </div>
       </aside>
     </>

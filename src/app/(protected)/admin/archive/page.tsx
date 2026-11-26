@@ -54,6 +54,25 @@ export default function AdminArchivePage() {
     loadEditions();
   }, [loadEditions]);
 
+  // Handle ESC key to close modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isModalOpen) {
+        setIsModalOpen(false);
+      }
+    };
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isModalOpen]);
+
   const saveEdition = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingEdition?.year || !editingEdition?.theme) {
@@ -216,8 +235,14 @@ export default function AdminArchivePage() {
 
       {/* Modal CRUD */}
       {isModalOpen && editingEdition && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 max-w-2xl w-full my-8 space-y-6 max-h-[90vh] overflow-y-auto">
+        <div
+          onClick={() => setIsModalOpen(false)}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto cursor-pointer"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 max-w-2xl w-full my-8 space-y-6 max-h-[90vh] overflow-y-auto cursor-default shadow-2xl"
+          >
             <div className="flex items-center justify-between pb-4 border-b border-slate-800">
               <h2 className="text-xl font-bold text-white">
                 {editingEdition._id ? "Edit Archived Edition" : "New Archive Record"}
