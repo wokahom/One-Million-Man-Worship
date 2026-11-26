@@ -11,10 +11,23 @@ import {
   Search,
   ExternalLink,
   X,
+  Bold,
+  Italic,
+  Heading1,
+  Heading2,
+  Heading3,
+  Quote,
+  List,
+  ListOrdered,
+  Code,
+  Link as LinkIcon,
+  Eye,
+  FileEdit,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/sonner";
+import MarkdownRenderer from "@/components/MarkdownRenderer";
 
 interface PostRecord {
   _id: string;
@@ -37,6 +50,7 @@ export default function AdminBlogPage() {
   const [search, setSearch] = useState("");
   const [editingPost, setEditingPost] = useState<Partial<PostRecord> | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editorTab, setEditorTab] = useState<"write" | "preview">("write");
 
   const loadPosts = useCallback(async () => {
     setLoading(true);
@@ -75,6 +89,27 @@ export default function AdminBlogPage() {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [isModalOpen]);
+
+  const insertMarkdown = (syntaxBefore: string, syntaxAfter: string = "", placeholder: string = "") => {
+    const textarea = document.getElementById("post-content-textarea") as HTMLTextAreaElement | null;
+    const current = editingPost?.content || "";
+    if (!textarea) {
+      setEditingPost({ ...editingPost, content: `${current}\n${syntaxBefore}${placeholder}${syntaxAfter}` });
+      return;
+    }
+
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selected = current.substring(start, end) || placeholder;
+    const replacement = `${syntaxBefore}${selected}${syntaxAfter}`;
+    const nextContent = current.substring(0, start) + replacement + current.substring(end);
+
+    setEditingPost({ ...editingPost, content: nextContent });
+    setTimeout(() => {
+      textarea.focus();
+      textarea.setSelectionRange(start + syntaxBefore.length, start + syntaxBefore.length + selected.length);
+    }, 10);
+  };
 
   const savePost = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -329,15 +364,146 @@ export default function AdminBlogPage() {
                 />
               </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-400 mb-1">Content</label>
-                <textarea
-                  required
-                  rows={8}
-                  value={editingPost.content || ""}
-                  onChange={(e) => setEditingPost({ ...editingPost, content: e.target.value })}
-                  className="w-full px-4 py-2 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white font-mono"
-                />
+              {/* Rich Markdown Editor & Preview */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <label className="block text-xs font-semibold text-slate-300">
+                    Article Body (Markdown Supported)
+                  </label>
+                  <div className="flex rounded-lg bg-slate-950 p-1 border border-slate-800">
+                    <button
+                      type="button"
+                      onClick={() => setEditorTab("write")}
+                      className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-semibold transition ${
+                        editorTab === "write"
+                          ? "bg-amber-500 text-slate-950 shadow"
+                          : "text-slate-400 hover:text-white"
+                      }`}
+                    >
+                      <FileEdit className="w-3.5 h-3.5" /> Write
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setEditorTab("preview")}
+                      className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-semibold transition ${
+                        editorTab === "preview"
+                          ? "bg-amber-500 text-slate-950 shadow"
+                          : "text-slate-400 hover:text-white"
+                      }`}
+                    >
+                      <Eye className="w-3.5 h-3.5" /> Live Preview
+                    </button>
+                  </div>
+                </div>
+
+                {editorTab === "write" ? (
+                  <div className="rounded-2xl border border-slate-800 bg-slate-950 overflow-hidden focus-within:border-amber-500/60 transition">
+                    {/* Formatting Toolbar */}
+                    <div className="flex flex-wrap items-center gap-1 p-2 bg-slate-900/90 border-b border-slate-800 text-slate-300">
+                      <button
+                        type="button"
+                        title="Heading 1"
+                        onClick={() => insertMarkdown("# ", "", "Main Heading")}
+                        className="p-1.5 rounded-lg hover:bg-slate-800 hover:text-amber-400 text-xs font-bold flex items-center gap-1"
+                      >
+                        <Heading1 className="w-4 h-4" />
+                      </button>
+                      <button
+                        type="button"
+                        title="Heading 2"
+                        onClick={() => insertMarkdown("## ", "", "Subheading")}
+                        className="p-1.5 rounded-lg hover:bg-slate-800 hover:text-amber-400 text-xs font-bold flex items-center gap-1"
+                      >
+                        <Heading2 className="w-4 h-4" />
+                      </button>
+                      <button
+                        type="button"
+                        title="Heading 3"
+                        onClick={() => insertMarkdown("### ", "", "Section Title")}
+                        className="p-1.5 rounded-lg hover:bg-slate-800 hover:text-amber-400 text-xs font-bold flex items-center gap-1"
+                      >
+                        <Heading3 className="w-4 h-4" />
+                      </button>
+                      <div className="w-[1px] h-4 bg-slate-800 mx-1" />
+                      <button
+                        type="button"
+                        title="Bold"
+                        onClick={() => insertMarkdown("**", "**", "bold text")}
+                        className="p-1.5 rounded-lg hover:bg-slate-800 hover:text-amber-400"
+                      >
+                        <Bold className="w-4 h-4" />
+                      </button>
+                      <button
+                        type="button"
+                        title="Italic"
+                        onClick={() => insertMarkdown("*", "*", "italic text")}
+                        className="p-1.5 rounded-lg hover:bg-slate-800 hover:text-amber-400"
+                      >
+                        <Italic className="w-4 h-4" />
+                      </button>
+                      <div className="w-[1px] h-4 bg-slate-800 mx-1" />
+                      <button
+                        type="button"
+                        title="Bullet List"
+                        onClick={() => insertMarkdown("- ", "", "List item")}
+                        className="p-1.5 rounded-lg hover:bg-slate-800 hover:text-amber-400"
+                      >
+                        <List className="w-4 h-4" />
+                      </button>
+                      <button
+                        type="button"
+                        title="Numbered List"
+                        onClick={() => insertMarkdown("1. ", "", "First step")}
+                        className="p-1.5 rounded-lg hover:bg-slate-800 hover:text-amber-400"
+                      >
+                        <ListOrdered className="w-4 h-4" />
+                      </button>
+                      <button
+                        type="button"
+                        title="Blockquote"
+                        onClick={() => insertMarkdown("> ", "", "Inspirational quote or verse")}
+                        className="p-1.5 rounded-lg hover:bg-slate-800 hover:text-amber-400"
+                      >
+                        <Quote className="w-4 h-4" />
+                      </button>
+                      <button
+                        type="button"
+                        title="Code Block"
+                        onClick={() => insertMarkdown("```\n", "\n```", "code block")}
+                        className="p-1.5 rounded-lg hover:bg-slate-800 hover:text-amber-400"
+                      >
+                        <Code className="w-4 h-4" />
+                      </button>
+                      <button
+                        type="button"
+                        title="Link"
+                        onClick={() => insertMarkdown("[", "](https://example.com)", "link title")}
+                        className="p-1.5 rounded-lg hover:bg-slate-800 hover:text-amber-400"
+                      >
+                        <LinkIcon className="w-4 h-4" />
+                      </button>
+                    </div>
+
+                    {/* Textarea */}
+                    <textarea
+                      id="post-content-textarea"
+                      required
+                      rows={12}
+                      placeholder="Write your article using markdown: # for headings, **bold**, > quotes, - lists..."
+                      value={editingPost.content || ""}
+                      onChange={(e) => setEditingPost({ ...editingPost, content: e.target.value })}
+                      className="w-full p-4 bg-slate-950 text-sm text-slate-200 placeholder:text-slate-600 focus:outline-none font-mono leading-relaxed resize-y"
+                    />
+                  </div>
+                ) : (
+                  <div className="p-6 rounded-2xl border border-slate-800 bg-slate-950/70 min-h-[300px] max-h-[480px] overflow-y-auto">
+                    {editingPost.content ? (
+                      <MarkdownRenderer content={editingPost.content} />
+                    ) : (
+                      <p className="text-sm text-slate-500 italic">No content to preview.</p>
+                    )}
+                  </div>
+                )}
               </div>
 
               <div className="flex justify-end gap-3 pt-4 border-t border-slate-800">

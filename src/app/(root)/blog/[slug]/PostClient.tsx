@@ -16,6 +16,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/sonner";
+import MarkdownRenderer from "@/components/MarkdownRenderer";
 
 interface Post {
   _id: string;
@@ -207,8 +208,8 @@ export default function PostClient({ slug }: { slug: string }) {
         )}
 
         {/* Article Content */}
-        <article className="prose prose-invert prose-lg max-w-none mb-16 text-slate-300 leading-relaxed font-normal whitespace-pre-line border-b border-slate-800 pb-12">
-          {post.content}
+        <article className="max-w-none mb-16 text-slate-300 leading-relaxed font-normal border-b border-slate-800 pb-12">
+          <MarkdownRenderer content={post.content} />
         </article>
 
         {/* Tags */}
