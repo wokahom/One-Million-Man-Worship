@@ -320,7 +320,7 @@ export default function ContactClient() {
                   <div>
                     <span style={{ color: "var(--text-secondary)", fontSize: "0.8rem" }}>Instagram & X: </span>
                     <a
-                      href="https://www.instagram.com/onemillionmanworship_ph"
+                      href="https://www.instagram.com/onemillionmanworship_ph?gwpx=MXdxcDhrZ3JoMm82cA=="
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{ color: "#ec4899", fontWeight: 700 }}
@@ -331,7 +331,7 @@ export default function ContactClient() {
                   <div>
                     <span style={{ color: "var(--text-secondary)", fontSize: "0.8rem" }}>Facebook & YouTube: </span>
                     <a
-                      href="https://youtube.com/@onemillionmanworship"
+                      href="https://youtube.com/@onemillionmanworship?si=D2MsxAavJ1DCJQI1"
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{ color: "var(--primary-red)", fontWeight: 700 }}

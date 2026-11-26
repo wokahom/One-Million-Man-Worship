@@ -17,9 +17,10 @@ import {
   Users,
   Video,
   HeartHandshake,
+  Archive,
+  BookOpen,
 } from "lucide-react";
-import { BsInstagram } from "react-icons/bs";
-import { YoutubeIcon, TikTokIcon, FacebookIcon } from "./Icons";
+import { YoutubeIcon, TikTokIcon } from "./Icons";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
@@ -57,7 +58,7 @@ export default function Header() {
               <li>
                 <Link
                   href="/"
-                  className={`nav-link ${isActive("/") ? "active" : ""}`}
+                  className={`nav-link whitespace-nowrap ${isActive("/") ? "active" : ""}`}
                 >
                   Home
                 </Link>
@@ -65,7 +66,7 @@ export default function Header() {
               <li>
                 <Link
                   href="/about"
-                  className={`nav-link ${isActive("/about") ? "active" : ""}`}
+                  className={`nav-link whitespace-nowrap ${isActive("/about") ? "active" : ""}`}
                 >
                   About 1MMW
                 </Link>
@@ -73,7 +74,7 @@ export default function Header() {
               <li>
                 <Link
                   href="/avatar"
-                  className={`nav-link ${isActive("/avatar") ? "active" : ""}`}
+                  className={`nav-link whitespace-nowrap ${isActive("/avatar") ? "active" : ""}`}
                   style={{ display: "flex", alignItems: "center", gap: 5 }}
                 >
                   <Sparkles size={14} color="var(--primary-gold)" />
@@ -83,7 +84,7 @@ export default function Header() {
               <li>
                 <Link
                   href="/volunteer"
-                  className={`nav-link ${isActive("/volunteer") ? "active" : ""}`}
+                  className={`nav-link whitespace-nowrap ${isActive("/volunteer") ? "active" : ""}`}
                 >
                   Volunteer
                 </Link>
@@ -91,7 +92,7 @@ export default function Header() {
               <li>
                 <Link
                   href="/testimony"
-                  className={`nav-link ${isActive("/testimony") ? "active" : ""}`}
+                  className={`nav-link whitespace-nowrap ${isActive("/testimony") ? "active" : ""}`}
                 >
                   Testimonies
                 </Link>
@@ -149,6 +150,24 @@ export default function Header() {
                     </span>
                   </Link>
                   <Link
+                    href="/archive"
+                    className="dropdown-item"
+                    onClick={() => setDropdownOpen(false)}
+                  >
+                    <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                      <Archive size={15} /> Editions Archive
+                    </span>
+                  </Link>
+                  <Link
+                    href="/blog"
+                    className="dropdown-item"
+                    onClick={() => setDropdownOpen(false)}
+                  >
+                    <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                      <BookOpen size={15} /> News & Articles
+                    </span>
+                  </Link>
+                  <Link
                     href="/gallery"
                     className="dropdown-item"
                     onClick={() => setDropdownOpen(false)}
@@ -177,7 +196,7 @@ export default function Header() {
               <li>
                 <Link
                   href="/contact"
-                  className={`nav-link ${isActive("/contact") ? "active" : ""}`}
+                  className={`nav-link whitespace-nowrap ${isActive("/contact") ? "active" : ""}`}
                 >
                   Contact & Logistics
                 </Link>
@@ -188,26 +207,26 @@ export default function Header() {
           {/* Social Icons & Actions */}
           <div className="header-actions">
             <div className="social-links">
-              <a
-                href="https://www.instagram.com/onemillionmanworship_ph"
+              {/* <a
+                href="https://www.instagram.com/onemillionmanworship_ph?gwpx=MXdxcDhrZ3JoMm82cA=="
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-icon"
                 title="Instagram (@onemillionmanworship_ph)"
               >
                 <BsInstagram size={16} />
-              </a>
-              <a
-                href="https://facebook.com/onemillionmanworship"
+              </a> */}
+              {/* <a
+                href="https://https://www.facebook.com/onemillionmanworshipph/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-icon"
                 title="Facebook (@onemillionmanworship)"
               >
                 <FacebookIcon size={16} />
-              </a>
+              </a> */}
               <a
-                href="https://youtube.com/@onemillionmanworship"
+                href="https://youtube.com/@onemillionmanworship?si=D2MsxAavJ1DCJQI1"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-icon"
@@ -341,6 +360,16 @@ export default function Header() {
                     onClick={closeMobile}
                   >
                     Testimonies Feed
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/archive" className="mobile-nav-link" onClick={closeMobile}>
+                    Editions Archive (2024–2026)
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/blog" className="mobile-nav-link" onClick={closeMobile}>
+                    News & Articles
                   </Link>
                 </li>
                 <li>

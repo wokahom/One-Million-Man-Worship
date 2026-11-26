@@ -3,16 +3,14 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import { ShieldCheck, LogOut } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import AdminSidebar from "@/components/admin/AdminSidebar";
 
 export default function ProtectedLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { user, loading, logout } = useAuth();
+  const { user, loading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -23,36 +21,9 @@ export default function ProtectedLayout({
 
   if (loading) {
     return (
-      <div
-        style={{
-          minHeight: "75vh",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: 16,
-        }}
-      >
-        <div
-          style={{
-            width: 44,
-            height: 44,
-            borderRadius: "50%",
-            border: "3px solid var(--border-glass)",
-            borderTopColor: "var(--primary-red)",
-            animation: "spin 1s linear infinite",
-          }}
-        />
-        <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}>
-          Verifying administrator credentials...
-        </p>
-        <style jsx>{`
-          @keyframes spin {
-            to {
-              transform: rotate(360deg);
-            }
-          }
-        `}</style>
+      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center gap-4 text-slate-400">
+        <div className="w-10 h-10 rounded-full border-2 border-slate-800 border-t-amber-400 animate-spin" />
+        <p className="text-sm">Verifying administrator credentials...</p>
       </div>
     );
   }
@@ -62,71 +33,11 @@ export default function ProtectedLayout({
   }
 
   return (
-    <div>
-      {/* Administrator Top Banner */}
-      <div
-        style={{
-          background: "var(--bg-card)",
-          borderBottom: "1px solid var(--border-glass)",
-          padding: "10px 0",
-        }}
-      >
-        <div
-          className="container"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            flexWrap: "wrap",
-            gap: 12,
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div
-              style={{
-                width: 32,
-                height: 32,
-                borderRadius: 8,
-                background: "rgba(16, 185, 129, 0.15)",
-                color: "#10b981",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <ShieldCheck size={18} />
-            </div>
-            <div>
-              <span style={{ fontSize: "0.82rem", fontWeight: 700, color: "var(--text-primary)" }}>
-                Authenticated Admin Session
-              </span>
-              <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 1 }}>
-                <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>
-                  {user.name} ({user.email})
-                </span>
-                <Badge variant="success" style={{ padding: "1px 6px", fontSize: "0.65rem" }}>
-                  {user.role}
-                </Badge>
-              </div>
-            </div>
-          </div>
-
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => logout()}
-              style={{ display: "inline-flex", alignItems: "center", gap: 6 }}
-            >
-              <LogOut size={14} />
-              <span>Sign Out</span>
-            </Button>
-          </div>
-        </div>
-      </div>
-
-      {children}
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col md:flex-row">
+      <AdminSidebar />
+      <main className="flex-1 p-4 md:p-8 overflow-y-auto max-w-7xl w-full">
+        {children}
+      </main>
     </div>
   );
 }

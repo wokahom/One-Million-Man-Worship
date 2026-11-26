@@ -289,7 +289,7 @@ export default function LivePage() {
 
                 <div style={{ marginTop: 20, paddingTop: 14, borderTop: "1px solid var(--border-glass)" }}>
                   <a
-                    href="https://youtube.com/@onemillionmanworship"
+                    href="https://youtube.com/@onemillionmanworship?si=D2MsxAavJ1DCJQI1"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-secondary"
@@ -421,7 +421,7 @@ export default function LivePage() {
                 }}
               >
                 <a
-                  href="https://youtube.com/@onemillionmanworship"
+                  href="https://youtube.com/@onemillionmanworship?si=D2MsxAavJ1DCJQI1"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
@@ -437,7 +437,7 @@ export default function LivePage() {
                 </a>
                 <span style={{ color: "var(--border-glass)" }}>|</span>
                 <a
-                  href="https://facebook.com/onemillionmanworship"
+                  href="https://https://www.facebook.com/onemillionmanworshipph/"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{

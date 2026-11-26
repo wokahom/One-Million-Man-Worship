@@ -30,7 +30,7 @@ export default function Footer() {
             </p>
             <div style={{ marginTop: 18, display: "flex", gap: 10, flexWrap: "wrap" }}>
               <a
-                href="https://www.instagram.com/onemillionmanworship_ph"
+                href="https://www.instagram.com/onemillionmanworship_ph?gwpx=MXdxcDhrZ3JoMm82cA=="
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-icon"
@@ -39,7 +39,7 @@ export default function Footer() {
                 <InstagramIcon size={17} />
               </a>
               <a
-                href="https://facebook.com/onemillionmanworship"
+                href="https://https://www.facebook.com/onemillionmanworshipph/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-icon"
@@ -48,7 +48,7 @@ export default function Footer() {
                 <FacebookIcon size={17} />
               </a>
               <a
-                href="https://youtube.com/@onemillionmanworship"
+                href="https://youtube.com/@onemillionmanworship?si=D2MsxAavJ1DCJQI1"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-icon"
@@ -109,6 +109,12 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Explore & Official Contact</h4>
             <ul className="footer-links">
+              <li>
+                <Link href="/archive">Editions Archive</Link>
+              </li>
+              <li>
+                <Link href="/blog">News & Articles</Link>
+              </li>
               <li>
                 <Link href="/live">2026 Live Broadcast</Link>
               </li>
